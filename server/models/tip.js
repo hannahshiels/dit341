@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const tipSchema = new Schema({
     content: {type: String},
-    date_posted: {type: Date},
+    title: {type:String},
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
