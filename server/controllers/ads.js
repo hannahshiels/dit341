@@ -3,7 +3,7 @@ const Ad = require('../models/ad');
 // const User = require('../models/user');
 const router = express.Router();
 
-router.route('/api/user/:userID/ads')
+router.route('/api/users/:userID/ads')
 .get((req, res) => {
     Ad.find({user: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
