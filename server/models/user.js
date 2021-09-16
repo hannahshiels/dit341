@@ -12,7 +12,7 @@ const userSchema = new Schema({
     gardens: [{
         type: Schema.Types.ObjectId,
         ref: 'Garden'
-    }]
+    }],
     ads: [{
         type: Schema.Types.ObjectId,
         ref: 'Ad'
