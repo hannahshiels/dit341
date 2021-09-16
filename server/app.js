@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 
 var plantsController = require('./controllers/plants');
 var tipsController = require('./controllers/tips');
+var adsController = require('./controllers/ads');
+var commentsController = require('./controllers/comments');
 
 
 var morgan = require('morgan');
@@ -11,7 +13,7 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://himank:himank@cluster0.iqjyq.mongodb.net/atlas?retryWrites=true&w=majority';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -42,6 +44,8 @@ app.get('/api', function(req, res) {
 
 app.use(plantsController);
 app.use(tipsController);
+app.use(adsController);
+app.use(commentsController);
 
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
