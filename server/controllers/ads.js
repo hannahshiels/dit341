@@ -3,10 +3,10 @@ const Ad = require('../models/ad');
 // const User = require('../models/user');
 const router = express.Router();
 
-router.route('api/users/:userID/ads')
+router.route('/api/user/:userID/ads')
 .get((req, res) => {
     Ad.find({user: req.params.userID}, function(err, ads){
-        if (err) {return next(err)}
+        if (err) { return next(err); }
         res.json({"ads of a user" : ads});
     })
 })
@@ -47,7 +47,7 @@ router.route('/api/users/:userID/ads/:adID')
 })
 
 .put((req, res) => {
-    Ad.findByID(req.params.plantID, function(err, ad){
+    Ad.findById(req.params.adID, function(err, ad){
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
         }
@@ -63,8 +63,8 @@ router.route('/api/users/:userID/ads/:adID')
 })
 
 .patch((req, res) => {
-    ad.findById(req.params.adID, function (err, ad){
-        if (plant == null){
+    Ad.findById(req.params.adID, function (err, ad){
+        if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
         }
         if (err) {return next(err);}
@@ -79,7 +79,7 @@ router.route('/api/users/:userID/ads/:adID')
 })
 
 .delete((req, res) => {
-    Ad.findOneAndDelete({ _id : req.params.adID}, function(err, plant){
+    Ad.findOneAndDelete({ _id : req.params.adID}, function(err, ad){
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
         }
