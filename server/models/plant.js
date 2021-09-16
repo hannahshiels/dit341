@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-//const User = require('./user');
-//const Garden = require('./garden');
-const Tip = require('./tip');
 
 const plantSchema = new Schema({
     plant_name: { type: String},

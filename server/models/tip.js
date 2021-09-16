@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-// const User = require('./user');
-const Plant = require('./plant');
 const Schema = mongoose.Schema;
 
 const tipSchema = new Schema({

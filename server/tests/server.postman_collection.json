@@ -1,17 +1,946 @@
 {
 	"info": {
-		"_postman_id": "f7ee95b5-9cb9-442f-a6a9-42de46138872",
+		"_postman_id": "445e5ee7-2d90-4b1e-befd-a2aa3de6f5be",
 		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Set up",
+			"item": [
+				{
+					"name": "POST User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"userID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"gardenID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"owned_by\": \"{{userID}}\"}\r\n        \r\n    ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}/gardens",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}",
+								"gardens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Plant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n    \"garden\": \"{{gardenID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Tips",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"tipID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"title\": \"Helpful watering tip\",\r\n    \"content\": \"Did you know that its really useful to water this plant?\",\r\n    \"author\": \"{{userID}}\",\r\n    \"plant\": \"{{plantID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "All plant requests",
+			"item": [
+				{
+					"name": "POST Plants",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n    \"garden\": \"{{gardenID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Plants",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Plants ASC",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants?sort=asc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Plants DESC",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants?sort=desc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Plant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Plant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plant_description\": [\r\n        {\r\n            \"img\": \"https://picsum.photos/200/300\"\r\n        },\r\n        {\r\n            \"description\": \"bright, yellow flower\"\r\n        }\r\n    ],\r\n    \"water_schedule\": [\"Monday\", \"Wednesday\"],\r\n    \"fertilizer_schedule\": [\"Tuesday\", \"Thursday\"],\r\n    \"plant_name\": \"Sunflower\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Plant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"plant_description\": [\r\n        {\r\n            \"description\": \"white flower\"\r\n        }\r\n    ],\r\n    \"plant_name\": \"Daisy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Plants",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE PLANT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n    \"garden\": \"{{gardenID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Plant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "All tips requests",
+			"item": [
+				{
+					"name": "CREATE PLANT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n    \"garden\": \"{{gardenID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Tips",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"tipID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"title\": \"Helpful watering tip\",\r\n    \"content\": \"Did you know that its really useful to water this plant?\",\r\n    \"author\": \"{{userID}}\",\r\n    \"plant\": \"{{plantID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All tips",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All tips on a plant in a garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Tip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips",
+								"{{tipID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Tip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"title\": \"Another tip title\",\r\n    \"content\": \"Another tip content\",\r\n    \"author\": \"{{userID}}\",\r\n    \"plant\": \"{{plantID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips",
+								"{{tipID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Tip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"content\": \"Changing tip content\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips",
+								"{{tipID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Tip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips",
+								"{{tipID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Tips on a plant in a garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE All tips",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "GET /api",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "b58d92ec-5214-450c-adb0-28e068aa71b9",
 						"exec": [
 							""
 						],
@@ -45,7 +974,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "05864cff-5cba-4070-bac3-a59328954ebf",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -55,7 +983,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "e9c319be-3306-4fc5-ba34-fcf64391213a",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -65,11 +992,32 @@
 	],
 	"variable": [
 		{
-			"id": "cd185905-a834-4211-8030-583d17702534",
 			"key": "host",
-			"value": "http://localhost:3000",
-			"type": "string"
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "userID",
+			"value": "61437c8813ba7d52e2630b28"
+		},
+		{
+			"key": "gardenID",
+			"value": "6143890332164916a0849bfa"
+		},
+		{
+			"key": "plantID",
+			"value": ""
+		},
+		{
+			"key": "tipID",
+			"value": ""
+		},
+		{
+			"key": "adID",
+			"value": ""
+		},
+		{
+			"key": "commentID",
+			"value": ""
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
