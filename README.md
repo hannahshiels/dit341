@@ -61,7 +61,7 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-We are making this system to help gardeners in Sweden who want to keep the gardens in the best shape possible. Users can instantly find what they are looking for using our epic filters for the stores, advertisements and jobs located near them. We’ll give users the ultimate guide on how to manage their garden, and allow them to share their own wise wisdom as well. Users can also find reliable and top rated gardening services through our system.
+We are making this system to help gardeners in Sweden who want to maintain their plants well, track progress, prepare schedules and thus keep their plants and gardens in the best shape possible. Users can instantly advertise what they are offering or looking for and can also comment on any advertisements in the system. We’ll allow the users to share their own wise wisdom regarding their plants. Descriptions and pictures of all plants in the garden will be kept in the system, which can be added by the users.
 
 ### Pages
 
