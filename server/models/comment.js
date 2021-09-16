@@ -12,6 +12,6 @@ var commentSchema = new Schema ({
         type : Schema.Types.ObjectId,
         ref : "Ad"
     }
-})
+});
 
 module.exports = mongoose.model('comments', commentSchema);
