@@ -4,15 +4,35 @@ const Plant = require('../models/plant');
 const router = express.Router();
 
 
+router.route('/api/tips')
+    .get((req,res,next) => {
+        // View all tips
+        Tip.find(function(err, tips){
+            if (err) { return next(err); }
+            res.json({"tips": tips});
+        })
+    })
+    .delete((req,res,next)=> {
+        // Delete all tips
+        Tip.deleteMany(function(err, tips){
+            if(err){ return next(err);}
+            res.json({
+                "message": "Deletion of tips successful"
+            })
+        })
+    })
+
+
+
 router.route('/api/gardens/:gardenID/plants/:plantID/tips')
-    .get((req,res) => {
+    .get((req,res,next) => {
         // View all tips within a plant within a garden
         Tip.find({plant: req.params.plantID}, function(err, tips){
             if (err) { return next(err); }
             res.json({"tips on a plant in a garden": tips});
         })
     })
-    .post((req,res)=> {
+    .post((req,res,next)=> {
         // Create a new tip within a plant within a garden
         const tip = new Tip(req.body);
         tip.save();
@@ -26,7 +46,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID/tips')
             }
         )
     })
-    .delete((req,res)=> {
+    .delete((req,res,next)=> {
         // Delete all tips within a plant within a garden
         Tip.deleteMany({plant:req.params.plantID}, function(err, tips){
             if(err){ return next(err);}
@@ -37,43 +57,46 @@ router.route('/api/gardens/:gardenID/plants/:plantID/tips')
     })
 
     router.route('/api/gardens/:gardenID/plants/:plantID/tips/:tipID')
-    .get((req,res) => {
+    .get((req,res,next) => {
         // View a tip within a plant within a garden
         Tip.findById(req.params.tipID, function(err, tip){
+            if(err){ return next(err);}
+
             if(tip == null){
                 return res.status(404).json({"message": "Tip not found"});
             }
-            if(err){ return next(err);}
             res.json(tip);
         })
     })
-    .put((req,res) => {
+    .put((req,res,next) => {
         // Update a tip within a plant within a garden
         Tip.findById(req.params.tipID, function(err, tip){
+            if(err){ return next(err);}
+
             if(tip == null){
                 return res.status(404).json({"message": "Tip not found"});
             }
-            if(err){ return next(err);}
             tip.title = req.body.title;
             tip.content = req.body.content;
             tip.save();
             res.json(tip);
         })
     })
-    .patch((req,res) => {
+    .patch((req,res,next) => {
         // Partially update a tip within a plant within a garden
         Tip.findById(req.params.tipID, function(err, tip){
+            if(err){ return next(err);}
+
             if(tip == null){
                 return res.status(404).json({"message": "Tip not found"});
             }
-            if(err){ return next(err);}
             tip.title = ( req.body.title  || tip.title );
             tip.content = (req.body.content || tip.content);
             tip.save();
             res.json(tip);
         })
     })
-    .delete((req,res)=> {
+    .delete((req,res,next)=> {
         // Delete a tip within a plant within a garden
         Tip.findOneAndDelete({_id: req.params.tipID}, function(err, tip){
             if(tip == null){
