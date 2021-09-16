@@ -65,20 +65,17 @@ We are making this system to help gardeners in Sweden who want to keep the garde
 
 ### Pages
 
-* Home: This page will show the features of our system, highlighting the products and services stores page, the events page, the advertisement board page, plant wikipedia page, and our gardening tips page. The user is able to navigate to these pages or login/create an account.
+* Home: This page will show all key features of our system i.e. the garden, the advertisement, the login and the gallery page. The user is able to navigate to the individual feature’s pages. The page will also show whether the user is logged in or not and if logged in, a button for logging out.
 
-*  Account/Login: This page will allow users to log into the application and create their account. To create an account it will only ask for a username, password and your location, however It only requires your username and password to log in. The user then has the option to put more information about themselves in the account page.
+*  Account/Login: This page will allow users to create a user account or login to the system. It will also show options like “forget username” and “forget password”. To create an account, the system will ask for a username, password and an email. The rest of the fields  (such as date of birth, contact number etc.) will be optional and can be filled in any time later on.
 
-* Products and Services Stores: The page will show off the product or service store you search for based on your area, through a map.
+* Advertisements: This page will have listings of local services or tools offered. The user will be able to post an advertisement offering something or asking for something. Registered users may post their own advertisements here. Registered users can also comment on any advertisements that are posted. Non-registered users can only view advertisements.
 
-* Events: This page will show information about gardening social events in Sweden and a user will be able to search events if gps/location is enabled. To be able to register for an event, the user should be logged in and if the user is not logged in, a button takes the user to the login page.
+* Gardens: All users can view other posted gardens showing details about the size, soil, and number of plants. Only registered users can create or edit their own garden. The user can navigate to each individual garden to view more details.
 
-* Advertisement Board: This page will have listings of local services or tools offered. Registered users may post their own ad here.
+* Plants: Within a user’s garden, all plants are shown. Each plant is shown with an image, name and description, along with schedules for water/ fertilizer. Users can write a tip for the plant and have an option to view all tips pertaining to that specific plant.
 
-* Plant Wikipedia: This page will act as wikipedia for plants. Users will be able to search and go to relevant information pages just like wikipedia. The page will allow the user to take or add a pic of the plant and the system will search for a relevant information page.
-
-* Gardening Tips: This page will have the latest tips from users that have posted their experiences with their gardens, as well as the recommendations that the system gives to all users. The user will have the option to choose from who they read the tips from: the other gardeners or the gardening system.
-
+* Tips: Users can search and view all tips in the system on this page.
 
 ### Entity-Relationship (ER) Diagram
 
