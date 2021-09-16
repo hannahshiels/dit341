@@ -13,6 +13,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Garden'
     }]
+    ads: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Ad'
+    }]
 });
 
 module.exports = mongoose.model('User', userSchema, 'users');

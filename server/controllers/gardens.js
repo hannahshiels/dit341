@@ -3,7 +3,7 @@ const Garden = require('../models/garden');
 const User = require('../models/user');
 const router = express.Router();
 
-router.route('/api/gardens/:userID/gardens')
+router.route('/api/users/:userID/gardens')
     .get((req,res) => {
         Garden.find({user: req.params.userID}, function(err, gardens){
             if (err) { return next(err); }
