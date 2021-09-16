@@ -1,6 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
 
+var usersController = require('./controllers/users');
+var gardensController = require('./controllers/gardens');
 var plantsController = require('./controllers/plants');
 var tipsController = require('./controllers/tips');
 var adsController = require('./controllers/ads');
@@ -42,10 +44,14 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
 
+
+app.use(usersController);
+app.use(gardensController);
 app.use(plantsController);
 app.use(tipsController);
 app.use(adsController);
 app.use(commentsController);
+
 
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
