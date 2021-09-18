@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "7414546d-2a3a-4998-b8cb-1fd651ecf4a2",
-		"name": "Ad-Comments requests",
+		"name": "Ad-Comments-requests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -51,14 +51,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads",
+							"raw": "{{host}}/api/users/{{userID}}/ads",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads"
 							]
 						}
@@ -100,16 +100,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}"
+								"{{adID}}"
 							]
 						}
 					},
@@ -150,14 +150,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads",
+							"raw": "{{host}}/api/users/{{userID}}/ads",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads"
 							]
 						}
@@ -196,16 +196,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}"
+								"{{adID}}"
 							]
 						}
 					},
@@ -243,7 +243,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}",
+							"raw": "{{host}}/api/users/{{user2}}/ads/{{adID}}",
 							"host": [
 								"{{host}}"
 							],
@@ -252,7 +252,7 @@
 								"users",
 								"{{user2}}",
 								"ads",
-								"{{ad2}}"
+								"{{adID}}"
 							]
 						}
 					},
@@ -290,16 +290,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}"
+								"{{adID}}"
 							]
 						}
 					},
@@ -337,14 +337,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads",
+							"raw": "{{host}}/api/users/{{userID}}/ads",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads"
 							]
 						}
@@ -400,16 +400,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}/comments",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}/comments",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}",
+								"{{adID}}",
 								"comments"
 							]
 						}
@@ -451,18 +451,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}/comments/{{comment2}}",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}/comments/{{commentID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}",
+								"{{adID}}",
 								"comments",
-								"{{comment2}}"
+								"{{commentID}}"
 							]
 						}
 					},
@@ -503,16 +503,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}/comments",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}/comments",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}",
+								"{{adID}}",
 								"comments"
 							]
 						}
@@ -551,18 +551,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}/comments/{{comment2}}",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}/comments/{{commentID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}",
+								"{{adID}}",
 								"comments",
-								"{{comment2}}"
+								"{{commentID}}"
 							]
 						}
 					},
@@ -600,18 +600,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}/comments/{{comment2}}",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}/comments/{{commentID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}",
+								"{{adID}}",
 								"comments",
-								"{{comment2}}"
+								"{{commentID}}"
 							]
 						}
 					},
@@ -649,18 +649,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}/comments/{{comment2}}",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}/comments/{{commentID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}",
+								"{{adID}}",
 								"comments",
-								"{{comment2}}"
+								"{{commentID}}"
 							]
 						}
 					},
@@ -698,16 +698,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user2}}/ads/{{ad2}}/comments",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}/comments",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user2}}",
+								"{{userID}}",
 								"ads",
-								"{{ad2}}",
+								"{{adID}}",
 								"comments"
 							]
 						}
