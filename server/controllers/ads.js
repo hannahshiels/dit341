@@ -1,6 +1,6 @@
 const express = require('express');
 const Ad = require('../models/ad');
-// const User = require('../models/user');
+const User = require('../models/user');
 const router = express.Router();
 
 router.route('/api/users/:userID/ads')
@@ -14,18 +14,14 @@ router.route('/api/users/:userID/ads')
 .post((req, res) => {
     const ad = new Ad(req.body);
     ad.save();
-    res.status.json(ad);
-
-    /*
     User.findOneAndUpdate(
-        { _id: req.params.UserID },
+        { _id: req.params.userID },
         { $push: { ads : ad } }, function (err, user){
-            if (err) { return next(err)}
+            if (err) { return next(err); }
             user.save();
             res.status(201).json(ad);
         }
     );
-    */
 })
 
 .delete((req, res) => {
