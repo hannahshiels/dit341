@@ -17,7 +17,7 @@ router.route('/api/users/:userID/ads/:adID/comments')
 
     Ad.findOneAndUpdate(
         { _id : req.params.adID },
-        { $push : { comments : comments } }, function(err, ad){
+        { $push : { comments : comment } }, function(err, ad){
             if (err){ return next(err) }
             ad.save();
             res.status(201).json(comment);
