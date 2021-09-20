@@ -46,7 +46,9 @@ router.route('/api/gardens/:gardenID/plants')
             { _id: req.params.gardenID }, 
             { $push: { plants: plant} }, function(err, garden){
                 if(err){ return next(err) }
-                garden.save();
+                if(garden == null){
+                    return res.status(404).json({"message": "Garden not found"})
+                }
                 res.status(201).json(plant);
             }
         ); 

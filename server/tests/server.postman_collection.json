@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"name\": \"name\",\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -103,8 +103,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"console.log(responseBody)\r",
-									"\r",
 									"var jsonData = JSON.parse(responseBody);\r",
 									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
 									"\r",
@@ -121,7 +119,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n    \"garden\": \"{{gardenID}}\"\r\n}",
+							"raw": "{\r\n   \"plant_name\": \"plant\",\r\n   \"plant_description\": [\r\n        {\"img\": \"example image\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -218,7 +216,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n    \"garden\": \"{{gardenID}}\"\r\n}",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"example image\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -501,7 +499,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n    \"garden\": \"{{gardenID}}\"\r\n}",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -585,7 +583,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n    \"garden\": \"{{gardenID}}\"\r\n}",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
