@@ -38,7 +38,7 @@ router.route('/api/gardens/:gardenID/plants')
         const plant = new Plant(req.body);  
         plant.save(function(err){
             if(err){
-                res.status(400).json({"message": "Fields are entered incorrectly. Please restructure request.", "errors": err.errors})
+               return res.status(400).json({"error": err.message});
             }
         });
 

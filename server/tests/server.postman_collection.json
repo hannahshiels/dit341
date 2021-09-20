@@ -103,6 +103,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"console.log(responseBody)\r",
+									"\r",
 									"var jsonData = JSON.parse(responseBody);\r",
 									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
 									"\r",
