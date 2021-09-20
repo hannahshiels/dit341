@@ -36,7 +36,11 @@ router.route('/api/gardens/:gardenID/plants')
     .post((req,res,next) => {
         // Create a plant
         const plant = new Plant(req.body);  
-        plant.save();
+        plant.save(function(err){
+            if(err){
+                res.status(400).json({"message": "Fields are entered incorrectly. Please restructure request.", "errors": err.errors})
+            }
+        });
 
        Garden.findOneAndUpdate(
             { _id: req.params.gardenID }, 
