@@ -4,27 +4,34 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.route('/api/users/:userID/ads')
-.get((req, res) => {
+.get((req, res, next) => {
     Ad.find({user: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
         res.json({"ads of a user" : ads});
     })
 })
 
-.post((req, res) => {
+.post((req, res, next) => {
     const ad = new Ad(req.body);
-    ad.save();
+    ad.save(function(err){
+        if (err){
+            return res.status(400).json({ "error" : err.message});
+        }
+    });
+
     User.findOneAndUpdate(
         { _id: req.params.userID },
         { $push: { ads : ad } }, function (err, user){
-            if (err) { return next(err); }
-            user.save();
+            if (err) { return next(err) }
+            if (garden == null){
+                return res.status(404).json({ "message" : "User not found" })
+            }
             res.status(201).json(ad);
         }
     );
 })
 
-.delete((req, res) => {
+.delete((req, res, next) => {
     Ad.deleteMany({ user : req.params.userID }, function(err, ads){
         if (err) { return next(err);}
         res.json({ "message" : "Deletion of ads successful"})
@@ -32,7 +39,7 @@ router.route('/api/users/:userID/ads')
 })
 
 router.route('/api/users/:userID/ads/:adID')
-.get((req, res) => {
+.get((req, res, next) => {
     Ad.findById(req.params.adID, function(err, ad) {
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found" });
@@ -42,7 +49,7 @@ router.route('/api/users/:userID/ads/:adID')
     })
 })
 
-.put((req, res) => {
+.put((req, res, next) => {
     Ad.findById(req.params.adID, function(err, ad){
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
@@ -58,7 +65,7 @@ router.route('/api/users/:userID/ads/:adID')
     })
 })
 
-.patch((req, res) => {
+.patch((req, res, next) => {
     Ad.findById(req.params.adID, function (err, ad){
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
@@ -74,13 +81,12 @@ router.route('/api/users/:userID/ads/:adID')
     })
 })
 
-.delete((req, res) => {
+.delete((req, res, next) => {
     Ad.findOneAndDelete({ _id : req.params.adID}, function(err, ad){
+        if (err) { return next(err); }
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
         }
-
-        if (err) { return next(err); }
 
         res.json(ad);
     })
