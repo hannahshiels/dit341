@@ -36,13 +36,19 @@ router.route('/api/gardens/:gardenID/plants')
     .post((req,res,next) => {
         // Create a plant
         const plant = new Plant(req.body);  
-        plant.save();
+        plant.save(function(err){
+            if(err){
+               return res.status(400).json({"error": err.message});
+            }
+        });
 
        Garden.findOneAndUpdate(
             { _id: req.params.gardenID }, 
             { $push: { plants: plant} }, function(err, garden){
                 if(err){ return next(err) }
-                garden.save();
+                if(garden == null){
+                    return res.status(404).json({"message": "Garden not found"})
+                }
                 res.status(201).json(plant);
             }
         ); 
