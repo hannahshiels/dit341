@@ -7,7 +7,7 @@ router.route('/api/comments')
 .get((req, res, next) => {
     Comment.find( function(err, comments){
         if (err) { return next(err); }
-        res.json({ "Comments in an ad" : ads })
+        res.json({ "Comments in an ad" : comments })
     })
 })
 
@@ -68,7 +68,7 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
         if (comment == null){
             return res.status(404).json({ "message" : "Comment not found"});
         }
-        comment.content = req.body.content;
+        comment.comment_content = req.body.comment_content;
         comment.date_posted = req.body.date_posted;
         comment.save();
         res.json(comment);
@@ -81,7 +81,7 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
         if (comment == null){
             return res.status(404).json({ "message" : "Comment not found" });
         }
-        comment.content = (req.body.content || comment.content);
+        comment.comment_content = (req.body.comment_content || comment.comment_content);
         comment.date_posted = (req.body.date_posted || comment.date_posted);
         comment.save();
         res.json(comment);

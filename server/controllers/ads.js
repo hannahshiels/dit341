@@ -23,7 +23,7 @@ router.route('/api/users/:userID/ads')
         { _id: req.params.userID },
         { $push: { ads : ad } }, function (err, user){
             if (err) { return next(err) }
-            if (garden == null){
+            if (user == null){
                 return res.status(404).json({ "message" : "User not found" })
             }
             res.status(201).json(ad);
@@ -59,7 +59,7 @@ router.route('/api/users/:userID/ads/:adID')
         ad.ad_contact.address = req.body.ad_contact.address;
         ad.ad_description = req.body.ad_description;
         ad.ad_type = req.body.ad_type;
-        ad.ad_date_posted = req-body.ad_date_posted;
+        ad.ad_date_posted = req.body.ad_date_posted;
         ad.save();
         res.json(ad);
     })
