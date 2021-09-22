@@ -862,6 +862,9 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"adID\", jsonData._id);",
+									"",
 									"pm.test(\"Post ad successful\", function () {",
 									"    pm.response.to.have.status(201);",
 									"});"
@@ -1316,7 +1319,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ad_description\" : \"Test4\",\n    \"ad_type\" : \"Test4\",\n    \"ad_contact\" : [\n        {\"number\" : 4},\n        {\"address\" : \"Test4\"}\n    ],\n    \"ad_date_posted\" : \"Test4\",\n    \"uploaded_by\" : \"{{userID}}\"\n}",
+							"raw": "{\n    \"ad_description\" : \"Test5\",\n    \"ad_type\" : \"Test5\",\n    \"ad_contact\" : [\n        {\"number\" : 5},\n        {\"address\" : \"Test5\"}\n    ],\n    \"ad_date_posted\" : \"Test5\",\n    \"uploaded_by\" : \"{{userID}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
