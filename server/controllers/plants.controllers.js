@@ -1,12 +1,7 @@
-const express = require('express');
 const Plant = require('../models/plant');
 const Garden = require('../models/garden');
-const router = express.Router();
 
-router.route('/api/gardens/:gardenID/plants')
-    .get((req,res,next) => {
-        // View all plants within a garden
-
+const getAllPlantsInGarden = (req,res,next) => {
         if(req.query.sort){
             if(req.query.sort === "asc"){
                 Plant.find({garden: req.params.gardenID}, function(err, plants){
@@ -32,9 +27,9 @@ router.route('/api/gardens/:gardenID/plants')
                 res.json({"plants in a garden": plants});
             }).populate('tips');
         }
-    })
-    .post((req,res,next) => {
-        // Create a plant
+    }
+
+const createPlantInGarden = (req,res,next) => {
         const plant = new Plant(req.body);  
         plant.save(function(err){
             if(err){
@@ -52,20 +47,18 @@ router.route('/api/gardens/:gardenID/plants')
                 res.status(201).json(plant);
             }
         ); 
-    })
-    .delete((req,res,next)=> {
-        // Delete all plants within a garden
+    }
+
+const deleteAllPlantsInGarden = (req,res,next) => {
         Plant.deleteMany({garden: req.params.gardenID}, function(err,plants){
             if(err){ return next(err);}
             res.json({
                 "message": "Deletion of plants successful"
             })
         })
-    })
+    }
 
-router.route('/api/gardens/:gardenID/plants/:plantID')
-    .get((req,res,next) => {
-        // View a plant within a garden
+const getPlant = (req,res,next) => {
         Plant.findById(req.params.plantID, function(err, plant){
             if(plant == null){
                 return res.status(404).json({"message": "Plant not found"});
@@ -73,9 +66,9 @@ router.route('/api/gardens/:gardenID/plants/:plantID')
             if(err){ return next(err);}
             res.json(plant);
         }).populate('tips');
-    })
-    .put((req,res,next) => {
-        // Update a plant within a garden
+    }
+
+const fullyUpdatePlant = (req,res,next) => {
         Plant.findById(req.params.plantID, function(err, plant){
             if(plant == null){
                 return res.status(404).json({"message": "Plant not found"});
@@ -89,9 +82,9 @@ router.route('/api/gardens/:gardenID/plants/:plantID')
             plant.save();
             res.json(plant);
         })
-    })
-    .patch((req,res,next) => {
-        // Partially update a plant within a garden
+    }
+
+const partialUpdatePlant = (req,res,next) => {
         Plant.findById(req.params.plantID, function(err, plant){
             if(err){ return next(err);}
 
@@ -106,9 +99,9 @@ router.route('/api/gardens/:gardenID/plants/:plantID')
             plant.save();
             res.json(plant);
         })
-    })
-    .delete((req,res,next)=> {
-        // Delete a plant within a garden
+    }
+
+ const deletePlant = (req,res,next)=> {
         Plant.findOneAndDelete({_id: req.params.plantID}, function(err, plant){
             if(err) { return next(err);}
 
@@ -119,6 +112,6 @@ router.route('/api/gardens/:gardenID/plants/:plantID')
         
             res.json(plant);
         } )
-    })
+    }
 
-module.exports = router;
+module.exports = {getAllPlantsInGarden, createPlantInGarden, deleteAllPlantsInGarden, getPlant, fullyUpdatePlant, partialUpdatePlant, deletePlant };

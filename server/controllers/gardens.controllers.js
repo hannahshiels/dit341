@@ -1,38 +1,35 @@
-const express = require('express');
 const Garden = require('../models/garden');
 const User = require('../models/user');
-const router = express.Router();
 
-router.route('/api/users/:userID/gardens')
-    .get((req,res) => {
+const getUserGardens = (req,res) => {
         Garden.find({user: req.params.userID}, function(err, gardens){
             if (err) { return next(err); }
             res.json({"GARDENS OF THE USER": gardens});
         })
-    })
-    .post((req,res) => {
+    }
+
+const createUserGarden = (req,res) => {
         const garden = new Garden(req.body);  
         garden.save();
         User.findOneAndUpdate(
             { _id: req.params.userID }, 
             { $push: { gardens: garden} }, function(err, user){
                 if(err){ return next(err) }
-                user.save();
                 res.status(201).json(garden);
             }
         );
-    })
-    .delete((req,res)=> {
+    }
+
+const deleteUserGardens =  (req,res)=> {
         Garden.deleteMany({user: req.params.userID}, function(err,gardens){
             if(err){ return next(err);}
             res.json({
                 "message": "ALL GARDENS DELETED SUCCESSFULLY"
             })
         })
-    })
+    }
 
-router.route('/api/users/:userID/gardens/:gardenID')
-    .get((req,res) => {
+const getGarden = (req,res) => {
         Garden.findById(req.params.gardenID, function(err, garden){
             if(garden == null){
                 return res.status(404).json({"message": "GARDEN NOT FOUND"});
@@ -40,8 +37,9 @@ router.route('/api/users/:userID/gardens/:gardenID')
             if(err){ return next(err);}
             res.json(garden);
         })
-    })
-    .put((req,res) => {
+    }
+
+const fullyUpdateGarden = (req,res) => {
         Garden.findById(req.params.gardenID, function(err, garden){
             if(garden == null){
                 return res.status(404).json({"message": "GARDEN NOT FOUND"});
@@ -54,8 +52,9 @@ router.route('/api/users/:userID/gardens/:gardenID')
             garden.save();
             res.json(garden);
         })
-    })
-    .patch((req,res) => {
+    }
+
+const partialUpdateGarden = (req,res) => {
         Garden.findById(req.params.gardenID, function(err, garden){
             if(garden == null){
                 return res.status(404).json({"message": "GARDEN NOT FOUND"});
@@ -68,8 +67,9 @@ router.route('/api/users/:userID/gardens/:gardenID')
             garden.save();
             res.json(garden);
         })
-    })
-    .delete((req,res)=> {
+    }
+
+const deleteGarden = (req,res)=> {
         Garden.findOneAndDelete({_id: req.params.gardenID}, function(err, garden){
             if(garden == null){
                 return res.status(404).json({"message": "GARDEN NOT FOUND"});
@@ -77,6 +77,6 @@ router.route('/api/users/:userID/gardens/:gardenID')
             if(err) { return next(err);}
             res.json(garden);
         })
-    })
+    }
 
-module.exports = router;
+module.exports = { getUserGardens, createUserGarden, deleteUserGardens, getGarden, fullyUpdateGarden, partialUpdateGarden, deleteGarden };

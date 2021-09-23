@@ -1,24 +1,21 @@
-const express = require('express');
 const User = require('../models/user');
-const router = express.Router();
 
-router.route('/api/users')
-    .get((req,res) => {
+const getAllUsers = (req,res) => {
         User.find(function(err, users){
             if (err) { return next(err); }
             res.json({"LIST OF USERS": users});
         })
-    })
-    .post((req,res) => {
+    }
+
+const createUser = (req,res) => {
         const user = new User(req.body);  
         user.save(function(err){
             if (err) { return next(err); }
             res.status(201).json(user);
         })
-    })
+    }
 
-router.route('/api/users/:userID')
-    .get((req,res) => {
+const getUser = (req,res) => {
         User.findById(req.params.userID, function(err, user){
             if(user == null){
                 return res.status(404).json({"message": "USER NOT FOUND"});
@@ -26,8 +23,9 @@ router.route('/api/users/:userID')
             if(err){ return next(err);}
             res.json(user);
         })
-    })
-    .put((req,res) => {
+    }
+
+const fullyUpdateUser = (req,res) => {
         User.findById(req.params.userID, function(err, user){
             if(user == null){
                 return res.status(404).json({"message": "USER NOT FOUND"});
@@ -43,8 +41,9 @@ router.route('/api/users/:userID')
             user.save();
             res.json(user);
         })
-    })
-    .patch((req,res) => {
+    }
+
+const partialUpdateUser = (req,res) => {
         User.findById(req.params.userID, function(err, user){
             if(user == null){
                 return res.status(404).json({"message": "USER NOT FOUND"});
@@ -60,8 +59,9 @@ router.route('/api/users/:userID')
             user.save();
             res.json(user);
         })
-    })
-    .delete((req,res)=> {
+    }
+
+const deleteUser = (req,res)=> {
         User.findOneAndDelete({_id: req.params.userID}, function(err, user){
             if(user == null){
                 return res.status(404).json({"message": "USER NOT FOUND"});
@@ -69,6 +69,6 @@ router.route('/api/users/:userID')
             if(err) { return next(err);}
             res.json(user);
         })
-    })
+    }
 
-module.exports = router;
+module.exports = {getAllUsers, createUser, getUser, fullyUpdateUser, partialUpdateUser, deleteUser};

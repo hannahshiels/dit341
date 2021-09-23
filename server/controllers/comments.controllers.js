@@ -1,33 +1,29 @@
-const express = require('express');
 const Comment = require('../models/comment');
 const Ad = require('../models/ad');
-const router = express.Router();
 
-router.route('/api/comments')
-.get((req, res, next) => {
+const getAllComments = (req, res, next) => {
     Comment.find( function(err, comments){
         if (err) { return next(err); }
-        res.json({ "Comments in an ad" : comments })
+        res.json({ "Comments on ads" : comments })
     })
-})
+}
 
-.delete((req, res, next) => {
+const deleteAllComments = (req, res, next) => {
     Comment.deleteMany(function(err, comments) {
         if(err) { return next(err); }
         res.json( { "message" : "Deletion of comments successful"})
     })
-})
+}
 
 
-router.route('/api/users/:userID/ads/:adID/comments')
-.get((req, res, next) => {
+const getAllCommentsOnAd = (req, res, next) => {
     Comment.find({ad: req.params.adID}, function(err, comments){
         if (err) { return next(err); }
         res.json({"Comments of an ad": comments});
     })
-})
+}
 
-.post((req, res, next) => {
+const createComment = (req, res, next) => {
     const comment = new Comment(req.body);
     comment.save();
 
@@ -39,20 +35,19 @@ router.route('/api/users/:userID/ads/:adID/comments')
             res.status(201).json(comment);
         }
     )
-})
+}
 
-.delete((req, res, next)=> {
+const deleteAllCommentsOnAd = (req, res, next)=> {
     Comment.deleteMany({ ad:req.params.adID }, function(err, comments){
         if(err){ return next(err); }
         res.json({
             "message": "Deletion of comments successful"
         })
     })
-})
+}
 
 
-router.route('/api/users/:userID/ads/:adID/comments/:commentID')
-.get((req, res, next) => {
+const getComment = (req, res, next) => {
     Comment.findById(req.params.commentID, function (err, comment){
         if (err) { return next(err); }
         if (comment == null){
@@ -60,9 +55,9 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
         }
         res.json(comment);
     })
-})
+}
 
-.put ((req, res, next) => {
+const fullyUpdateComment = (req, res, next) => {
     Comment.findById(req.params.commentID, function(err, comment){
         if (err) { return next(err); }
         if (comment == null){
@@ -73,9 +68,9 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
         comment.save();
         res.json(comment);
     })
-})
+}
 
-.patch((req, res, next) => {
+const partialUpdateComment = (req, res, next) => {
     Comment.findById(req.params.commentID, function(err, comment) {
         if (err) { return next(err); }
         if (comment == null){
@@ -86,9 +81,9 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
         comment.save();
         res.json(comment);
     })
-})
+}
 
-.delete((req, res, next)=> {
+const deleteComment = (req, res, next)=> {
     Comment.findOneAndDelete({_id: req.params.commentID}, function(err, comment){
         if(err) { return next(err); }
         if(comment == null){
@@ -97,6 +92,6 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
     
         res.json(comment);
     } )
-})
+}
 
-module.exports = router;
+module.exports = {getAllComments, deleteAllComments, getAllCommentsOnAd, createComment, deleteAllCommentsOnAd, getComment, fullyUpdateComment, partialUpdateComment, deleteComment  };
