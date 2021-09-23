@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.route('/api/users/:userID/ads')
 .get((req, res, next) => {
-    Ad.find({user: req.params.userID}, function(err, ads){
+    Ad.find({uploaded_by: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
         res.json({"ads of a user" : ads});
     })
