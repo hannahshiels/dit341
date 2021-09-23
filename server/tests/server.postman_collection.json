@@ -466,6 +466,384 @@
 			]
 		},
 		{
+			"name": "All tips requests",
+			"item": [
+				{
+					"name": "CREATE PLANT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Tips",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"tipID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"title\": \"Helpful watering tip\",\r\n    \"content\": \"Did you know that its really useful to water this plant?\",\r\n    \"author\": \"{{userID}}\",\r\n    \"plant\": \"{{plantID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All tips",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All tips on a plant in a garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Tip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips",
+								"{{tipID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Tip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"title\": \"Another tip title\",\r\n    \"content\": \"Another tip content\",\r\n    \"author\": \"{{userID}}\",\r\n    \"plant\": \"{{plantID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips",
+								"{{tipID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Tip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"content\": \"Changing tip content\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips",
+								"{{tipID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Tip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips",
+								"{{tipID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Tips on a plant in a garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE All tips",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "All garden requests",
 			"item": [
 				{
@@ -1098,384 +1476,6 @@
 								"api",
 								"users",
 								"{{userID}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "All tips requests",
-			"item": [
-				{
-					"name": "CREATE PLANT",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
-									"\r",
-									"pm.test(\"Successful POST request\", function () {\r",
-									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST Tips",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"tipID\", jsonData._id);\r",
-									"\r",
-									"pm.test(\"Successful POST request\", function () {\r",
-									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{  \r\n    \"title\": \"Helpful watering tip\",\r\n    \"content\": \"Did you know that its really useful to water this plant?\",\r\n    \"author\": \"{{userID}}\",\r\n    \"plant\": \"{{plantID}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}",
-								"tips"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET All tips",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/tips",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"tips"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All tips on a plant in a garden",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}",
-								"tips"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Tip",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}",
-								"tips",
-								"{{tipID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PUT Tip",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{  \r\n    \"title\": \"Another tip title\",\r\n    \"content\": \"Another tip content\",\r\n    \"author\": \"{{userID}}\",\r\n    \"plant\": \"{{plantID}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}",
-								"tips",
-								"{{tipID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PATCH Tip",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{  \r\n    \"content\": \"Changing tip content\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}",
-								"tips",
-								"{{tipID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE Tip",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}",
-								"tips",
-								"{{tipID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE Tips on a plant in a garden",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}",
-								"tips"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE All tips",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/tips",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"tips"
 							]
 						}
 					},
