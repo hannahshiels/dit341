@@ -866,7 +866,7 @@
 									"pm.collectionVariables.set(\"adID\", jsonData._id);",
 									"",
 									"pm.test(\"Post ad successful\", function () {",
-									"    pm.response.to.have.status(201);",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1187,7 +1187,7 @@
 									"pm.collectionVariables.set(\"adID\", jsonData._id);",
 									"",
 									"pm.test(\"Post ad successful\", function () {",
-									"    pm.response.to.have.status(201);",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1301,7 +1301,7 @@
 									"pm.collectionVariables.set(\"adID\", jsonData._id);",
 									"",
 									"pm.test(\"Post ad successful\", function () {",
-									"    pm.response.to.have.status(201);",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1361,7 +1361,7 @@
 									"pm.collectionVariables.set(\"commentID\", jsonData._id);",
 									"",
 									"pm.test(\"Post comment successful\", function () {",
-									"    pm.response.to.have.status(201);",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1780,6 +1780,17 @@
 							"script": {
 								"exec": [
 									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
