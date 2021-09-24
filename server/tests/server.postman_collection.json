@@ -925,58 +925,6 @@
 					"response": []
 				},
 				{
-					"name": "GET Gardens ASC",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens?sort=asc",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}",
-								"gardens"
-							],
-							"query": [
-								{
-									"key": "sort",
-									"value": "asc"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Gardens DESC",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens?sort=desc",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}",
-								"gardens"
-							],
-							"query": [
-								{
-									"key": "sort",
-									"value": "desc"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "GET Garden",
 					"event": [
 						{
@@ -1282,54 +1230,6 @@
 							"path": [
 								"api",
 								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Users ASC",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/users?sort=asc",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users"
-							],
-							"query": [
-								{
-									"key": "sort",
-									"value": "asc"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Users DESC",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/users?sort=desc",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users"
-							],
-							"query": [
-								{
-									"key": "sort",
-									"value": "desc"
-								}
 							]
 						}
 					},
