@@ -7,7 +7,7 @@ router.route('/api/users/:userID/ads')
 .get((req, res, next) => {
     Ad.find({uploaded_by: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
-        res.json({"ads of a user" : ads});
+        res.status(200).json({"ads of a user" : ads });
     })
 })
 
@@ -34,7 +34,7 @@ router.route('/api/users/:userID/ads')
 .delete((req, res, next) => {
     Ad.deleteMany({ user : req.params.userID }, function(err, ads){
         if (err) { return next(err);}
-        res.json({ "message" : "Deletion of ads successful"})
+        res.status(200).json({ "message" : "Deletion of ads successful"})
     })
 })
 
@@ -45,7 +45,7 @@ router.route('/api/users/:userID/ads/:adID')
             return res.status(404).json({ "message" : "Ad not found" });
         }
         if (err) { return next(err);}
-        res.json(ad);
+        res.status(200).json(ad);
     })
 })
 
@@ -61,7 +61,7 @@ router.route('/api/users/:userID/ads/:adID')
         ad.ad_type = req.body.ad_type;
         ad.ad_date_posted = req.body.ad_date_posted;
         ad.save();
-        res.json(ad);
+        res.status(200).json(ad);
     })
 })
 
@@ -77,7 +77,7 @@ router.route('/api/users/:userID/ads/:adID')
         ad.ad_type = (req.body.ad_type || ad.ad_type);
         ad.ad_date_posted = (req.body.ad_date_posted || ad.ad_date_posted);
         ad.save();
-        res.json(ad);
+        res.status(200).json(ad);
     })
 })
 
@@ -88,7 +88,7 @@ router.route('/api/users/:userID/ads/:adID')
             return res.status(404).json({ "message" : "Ad not found"});
         }
 
-        res.json(ad);
+        res.status(200).json(ad);
     })
 })
 

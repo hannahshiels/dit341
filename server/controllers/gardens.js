@@ -7,7 +7,7 @@ router.route('/api/users/:userID/gardens')
     .get((req,res) => {
         Garden.find({user: req.params.userID}, function(err, gardens){
             if (err) { return next(err); }
-            res.json({"GARDENS OF THE USER": gardens});
+            res.status(200).json({"GARDENS OF THE USER": gardens});
         })
     })
     .post((req,res) => {
@@ -25,7 +25,7 @@ router.route('/api/users/:userID/gardens')
     .delete((req,res)=> {
         Garden.deleteMany({user: req.params.userID}, function(err,gardens){
             if(err){ return next(err);}
-            res.json({
+            res.status(200).json({
                 "message": "ALL GARDENS DELETED SUCCESSFULLY"
             })
         })
@@ -38,7 +38,7 @@ router.route('/api/users/:userID/gardens/:gardenID')
                 return res.status(404).json({"message": "GARDEN NOT FOUND"});
             }
             if(err){ return next(err);}
-            res.json(garden);
+            res.status(200).json(garden);
         })
     })
     .put((req,res) => {
@@ -52,7 +52,7 @@ router.route('/api/users/:userID/gardens/:gardenID')
             garden.direction = req.body.direction;
             garden.noplants = req.body.noplants; //update it to count on plant id
             garden.save();
-            res.json(garden);
+            res.status(200).json(garden);
         })
     })
     .patch((req,res) => {
@@ -66,7 +66,7 @@ router.route('/api/users/:userID/gardens/:gardenID')
             garden.direction = (req.body.direction || garden.direction);
             garden.noplants = (req.body.noplants || garden.noplants); //update it to count on plant id
             garden.save();
-            res.json(garden);
+            res.status(200).json(garden);
         })
     })
     .delete((req,res)=> {
@@ -75,7 +75,7 @@ router.route('/api/users/:userID/gardens/:gardenID')
                 return res.status(404).json({"message": "GARDEN NOT FOUND"});
             }
             if(err) { return next(err);}
-            res.json(garden);
+            res.status(200).json(garden);
         })
     })
 

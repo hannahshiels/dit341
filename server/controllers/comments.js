@@ -7,14 +7,14 @@ router.route('/api/comments')
 .get((req, res, next) => {
     Comment.find( function(err, comments){
         if (err) { return next(err); }
-        res.json({ "Comments in an ad" : comments })
+        res.status(200).json({ "Comments in an ad" : comments })
     })
 })
 
 .delete((req, res, next) => {
     Comment.deleteMany(function(err, comments) {
         if(err) { return next(err); }
-        res.json( { "message" : "Deletion of comments successful"})
+        res.status(200).json( { "message" : "Deletion of comments successful"})
     })
 })
 
@@ -23,7 +23,7 @@ router.route('/api/users/:userID/ads/:adID/comments')
 .get((req, res, next) => {
     Comment.find({ad: req.params.adID}, function(err, comments){
         if (err) { return next(err); }
-        res.json({"Comments of an ad": comments});
+        res.status(200).json({"Comments of an ad": comments});
     })
 })
 
@@ -44,7 +44,7 @@ router.route('/api/users/:userID/ads/:adID/comments')
 .delete((req, res, next)=> {
     Comment.deleteMany({ ad:req.params.adID }, function(err, comments){
         if(err){ return next(err); }
-        res.json({
+        res.status(200).json({
             "message": "Deletion of comments successful"
         })
     })
@@ -58,7 +58,7 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
         if (comment == null){
             return res.status(404).json({ "message" : "Comment not found"});
         }
-        res.json(comment);
+        res.status(200).json(comment);
     })
 })
 
@@ -71,7 +71,7 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
         comment.comment_content = req.body.comment_content;
         comment.date_posted = req.body.date_posted;
         comment.save();
-        res.json(comment);
+        res.status(200).json(comment);
     })
 })
 
@@ -84,7 +84,7 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
         comment.comment_content = (req.body.comment_content || comment.comment_content);
         comment.date_posted = (req.body.date_posted || comment.date_posted);
         comment.save();
-        res.json(comment);
+        res.status(200).json(comment);
     })
 })
 
@@ -95,7 +95,7 @@ router.route('/api/users/:userID/ads/:adID/comments/:commentID')
             return res.status(404).json({"message": "Comment not found"});
         }
     
-        res.json(comment);
+        res.status(200).json(comment);
     } )
 })
 

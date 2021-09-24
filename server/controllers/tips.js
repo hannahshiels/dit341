@@ -9,14 +9,14 @@ router.route('/api/tips')
         // View all tips
         Tip.find(function(err, tips){
             if (err) { return next(err); }
-            res.json({"tips": tips});
+            res.status(200).json({"tips": tips});
         })
     })
     .delete((req,res,next)=> {
         // Delete all tips
         Tip.deleteMany(function(err, tips){
             if(err){ return next(err);}
-            res.json({
+            res.status(200).json({
                 "message": "Deletion of tips successful"
             })
         })
@@ -29,7 +29,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID/tips')
         // View all tips within a plant within a garden
         Tip.find({plant: req.params.plantID}, function(err, tips){
             if (err) { return next(err); }
-            res.json({"tips on a plant in a garden": tips});
+            res.status(200).json({"tips on a plant in a garden": tips});
         })
     })
     .post((req,res,next)=> {
@@ -50,7 +50,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID/tips')
         // Delete all tips within a plant within a garden
         Tip.deleteMany({plant:req.params.plantID}, function(err, tips){
             if(err){ return next(err);}
-            res.json({
+            res.status(200).json({
                 "message": "Deletion of tips successful"
             })
         })
@@ -65,7 +65,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID/tips')
             if(tip == null){
                 return res.status(404).json({"message": "Tip not found"});
             }
-            res.json(tip);
+            res.status(200).json(tip);
         })
     })
     .put((req,res,next) => {
@@ -79,7 +79,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID/tips')
             tip.title = req.body.title;
             tip.content = req.body.content;
             tip.save();
-            res.json(tip);
+            res.status(200).json(tip);
         })
     })
     .patch((req,res,next) => {
@@ -93,7 +93,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID/tips')
             tip.title = ( req.body.title  || tip.title );
             tip.content = (req.body.content || tip.content);
             tip.save();
-            res.json(tip);
+            res.status(200).json(tip);
         })
     })
     .delete((req,res,next)=> {
@@ -105,7 +105,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID/tips')
 
             if(err) { return next(err);}
         
-            res.json(tip);
+            res.status(200).json(tip);
         } )
     })
 
