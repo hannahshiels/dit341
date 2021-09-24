@@ -7,6 +7,9 @@ router.route('/api/users/:userID/ads')
 .get((req, res, next) => {
     Ad.find({uploaded_by: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
+        if(ads.length == 0){
+            return res.status(404).json({ "message" : "No ads found"})
+        }
         res.status(200).json({"ads of a user" : ads });
     })
 })
@@ -32,7 +35,7 @@ router.route('/api/users/:userID/ads')
 })
 
 .delete((req, res, next) => {
-    Ad.deleteMany({ user : req.params.userID }, function(err, ads){
+    Ad.deleteMany({ uploaded_by : req.params.userID }, function(err, ads){
         if (err) { return next(err);}
         res.status(200).json({ "message" : "Deletion of ads successful"})
     })

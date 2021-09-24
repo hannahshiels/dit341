@@ -9,6 +9,9 @@ router.route('/api/tips')
         // View all tips
         Tip.find(function(err, tips){
             if (err) { return next(err); }
+            if(tips.length == 0){
+                return res.status(404).json({ "message" : "No tip found"})
+            }
             res.status(200).json({"tips": tips});
         })
     })
@@ -35,7 +38,11 @@ router.route('/api/gardens/:gardenID/plants/:plantID/tips')
     .post((req,res,next)=> {
         // Create a new tip within a plant within a garden
         const tip = new Tip(req.body);
-        tip.save();
+        tip.save(function(err){
+            if(err){
+               return res.status(400).json({"error": err.message});
+            }
+        });
 
         Plant.findOneAndUpdate(
             { _id: req.params.plantID }, 

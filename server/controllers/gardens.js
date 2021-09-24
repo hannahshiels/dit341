@@ -7,12 +7,19 @@ router.route('/api/users/:userID/gardens')
     .get((req,res) => {
         Garden.find({user: req.params.userID}, function(err, gardens){
             if (err) { return next(err); }
+            if(gardens.length == 0){
+                return res.status(404).json({"message":"No gardens found"})
+            }
             res.status(200).json({"GARDENS OF THE USER": gardens});
         })
     })
     .post((req,res) => {
         const garden = new Garden(req.body);  
-        garden.save();
+        garden.save(function(err){
+            if (err){
+                return res.status(400).json({ "error" : err.message});
+            }
+        });
         User.findOneAndUpdate(
             { _id: req.params.userID }, 
             { $push: { gardens: garden} }, function(err, user){

@@ -7,6 +7,9 @@ router.route('/api/comments')
 .get((req, res, next) => {
     Comment.find( function(err, comments){
         if (err) { return next(err); }
+        if(comments.length == 0){
+            return res.status(404).json({ "message" : "No comments found"})
+        }
         res.status(200).json({ "Comments in an ad" : comments })
     })
 })
@@ -29,12 +32,19 @@ router.route('/api/users/:userID/ads/:adID/comments')
 
 .post((req, res, next) => {
     const comment = new Comment(req.body);
-    comment.save();
+    comment.save(function(err){
+        if(err){
+           return res.status(400).json({"error": err.message});
+        }
+    });
 
     Ad.findOneAndUpdate(
         { _id : req.params.adID },
         { $push : { comments : comment } }, function(err, ad){
             if (err){ return next(err) }
+            if(ad == null){
+                return res.status(404).json({"message": "Ad not found"})
+            }
             ad.save();
             res.status(201).json(comment);
         }

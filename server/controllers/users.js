@@ -6,6 +6,9 @@ router.route('/api/users')
     .get((req,res) => {
         User.find(function(err, users){
             if (err) { return next(err); }
+            if(users.length == 0){
+                return res.status(404).json({ "message" : "No users found"})
+            }
             res.status(200).json({"LIST OF USERS": users});
         })
     })
