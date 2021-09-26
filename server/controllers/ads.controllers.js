@@ -4,7 +4,10 @@ const User = require('../models/user');
 const getUserAds = (req, res, next) => {
     Ad.find({uploaded_by: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
-        res.json({"ads of a user" : ads});
+        if(ads.length == 0){
+            return res.status(404).json({ "message" : "No ads found"})
+        }
+        res.status(200).json({"ads of a user" : ads });
     })
 }
 
@@ -27,12 +30,13 @@ const createUserAd = (req, res, next) => {
             res.status(201).json(ad);
         }
     );
+
 }
 
 const deleteUserAds = (req, res, next) => {
-    Ad.deleteMany({ user : req.params.userID }, function(err, ads){
+    Ad.deleteMany({ uploaded_by : req.params.userID }, function(err, ads){
         if (err) { return next(err);}
-        res.json({ "message" : "Deletion of ads successful"})
+        res.status(200).json({ "message" : "Deletion of ads successful"})
     })
 }
 
@@ -42,7 +46,7 @@ const getUserAd = (req, res, next) => {
             return res.status(404).json({ "message" : "Ad not found" });
         }
         if (err) { return next(err);}
-        res.json(ad);
+        res.status(200).json(ad);
     })
 }
 
@@ -58,7 +62,7 @@ const fullUpdateUserAd = (req, res, next) => {
         ad.ad_type = req.body.ad_type;
         ad.ad_date_posted = req.body.ad_date_posted;
         ad.save();
-        res.json(ad);
+        res.status(200).json(ad);
     })
 }
 
@@ -74,7 +78,7 @@ const partialUpdateUserAd = (req, res, next) => {
         ad.ad_type = (req.body.ad_type || ad.ad_type);
         ad.ad_date_posted = (req.body.ad_date_posted || ad.ad_date_posted);
         ad.save();
-        res.json(ad);
+        res.status(200).json(ad);
     })
 }
 
@@ -84,9 +88,9 @@ const deleteUserAd = (req, res, next) => {
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
         }
-
-        res.json(ad);
+        res.status(200).json(ad);
     })
+
 }
 
 module.exports = { getUserAds, createUserAd,deleteUserAds,  getUserAd, fullUpdateUserAd, partialUpdateUserAd,  deleteUserAd  };

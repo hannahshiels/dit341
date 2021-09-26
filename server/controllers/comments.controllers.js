@@ -4,14 +4,17 @@ const Ad = require('../models/ad');
 const getAllComments = (req, res, next) => {
     Comment.find( function(err, comments){
         if (err) { return next(err); }
-        res.json({ "Comments on ads" : comments })
+        if(comments.length == 0){
+            return res.status(404).json({ "message" : "No comments found"})
+        }
+        res.status(200).json({ "Comments in an ad" : comments })
     })
 }
 
 const deleteAllComments = (req, res, next) => {
     Comment.deleteMany(function(err, comments) {
         if(err) { return next(err); }
-        res.json( { "message" : "Deletion of comments successful"})
+        res.status(200).json( { "message" : "Deletion of comments successful"})
     })
 }
 
@@ -19,18 +22,25 @@ const deleteAllComments = (req, res, next) => {
 const getAllCommentsOnAd = (req, res, next) => {
     Comment.find({ad: req.params.adID}, function(err, comments){
         if (err) { return next(err); }
-        res.json({"Comments of an ad": comments});
+        res.status(200).json({"Comments of an ad": comments});
     })
 }
 
 const createComment = (req, res, next) => {
     const comment = new Comment(req.body);
-    comment.save();
+    comment.save(function(err){
+        if(err){
+           return res.status(400).json({"error": err.message});
+        }
+    });
 
     Ad.findOneAndUpdate(
         { _id : req.params.adID },
         { $push : { comments : comment } }, function(err, ad){
             if (err){ return next(err) }
+            if(ad == null){
+                return res.status(404).json({"message": "Ad not found"})
+            }
             ad.save();
             res.status(201).json(comment);
         }
@@ -40,7 +50,7 @@ const createComment = (req, res, next) => {
 const deleteAllCommentsOnAd = (req, res, next)=> {
     Comment.deleteMany({ ad:req.params.adID }, function(err, comments){
         if(err){ return next(err); }
-        res.json({
+        res.status(200).json({
             "message": "Deletion of comments successful"
         })
     })
@@ -53,7 +63,7 @@ const getComment = (req, res, next) => {
         if (comment == null){
             return res.status(404).json({ "message" : "Comment not found"});
         }
-        res.json(comment);
+        res.status(200).json(comment);
     })
 }
 
@@ -66,7 +76,7 @@ const fullyUpdateComment = (req, res, next) => {
         comment.comment_content = req.body.comment_content;
         comment.date_posted = req.body.date_posted;
         comment.save();
-        res.json(comment);
+        res.status(200).json(comment);
     })
 }
 
@@ -79,7 +89,7 @@ const partialUpdateComment = (req, res, next) => {
         comment.comment_content = (req.body.comment_content || comment.comment_content);
         comment.date_posted = (req.body.date_posted || comment.date_posted);
         comment.save();
-        res.json(comment);
+        res.status(200).json(comment);
     })
 }
 
@@ -90,7 +100,7 @@ const deleteComment = (req, res, next)=> {
             return res.status(404).json({"message": "Comment not found"});
         }
     
-        res.json(comment);
+        res.status(200).json(comment);
     } )
 }
 
