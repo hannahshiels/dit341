@@ -11,7 +11,7 @@ router.route('/api/gardens/:gardenID/plants')
             if(req.query.sort === "asc"){
                 Plant.find({garden: req.params.gardenID}, function(err, plants){
                     if (err) { return next(err); }
-                    if(plants == null){
+                    if(plants.length == 0){
                         return res.status(404).json({"message":"No plants with that name found"})
                     }
                     return res.status(200).json({"plants in a garden": plants});
@@ -20,7 +20,7 @@ router.route('/api/gardens/:gardenID/plants')
             if(req.query.sort === "desc"){
                 Plant.find({garden: req.params.gardenID}, function(err, plants){
                     if (err) { return next(err); }
-                    if(plants == null){
+                    if(plants.length == 0){
                         return res.status(404).json({"message":"No plants with that name found"})
                     }
                     return res.status(200).json({"plants in a garden": plants});
