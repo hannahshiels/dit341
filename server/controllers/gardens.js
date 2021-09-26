@@ -30,7 +30,7 @@ router.route('/api/users/:userID/gardens')
         );
     })
     .delete((req,res)=> {
-        Garden.deleteMany({user: req.params.userID}, function(err,gardens){
+        Garden.deleteMany({owned_by: req.params.userID}, function(err,gardens){
             if(err){ return next(err);}
             res.status(200).json({
                 "message": "ALL GARDENS DELETED SUCCESSFULLY"
