@@ -1,15 +1,15 @@
 {
 	"info": {
-		"_postman_id": "663e3c97-84d8-41f8-aba2-c041b2c8caad",
+		"_postman_id": "1d41144a-db28-4eec-afaa-85ddbf64c98f",
 		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Set up",
+			"name": "All user requests",
 			"item": [
 				{
-					"name": "POST User",
+					"name": "POST Users",
 					"event": [
 						{
 							"listen": "test",
@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"name\",\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n   \"name\": \"James Bond\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contactnumber\": \"007\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -52,7 +52,157 @@
 					"response": []
 				},
 				{
-					"name": "POST Garden",
+					"name": "GET Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Jack Bond\",\r\n   \"dob\": \"1901-01-01\",\r\n   \"role\": \"user\",\r\n   \"address\": \"10 Downing Street UK\",\r\n   \"contactnumber\": \"008\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"james.bond@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "All garden requests",
+			"item": [
+				{
+					"name": "POST Gardens",
 					"event": [
 						{
 							"listen": "test",
@@ -74,7 +224,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"owned_by\": \"{{userID}}\"}\r\n        \r\n    ",
+							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soillevel\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,6 +241,159 @@
 								"users",
 								"{{userID}}",
 								"gardens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Gardens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}/gardens",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}",
+								"gardens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}",
+								"gardens",
+								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"noplants\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}",
+								"gardens",
+								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"soillevel\": \"tilt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}",
+								"gardens",
+								"{{gardenID}}"
 							]
 						}
 					},
@@ -181,6 +484,19 @@
 				},
 				{
 					"name": "GET Plants ASC",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -207,6 +523,19 @@
 				},
 				{
 					"name": "GET Plants DESC",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -350,169 +679,12 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "DELETE Plants",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CREATE PLANT",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
-									"\r",
-									"pm.test(\"Successful POST request\", function () {\r",
-									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE Plant",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
 		{
 			"name": "All tips requests",
 			"item": [
-				{
-					"name": "CREATE PLANT",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
-									"\r",
-									"pm.test(\"Successful POST request\", function () {\r",
-									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "POST Tips",
 					"event": [
@@ -747,95 +919,6 @@
 								"{{plantID}}",
 								"tips",
 								"{{tipID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE Tip",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}",
-								"tips",
-								"{{tipID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE Tips on a plant in a garden",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"gardens",
-								"{{gardenID}}",
-								"plants",
-								"{{plantID}}",
-								"tips"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE All tips",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/tips",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"tips"
 							]
 						}
 					},
@@ -1118,229 +1201,12 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "DELETE Ads",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/ads",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}",
-								"ads"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CREATE AD",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"pm.collectionVariables.set(\"adID\", jsonData._id);",
-									"",
-									"pm.test(\"Post ad successful\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"ad_description\" : \"Test5\",\n    \"ad_type\" : \"Test5\",\n    \"ad_contact\" : [\n        {\"number\" : 5},\n        {\"address\" : \"Test5\"}\n    ],\n    \"ad_date_posted\" : \"Test5\",\n    \"uploaded_by\" : \"{{userID}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/ads",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}",
-								"ads"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE Ad",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}",
-								"ads",
-								"{{adID}}"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
 		{
 			"name": "All comment requests",
 			"item": [
-				{
-					"name": "CREATE AD",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"pm.collectionVariables.set(\"adID\", jsonData._id);",
-									"",
-									"pm.test(\"Post ad successful\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"ad_description\" : \"Test5\",\n    \"ad_type\" : \"Test5\",\n    \"ad_contact\" : [\n        {\"number\" : 5},\n        {\"address\" : \"Test5\"}\n    ],\n    \"ad_date_posted\" : \"Test5\",\n    \"uploaded_by\" : \"{{userID}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/ads",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}",
-								"ads"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "POST Comments",
 					"event": [
@@ -1670,7 +1536,12 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Delete requests",
+			"item": [
 				{
 					"name": "DELETE Comment",
 					"event": [
@@ -1817,24 +1688,28 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "All garden requests",
-			"item": [
+				},
 				{
-					"name": "POST Gardens",
+					"name": "CREATE AD",
 					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"gardenID\", jsonData._id);\r",
-									"\r",
-									"pm.test(\"Successful POST request\", function () {\r",
-									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"adID\", jsonData._id);",
+									"",
+									"pm.test(\"Post ad successful\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1843,10 +1718,16 @@
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soillevel\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
+							"raw": "{\n    \"ad_description\" : \"Test5\",\n    \"ad_type\" : \"Test5\",\n    \"ad_contact\" : [\n        {\"number\" : 5},\n        {\"address\" : \"Test5\"}\n    ],\n    \"ad_date_posted\" : \"Test5\",\n    \"uploaded_by\" : \"{{userID}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1854,7 +1735,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens",
+							"raw": "{{host}}/api/users/{{userID}}/ads",
 							"host": [
 								"{{host}}"
 							],
@@ -1862,131 +1743,30 @@
 								"api",
 								"users",
 								"{{userID}}",
-								"gardens"
+								"ads"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GET Gardens",
+					"name": "DELETE Ad",
 					"event": [
 						{
-							"listen": "test",
+							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}",
-								"gardens"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Garden",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}",
-								"gardens",
-								"{{gardenID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PUT Garden",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"noplants\": \"5\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
 							}
 						},
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}",
-								"gardens",
-								"{{gardenID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PATCH Garden",
-					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1994,19 +1774,16 @@
 						}
 					],
 					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"soillevel\": \"tilt\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
 							}
-						},
+						],
 						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
+							"raw": "{{host}}/api/users/{{userID}}/ads/{{adID}}",
 							"host": [
 								"{{host}}"
 							],
@@ -2014,15 +1791,63 @@
 								"api",
 								"users",
 								"{{userID}}",
-								"gardens",
-								"{{gardenID}}"
+								"ads",
+								"{{adID}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE Gardens",
+					"name": "DELETE Ads",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}/ads",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}",
+								"ads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Tips on a plant in a garden",
 					"event": [
 						{
 							"listen": "test",
@@ -2040,15 +1865,230 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens",
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"users",
-								"{{userID}}",
-								"gardens"
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE TIP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"tipID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"title\": \"Helpful watering tip\",\r\n    \"content\": \"Did you know that its really useful to water this plant?\",\r\n    \"author\": \"{{userID}}\",\r\n    \"plant\": \"{{plantID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Tip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}/tips/{{tipID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}",
+								"tips",
+								"{{tipID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE All tips",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/tips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE PLANT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"plantID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"https://picsum.photos/200/300\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Plant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants/{{plantID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants",
+								"{{plantID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Plants",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}/plants",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}",
+								"plants"
 							]
 						}
 					},
@@ -2132,57 +2172,9 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "All user requests",
-			"item": [
-				{
-					"name": "POST Users",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"userID\", jsonData._id);\r",
-									"\r",
-									"pm.test(\"Successful POST request\", function () {\r",
-									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"name\": \"James Bond\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contactnumber\": \"007\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/users",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "GET Users",
+					"name": "DELETE Gardens",
 					"event": [
 						{
 							"listen": "test",
@@ -2197,130 +2189,18 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/users",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}",
+							"raw": "{{host}}/api/users/{{userID}}/gardens",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{userID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PUT User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"mynameisbond\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PATCH User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"james.bond@gmail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/api/users/{{userID}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{userID}}"
+								"{{userID}}",
+								"gardens"
 							]
 						}
 					},
