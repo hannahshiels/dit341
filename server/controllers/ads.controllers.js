@@ -1,10 +1,7 @@
-const express = require('express');
 const Ad = require('../models/ad');
 const User = require('../models/user');
-const router = express.Router();
 
-router.route('/api/users/:userID/ads')
-.get((req, res, next) => {
+const getUserAds = (req, res, next) => {
     Ad.find({uploaded_by: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
         if(ads.length == 0){
@@ -12,9 +9,10 @@ router.route('/api/users/:userID/ads')
         }
         res.status(200).json({"ads of a user" : ads });
     })
-})
+}
 
-.post((req, res, next) => {
+
+const createUserAd = (req, res, next) => {
     const ad = new Ad(req.body);
     ad.save(function(err){
         if (err){
@@ -32,17 +30,17 @@ router.route('/api/users/:userID/ads')
             res.status(201).json(ad);
         }
     );
-})
 
-.delete((req, res, next) => {
+}
+
+const deleteUserAds = (req, res, next) => {
     Ad.deleteMany({ uploaded_by : req.params.userID }, function(err, ads){
         if (err) { return next(err);}
         res.status(200).json({ "message" : "Deletion of ads successful"})
     })
-})
+}
 
-router.route('/api/users/:userID/ads/:adID')
-.get((req, res, next) => {
+const getUserAd = (req, res, next) => {
     Ad.findById(req.params.adID, function(err, ad) {
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found" });
@@ -50,9 +48,9 @@ router.route('/api/users/:userID/ads/:adID')
         if (err) { return next(err);}
         res.status(200).json(ad);
     })
-})
+}
 
-.put((req, res, next) => {
+const fullUpdateUserAd = (req, res, next) => {
     Ad.findById(req.params.adID, function(err, ad){
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
@@ -66,9 +64,9 @@ router.route('/api/users/:userID/ads/:adID')
         ad.save();
         res.status(200).json(ad);
     })
-})
+}
 
-.patch((req, res, next) => {
+const partialUpdateUserAd = (req, res, next) => {
     Ad.findById(req.params.adID, function (err, ad){
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
@@ -82,17 +80,17 @@ router.route('/api/users/:userID/ads/:adID')
         ad.save();
         res.status(200).json(ad);
     })
-})
+}
 
-.delete((req, res, next) => {
+const deleteUserAd = (req, res, next) => {
     Ad.findOneAndDelete({ _id : req.params.adID}, function(err, ad){
         if (err) { return next(err); }
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
         }
-
         res.status(200).json(ad);
     })
-})
 
-module.exports = router;
+}
+
+module.exports = { getUserAds, createUserAd,deleteUserAds,  getUserAd, fullUpdateUserAd, partialUpdateUserAd,  deleteUserAd  };

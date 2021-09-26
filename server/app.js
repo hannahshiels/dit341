@@ -1,22 +1,22 @@
-var express = require('express');
-var mongoose = require('mongoose');
+const express = require('express');
+const mongoose = require('mongoose');
 
-var usersController = require('./controllers/users');
-var gardensController = require('./controllers/gardens');
-var plantsController = require('./controllers/plants');
-var tipsController = require('./controllers/tips');
-var adsController = require('./controllers/ads');
-var commentsController = require('./controllers/comments');
+const usersRouter = require('./routes/users.routes');
+const gardensRouter = require('./routes/gardens.routes');
+const plantsRouter = require('./routes/plants.routes');
+const tipsRouter = require('./routes/tips.routes');
+const adsRouter = require('./routes/ads.routes');
+const commentsRouter = require('./routes/comments.routes');
 
 
-var morgan = require('morgan');
-var path = require('path');
-var cors = require('cors');
-var history = require('connect-history-api-fallback');
+const morgan = require('morgan');
+const path = require('path');
+const cors = require('cors');
+const history = require('connect-history-api-fallback');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
-var port = process.env.PORT || 3000;
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+const port = process.env.PORT || 3000;
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
@@ -29,7 +29,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
 });
 
 // Create Express app
-var app = express();
+const app = express();
 // Parse requests of content-type 'application/json'
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -45,13 +45,12 @@ app.get('/api', function(req, res) {
 });
 
 
-app.use(usersController);
-app.use(gardensController);
-app.use(plantsController);
-app.use(tipsController);
-app.use(adsController);
-app.use(commentsController);
-
+app.use(usersRouter);
+app.use(gardensRouter);
+app.use(plantsRouter);
+app.use(tipsRouter);
+app.use(adsRouter);
+app.use(commentsRouter);
 
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
@@ -63,12 +62,12 @@ app.use('/api/*', function (req, res) {
 // Support Vuejs HTML 5 history mode
 app.use(history());
 // Serve static assets
-var root = path.normalize(__dirname + '/..');
-var client = path.join(root, 'client', 'dist');
+const root = path.normalize(__dirname + '/..');
+const client = path.join(root, 'client', 'dist');
 app.use(express.static(client));
 
 // Error handler (i.e., when exception is thrown) must be registered last
-var env = app.get('env');
+const env = app.get('env');
 // eslint-disable-next-line no-unused-vars
 app.use(function(err, req, res, next) {
     console.error(err.stack);
