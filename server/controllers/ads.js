@@ -1,52 +1,58 @@
 const express = require('express');
 const Ad = require('../models/ad');
-// const User = require('../models/user');
+const User = require('../models/user');
 const router = express.Router();
 
 router.route('/api/users/:userID/ads')
-.get((req, res) => {
-    Ad.find({user: req.params.userID}, function(err, ads){
+.get((req, res, next) => {
+    Ad.find({uploaded_by: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
-        res.json({"ads of a user" : ads});
+        if(ads.length == 0){
+            return res.status(404).json({ "message" : "No ads found"})
+        }
+        res.status(200).json({"ads of a user" : ads });
     })
 })
 
-.post((req, res) => {
+.post((req, res, next) => {
     const ad = new Ad(req.body);
-    ad.save();
-    res.status.json(ad);
+    ad.save(function(err){
+        if (err){
+            return res.status(400).json({ "error" : err.message});
+        }
+    });
 
-    /*
     User.findOneAndUpdate(
-        { _id: req.params.UserID },
+        { _id: req.params.userID },
         { $push: { ads : ad } }, function (err, user){
-            if (err) { return next(err)}
-            user.save();
+            if (err) { return next(err) }
+            if (user == null){
+                return res.status(404).json({ "message" : "User not found" })
+            }
             res.status(201).json(ad);
         }
     );
-    */
 })
 
-.delete((req, res) => {
-    Ad.deleteMany({ user : req.params.userID }, function(err, ads){
+.delete((req, res, next) => {
+    Ad.deleteMany({ uploaded_by : req.params.userID }, function(err, ads){
         if (err) { return next(err);}
-        res.json({ "message" : "Deletion of ads successful"})
+        res.status(200).json({ "message" : "Deletion of ads successful"})
     })
 })
 
 router.route('/api/users/:userID/ads/:adID')
-.get((req, res) => {
+.get((req, res, next) => {
     Ad.findById(req.params.adID, function(err, ad) {
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found" });
         }
         if (err) { return next(err);}
-        res.json(ad);
+        res.status(200).json(ad);
     })
 })
 
-.put((req, res) => {
+.put((req, res, next) => {
     Ad.findById(req.params.adID, function(err, ad){
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
@@ -56,13 +62,13 @@ router.route('/api/users/:userID/ads/:adID')
         ad.ad_contact.address = req.body.ad_contact.address;
         ad.ad_description = req.body.ad_description;
         ad.ad_type = req.body.ad_type;
-        ad.ad_date_posted = req-body.ad_date_posted;
+        ad.ad_date_posted = req.body.ad_date_posted;
         ad.save();
-        res.json(ad);
+        res.status(200).json(ad);
     })
 })
 
-.patch((req, res) => {
+.patch((req, res, next) => {
     Ad.findById(req.params.adID, function (err, ad){
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
@@ -74,19 +80,18 @@ router.route('/api/users/:userID/ads/:adID')
         ad.ad_type = (req.body.ad_type || ad.ad_type);
         ad.ad_date_posted = (req.body.ad_date_posted || ad.ad_date_posted);
         ad.save();
-        res.json(ad);
+        res.status(200).json(ad);
     })
 })
 
-.delete((req, res) => {
+.delete((req, res, next) => {
     Ad.findOneAndDelete({ _id : req.params.adID}, function(err, ad){
+        if (err) { return next(err); }
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
         }
 
-        if (err) { return next(err); }
-
-        res.json(ad);
+        res.status(200).json(ad);
     })
 })
 

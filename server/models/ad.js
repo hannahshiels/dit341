@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var adSchema = new Schema ({
+const adSchema = new Schema ({
     ad_description : { type : String },
     ad_type : { type : String },
     ad_contact : { type : [] },
@@ -16,4 +16,4 @@ var adSchema = new Schema ({
     }]
 });
 
-module.exports = mongoose.model('ads', adSchema);
+module.exports = mongoose.model('Ad', adSchema, 'ads');

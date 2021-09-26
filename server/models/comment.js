@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var commentSchema = new Schema ({
+const commentSchema = new Schema ({
     comment_content : { type : String },
     date_posted : { type : String },
     posted_by : {
@@ -14,4 +14,4 @@ var commentSchema = new Schema ({
     }
 });
 
-module.exports = mongoose.model('comments', commentSchema);
+module.exports = mongoose.model('Comment', commentSchema, 'comments');

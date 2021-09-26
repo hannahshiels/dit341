@@ -3,68 +3,110 @@ const Comment = require('../models/comment');
 const Ad = require('../models/ad');
 const router = express.Router();
 
-router.route('/api/users/:userID/ads/:adID/comments')
-.get((req, res) => {
-    Comment.find({ ad : req.params.adID}, function(err, comments) {
+router.route('/api/comments')
+.get((req, res, next) => {
+    Comment.find( function(err, comments){
         if (err) { return next(err); }
-        res.json({ "Comments in an ad" : ads })
+        if(comments.length == 0){
+            return res.status(404).json({ "message" : "No comments found"})
+        }
+        res.status(200).json({ "Comments in an ad" : comments })
     })
 })
 
-.post((req, res) => {
+.delete((req, res, next) => {
+    Comment.deleteMany(function(err, comments) {
+        if(err) { return next(err); }
+        res.status(200).json( { "message" : "Deletion of comments successful"})
+    })
+})
+
+
+router.route('/api/users/:userID/ads/:adID/comments')
+.get((req, res, next) => {
+    Comment.find({ad: req.params.adID}, function(err, comments){
+        if (err) { return next(err); }
+        res.status(200).json({"Comments of an ad": comments});
+    })
+})
+
+.post((req, res, next) => {
     const comment = new Comment(req.body);
-    comment.save();
+    comment.save(function(err){
+        if(err){
+           return res.status(400).json({"error": err.message});
+        }
+    });
 
     Ad.findOneAndUpdate(
         { _id : req.params.adID },
-        { $push : { comments : comments } }, function(err, ad){
+        { $push : { comments : comment } }, function(err, ad){
             if (err){ return next(err) }
+            if(ad == null){
+                return res.status(404).json({"message": "Ad not found"})
+            }
             ad.save();
             res.status(201).json(comment);
         }
     )
 })
 
-.delete((req, res) => {
-    Comment.deleteMany({ ads: req.params.adID}, function(err, comments) {
-        if(err) { return next(err); }
-        res.json( { "message" : "Deletion of comments successful"})
+.delete((req, res, next)=> {
+    Comment.deleteMany({ ad:req.params.adID }, function(err, comments){
+        if(err){ return next(err); }
+        res.status(200).json({
+            "message": "Deletion of comments successful"
+        })
     })
 })
+
 
 router.route('/api/users/:userID/ads/:adID/comments/:commentID')
-.get((req, res) => {
+.get((req, res, next) => {
     Comment.findById(req.params.commentID, function (err, comment){
+        if (err) { return next(err); }
         if (comment == null){
             return res.status(404).json({ "message" : "Comment not found"});
         }
-        if (err) { return next(err); }
-        res.json(comment);
+        res.status(200).json(comment);
     })
 })
 
-.put ((req, res) => {
+.put ((req, res, next) => {
     Comment.findById(req.params.commentID, function(err, comment){
+        if (err) { return next(err); }
         if (comment == null){
             return res.status(404).json({ "message" : "Comment not found"});
         }
-        if (err) { return next(err); }
-        comment.content = req.body.content;
+        comment.comment_content = req.body.comment_content;
         comment.date_posted = req.body.date_posted;
         comment.save();
-        res.json(comment);
+        res.status(200).json(comment);
     })
 })
 
-.patch((req, res) => {
+.patch((req, res, next) => {
     Comment.findById(req.params.commentID, function(err, comment) {
+        if (err) { return next(err); }
         if (comment == null){
             return res.status(404).json({ "message" : "Comment not found" });
         }
-        if (err) { return next(err); }
-
-        res.json(comment);
+        comment.comment_content = (req.body.comment_content || comment.comment_content);
+        comment.date_posted = (req.body.date_posted || comment.date_posted);
+        comment.save();
+        res.status(200).json(comment);
     })
+})
+
+.delete((req, res, next)=> {
+    Comment.findOneAndDelete({_id: req.params.commentID}, function(err, comment){
+        if(err) { return next(err); }
+        if(comment == null){
+            return res.status(404).json({"message": "Comment not found"});
+        }
+    
+        res.status(200).json(comment);
+    } )
 })
 
 module.exports = router;

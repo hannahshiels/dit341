@@ -6,7 +6,10 @@ router.route('/api/users')
     .get((req,res) => {
         User.find(function(err, users){
             if (err) { return next(err); }
-            res.json({"LIST OF USERS": users});
+            if(users.length == 0){
+                return res.status(404).json({ "message" : "No users found"})
+            }
+            res.status(200).json({"LIST OF USERS": users});
         })
     })
     .post((req,res) => {
@@ -24,7 +27,7 @@ router.route('/api/users/:userID')
                 return res.status(404).json({"message": "USER NOT FOUND"});
             }
             if(err){ return next(err);}
-            res.json(user);
+            res.status(200).json(user);
         })
     })
     .put((req,res) => {
@@ -41,7 +44,7 @@ router.route('/api/users/:userID')
             user.contactnumber = req.body.contactnumber;
             user.email = req.body.email;
             user.save();
-            res.json(user);
+            res.status(200).json(user);
         })
     })
     .patch((req,res) => {
@@ -58,7 +61,7 @@ router.route('/api/users/:userID')
             user.contactnumber = (req.body.contactnumber || user.contactnumber);
             user.email = (req.body.email || user.email);
             user.save();
-            res.json(user);
+            res.status(200).json(user);
         })
     })
     .delete((req,res)=> {
@@ -67,7 +70,7 @@ router.route('/api/users/:userID')
                 return res.status(404).json({"message": "USER NOT FOUND"});
             }
             if(err) { return next(err);}
-            res.json(user);
+            res.status(200).json(user);
         })
     })
 

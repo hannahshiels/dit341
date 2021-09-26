@@ -11,25 +11,25 @@ router.route('/api/gardens/:gardenID/plants')
             if(req.query.sort === "asc"){
                 Plant.find({garden: req.params.gardenID}, function(err, plants){
                     if (err) { return next(err); }
-                    if(plants == null){
+                    if(plants.length == 0){
                         return res.status(404).json({"message":"No plants with that name found"})
                     }
-                    return res.json({"plants in a garden": plants});
+                    return res.status(200).json({"plants in a garden": plants});
                 }).sort({plant_name: 1}).populate('tips');
             }
             if(req.query.sort === "desc"){
                 Plant.find({garden: req.params.gardenID}, function(err, plants){
                     if (err) { return next(err); }
-                    if(plants == null){
+                    if(plants.length == 0){
                         return res.status(404).json({"message":"No plants with that name found"})
                     }
-                    return res.json({"plants in a garden": plants});
+                    return res.status(200).json({"plants in a garden": plants});
                 }).sort({plant_name: -1}).populate('tips');
             }
         } else {
             Plant.find({garden: req.params.gardenID}, function(err, plants){
                 if (err) { return next(err); }
-                res.json({"plants in a garden": plants});
+                res.status(200).json({"plants in a garden": plants});
             }).populate('tips');
         }
     })
@@ -57,7 +57,7 @@ router.route('/api/gardens/:gardenID/plants')
         // Delete all plants within a garden
         Plant.deleteMany({garden: req.params.gardenID}, function(err,plants){
             if(err){ return next(err);}
-            res.json({
+            res.status(200).json({
                 "message": "Deletion of plants successful"
             })
         })
@@ -71,7 +71,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID')
                 return res.status(404).json({"message": "Plant not found"});
             }
             if(err){ return next(err);}
-            res.json(plant);
+            res.status(200).json(plant);
         }).populate('tips');
     })
     .put((req,res,next) => {
@@ -87,7 +87,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID')
             plant.fertilizer_schedule = req.body.fertilizer_schedule;
             plant.plant_name = req.body.plant_name;
             plant.save();
-            res.json(plant);
+            res.status(200).json(plant);
         })
     })
     .patch((req,res,next) => {
@@ -104,7 +104,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID')
             plant.fertilizer_schedule = (req.body.fertilizer_schedule || plant.fertilizer_schedule );
             plant.plant_name = (req.body.plant_name || plant.plant_name);
             plant.save();
-            res.json(plant);
+            res.status(200).json(plant);
         })
     })
     .delete((req,res,next)=> {
@@ -117,7 +117,7 @@ router.route('/api/gardens/:gardenID/plants/:plantID')
             }
 
         
-            res.json(plant);
+            res.status(200).json(plant);
         } )
     })
 
