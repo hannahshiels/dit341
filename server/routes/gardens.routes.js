@@ -18,9 +18,9 @@ router.route('/api/gardens')
     .post(gardenControllers.createGarden)
 
 router.route('/api/gardens/:gardenID')
-    .get(userControllers.getGarden)
-    .put(userControllers.fullyUpdateGarden)
-    .patch(userControllers.partialUpdateGarden)
-    .delete(userControllers.deleteGarden)
+    .get(gardenControllers.getGarden)
+    .put(gardenControllers.fullyUpdateGarden)
+    .patch(gardenControllers.partialUpdateGarden)
+    .delete(gardenControllers.deleteGarden)
 
 module.exports = router;
