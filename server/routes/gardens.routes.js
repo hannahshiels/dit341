@@ -13,4 +13,14 @@ router.route('/api/users/:userID/gardens/:gardenID')
     .patch(gardenControllers.partialUpdateGarden)
     .delete(gardenControllers.deleteGarden)
 
+router.route('/api/gardens')
+    .get(gardenControllers.getAllGardens)
+    .post(gardenControllers.createGarden)
+
+router.route('/api/gardens/:gardenID')
+    .get(gardenControllers.getGarden)
+    .put(gardenControllers.fullyUpdateGarden)
+    .patch(gardenControllers.partialUpdateGarden)
+    .delete(gardenControllers.deleteGarden)
+
 module.exports = router;
