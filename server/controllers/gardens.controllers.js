@@ -105,4 +105,4 @@ const deleteGarden = (req,res,next)=> {
     })
     }
 
-module.exports = { getUserGardens, createUserGarden, deleteUserGardens, getGarden, fullyUpdateGarden, partialUpdateGarden, deleteGarden };
+module.exports = { getAllGardens, createGarden, getUserGardens, createUserGarden, deleteUserGardens, getGarden, fullyUpdateGarden, partialUpdateGarden, deleteGarden };
