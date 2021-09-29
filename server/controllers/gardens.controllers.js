@@ -2,7 +2,7 @@ const Garden = require('../models/garden');
 const User = require('../models/user');
 
 const getAllGardens = (req,res,next) => {
-    Garden.find(function(err, users){
+    Garden.find(function(err, gardens){
         if (err) { return next(err); }
         if(gardens.length == 0){
             return res.status(404).json({ "message" : "No gardens found"})
