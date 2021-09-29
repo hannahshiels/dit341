@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const gardenSchema = new Schema({
     size: { type: String},
-    soillevel: { type: String},
+    soil_level: { type: String},
     direction: { type: String},
-    noplants: { type: String},
+    no_plants: { type: String},
     owned_by: {
         type: Schema.Types.ObjectId,
         ref: "User"

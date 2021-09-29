@@ -1,4 +1,6 @@
 const express = require('express');
+const passport = require('passport');
+require('./config/passport')();
 const mongoose = require('mongoose');
 
 const usersRouter = require('./routes/users.routes');
@@ -7,11 +9,13 @@ const plantsRouter = require('./routes/plants.routes');
 const tipsRouter = require('./routes/tips.routes');
 const adsRouter = require('./routes/ads.routes');
 const commentsRouter = require('./routes/comments.routes');
+const authRouter = require('./routes/auth.routes');
 
 
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
 const history = require('connect-history-api-fallback');
 
 // Variables
@@ -39,6 +43,11 @@ app.use(morgan('dev'));
 app.options('*', cors());
 app.use(cors());
 
+app.use(cookieParser());
+// use passport
+app.use(passport.initialize());
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(passport.authenticate('session'));
 // Import routes
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
@@ -51,6 +60,7 @@ app.use(plantsRouter);
 app.use(tipsRouter);
 app.use(adsRouter);
 app.use(commentsRouter);
+app.use(authRouter);
 
 
 // Catch all non-error handler for api (i.e., 404 Not Found)

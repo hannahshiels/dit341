@@ -54,9 +54,9 @@ const fullyUpdateGarden = (req,res,next) => {
         }
         if(err){ return next(err);}
         garden.size = req.body.size;
-        garden.soillevel = req.body.soillevel;
+        garden.soil_level = req.body.soil_level;
         garden.direction = req.body.direction;
-        garden.noplants = req.body.noplants; //update it to count on plant id
+        garden.no_plants = req.body.no_plants; //update it to count on plant id
         garden.save();
         res.status(200).json(garden);
     })
@@ -69,9 +69,9 @@ const partialUpdateGarden = (req,res,next) => {
         }
         if(err){ return next(err);}          
         garden.size = (req.body.size || garden.size);
-        garden.soillevel = (req.body.soillevel || garden.soillevel);
+        garden.soil_level = (req.body.soil_level || garden.soil_level);
         garden.direction = (req.body.direction || garden.direction);
-        garden.noplants = (req.body.noplants || garden.noplants); //update it to count on plant id
+        garden.no_plants = (req.body.no_plants || garden.no_plants); //update it to count on plant id
         garden.save();
         res.status(200).json(garden);
     })
@@ -87,4 +87,14 @@ const deleteGarden = (req,res,next)=> {
     })
     }
 
-module.exports = { getUserGardens, createUserGarden, deleteUserGardens, getGarden, fullyUpdateGarden, partialUpdateGarden, deleteGarden };
+const deleteAllGardens = (req,res,next)=> {
+        Garden.deleteMany(function(err, gardens){
+            if(gardens == null){
+                return res.status(404).json({"message": "GARDEN NOT FOUND"});
+            }
+            if(err) { return next(err);}
+            res.status(200).json(gardens);
+        })
+}
+
+module.exports = { getUserGardens, createUserGarden, deleteUserGardens, getGarden, fullyUpdateGarden, partialUpdateGarden, deleteGarden, deleteAllGardens };
