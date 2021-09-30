@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="text-black-50 p-2">
+    <b-container class="text-black-50 p-2 mt-3">
       <b-row align-h="center">
         <b-col xl="6" md="8" sm="12">
           <update-acc-form />
