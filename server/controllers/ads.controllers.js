@@ -7,7 +7,7 @@ const getUserAds = (req, res, next) => {
         if(ads.length == 0){
             return res.status(404).json({ "message" : "No ads found"})
         }
-        res.status(200).json({"ads of a user" : ads });
+        res.status(200).json({"ads" : ads });
     })
 }
 
