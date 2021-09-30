@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"name\": \"James Bond\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contactnumber\": \"007\"\r\n}",
+							"raw": "{\r\n   \"name\": \"James Bond\",\r\n   \"email\": \"email@email.com\",\r\n   \"password\": \"password\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contact_number\": \"007\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -46,6 +46,46 @@
 							"path": [
 								"api",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"email@email.com\",\r\n   \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"login"
 							]
 						}
 					},
@@ -134,7 +174,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"name\": \"Jack Bond\",\r\n   \"dob\": \"1901-01-01\",\r\n   \"role\": \"user\",\r\n   \"address\": \"10 Downing Street UK\",\r\n   \"contactnumber\": \"008\"\r\n}",
+							"raw": "{\r\n   \"name\": \"Jack Bond\",\r\n   \"dob\": \"1901-01-01\",\r\n   \"role\": \"user\",\r\n   \"address\": \"10 Downing Street UK\",\r\n   \"contact_number\": \"008\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -175,7 +215,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"james.bond@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Jack Smith\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -202,7 +242,7 @@
 			"name": "All garden requests",
 			"item": [
 				{
-					"name": "POST Gardens",
+					"name": "POST User Gardens",
 					"event": [
 						{
 							"listen": "test",
@@ -224,7 +264,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soillevel\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
+							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soil_level\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -247,7 +287,7 @@
 					"response": []
 				},
 				{
-					"name": "GET Gardens",
+					"name": "GET User Gardens",
 					"event": [
 						{
 							"listen": "test",
@@ -280,7 +320,7 @@
 					"response": []
 				},
 				{
-					"name": "GET Garden",
+					"name": "GET User Garden",
 					"event": [
 						{
 							"listen": "test",
@@ -306,6 +346,167 @@
 								"api",
 								"users",
 								"{{userID}}",
+								"gardens",
+								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT User Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"no_plants\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}",
+								"gardens",
+								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH User Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"soil_level\": \"tilt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userID}}",
+								"gardens",
+								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Gardens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"gardenID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soil_level\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
 								"gardens",
 								"{{gardenID}}"
 							]
@@ -333,7 +534,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"noplants\": \"5\"\r\n}",
+							"raw": "{\r\n    \"no_plants\": \"5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -341,14 +542,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
+							"raw": "{{host}}/api/gardens/{{gardenID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"users",
-								"{{userID}}",
 								"gardens",
 								"{{gardenID}}"
 							]
@@ -376,7 +575,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"soillevel\": \"tilt\"\r\n}",
+							"raw": "{\r\n    \"soil_level\": \"tilt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -384,16 +583,45 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
+							"raw": "{{host}}/api/gardens/{{gardenID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"users",
-								"{{userID}}",
 								"gardens",
 								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Gardens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens"
 							]
 						}
 					},
@@ -2207,6 +2435,37 @@
 					"response": []
 				},
 				{
+					"name": "Logout user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "DELETE User",
 					"event": [
 						{
@@ -2233,6 +2492,51 @@
 								"api",
 								"users",
 								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Jack Bond\",\r\n   \"email\": \"email2@email.com\",\r\n   \"password\": \"password\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contact_number\": \"007\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE All Users",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
 							]
 						}
 					},

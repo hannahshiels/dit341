@@ -1,6 +1,5 @@
 <template>
  <div>
-   <navigation-bar/>
     <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no ads </p> </div>
     <div class="row mt-3">
     <div class="col-md-8 bg-secondary">
@@ -22,14 +21,12 @@
 
 import Ad from '../components/Ad.vue'
 import PostAd from '../components/PostAd.vue'
-import NavigationBar from '../components/NavigationBar.vue'
 import { Api } from '@/Api'
 
 export default {
   name: 'ads',
   components: {
     ad: Ad,
-    NavigationBar,
     PostAd
   },
   mounted() {
