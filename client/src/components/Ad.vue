@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3">
+  <div>
     <b-card border-variant="dark">
       <b-card-header class="d-flex justify-content-center align-items-center border-dark">
         <div class="bg-grey  d-flex flex-fill">

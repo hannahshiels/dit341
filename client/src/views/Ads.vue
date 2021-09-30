@@ -1,23 +1,36 @@
 <template>
- <div class="mx-auto">
-   <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no ads </p> </div>
-     <b-card-group deck class="position-absolute top-0 end-0 mx-auto">
-      <div v-for="ad in ads" v-bind:key="ad._id">
-          <ad v-bind:ad="ad"/>
-      </div>
+ <div>
+   <navigation-bar/>
+    <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no ads </p> </div>
+    <div class="row mt-3">
+    <div class="col-md-8 bg-secondary">
+    <p>All advertisements</p>
+       <b-card-group deck>
+          <div v-for="ad in ads" v-bind:key="ad._id">
+            <ad v-bind:ad="ad" class="mb-1 mt-1 ml-1 mr-1"/>
+          </div>
      </b-card-group>
- </div>
+     </div>
+   <div class="col-md-4">
+     <post-ad/>
+   </div>
+   </div>
+  </div>
 </template>
 
 <script>
 
 import Ad from '../components/Ad.vue'
+import PostAd from '../components/PostAd.vue'
+import NavigationBar from '../components/NavigationBar.vue'
 import { Api } from '@/Api'
 
 export default {
   name: 'ads',
   components: {
-    ad: Ad
+    ad: Ad,
+    NavigationBar,
+    PostAd
   },
   mounted() {
     Api.get('/users/6149f9f1e01786e798ea4619/ads')
