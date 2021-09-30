@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const gardenControllers = require('../controllers/gardens.controllers')
 
+
 router.route('/api/users/:userID/gardens')
     .get(gardenControllers.getUserGardens)
     .post(gardenControllers.createUserGarden)

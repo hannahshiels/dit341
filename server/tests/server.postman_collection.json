@@ -242,7 +242,7 @@
 			"name": "All garden requests",
 			"item": [
 				{
-					"name": "POST Gardens",
+					"name": "POST User Gardens",
 					"event": [
 						{
 							"listen": "test",
@@ -287,7 +287,7 @@
 					"response": []
 				},
 				{
-					"name": "GET Gardens",
+					"name": "GET User Gardens",
 					"event": [
 						{
 							"listen": "test",
@@ -320,7 +320,7 @@
 					"response": []
 				},
 				{
-					"name": "GET Garden",
+					"name": "GET User Garden",
 					"event": [
 						{
 							"listen": "test",
@@ -354,7 +354,7 @@
 					"response": []
 				},
 				{
-					"name": "PUT Garden",
+					"name": "PUT User Garden",
 					"event": [
 						{
 							"listen": "test",
@@ -397,7 +397,7 @@
 					"response": []
 				},
 				{
-					"name": "PATCH Garden",
+					"name": "PATCH User Garden",
 					"event": [
 						{
 							"listen": "test",
@@ -434,6 +434,194 @@
 								"{{userID}}",
 								"gardens",
 								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Gardens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"gardenID\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soil_level\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"no_plants\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Garden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"soil_level\": \"tilt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/gardens/{{gardenID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens",
+								"{{gardenID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Gardens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/gardens",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"gardens"
 							]
 						}
 					},
@@ -2304,6 +2492,51 @@
 								"api",
 								"users",
 								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Jack Bond\",\r\n   \"email\": \"email2@email.com\",\r\n   \"password\": \"password\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contact_number\": \"007\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE All Users",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
 							]
 						}
 					},

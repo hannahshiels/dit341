@@ -12,7 +12,7 @@ const login = (req,res,next) => {
         }
 
         req.login(user, err => {
-          res.status(200).json({"message": "Logged in as " + user})
+          res.status(200).json({"id": user._id })
         })
 
       })(req, res,next);

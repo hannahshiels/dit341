@@ -21,10 +21,10 @@ const userSchema = new Schema({
     }]
 });
 
+userSchema.plugin(uniqueValidator);
+
 userSchema.methods.validPassword = function(password) {
     return this.password === password
 };
-
-userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', userSchema, 'users');
