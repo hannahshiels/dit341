@@ -60,6 +60,8 @@ export default {
           console.log(response)
           const status = JSON.stringify(response.status)
           if (status === '200') {
+            this.$parent.$parent.setAuthenticated(true)
+            this.$parent.$parent.setID(response.data.id)
             Router.push('/')
           }
         })

@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 require('./config/passport')();
 const mongoose = require('mongoose');
-
+const cookies = require('cookie-parser');
 const usersRouter = require('./routes/users.routes');
 const gardensRouter = require('./routes/gardens.routes');
 const plantsRouter = require('./routes/plants.routes');
@@ -15,7 +15,6 @@ const authRouter = require('./routes/auth.routes');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
-const cookieParser = require('cookie-parser')
 const history = require('connect-history-api-fallback');
 
 // Variables
@@ -40,14 +39,18 @@ app.use(express.json());
 // HTTP request logger
 app.use(morgan('dev'));
 // Enable cross-origin resource sharing for frontend must be registered before api
-app.options('*', cors());
-app.use(cors());
+//app.options('*', cors());
+app.use(cors({
+    origin: [
+        'http://localhost:8080'
+    ],
+    credentials: true}));
 
-app.use(cookieParser());
 // use passport
+app.use(cookies())
+app.use(require('express-session')({ secret: 'get-potted', resave: false, saveUninitialized: false, cookie: { maxAge: 600000} }));
 app.use(passport.initialize());
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
-app.use(passport.authenticate('session'));
+app.use(passport.session());
 // Import routes
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});

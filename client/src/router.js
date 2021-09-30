@@ -6,6 +6,7 @@ import SignUp from './views/SignUp.vue'
 import Tips from './views/Tips.vue'
 import Ads from './views/Ads.vue'
 import Start from './views/Start.vue'
+import Settings from './views/Settings.vue'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/start',
       name: 'start',
       component: Start
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings
     }
   ]
 })
