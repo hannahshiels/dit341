@@ -46,8 +46,8 @@ export default {
       // this.$router.push('/test')
     },
     toMainPage() {
-      console.log('Moving ot the main page')
-      this.$router.push('/main')
+      console.log('Moving to the start page')
+      this.$router.push('/start')
     }
   }
 }
