@@ -1,6 +1,24 @@
 const Garden = require('../models/garden');
 const User = require('../models/user');
 
+const getAllGardens = (req,res,next) => {
+    Garden.find(function(err, gardens){
+        if (err) { return next(err); }
+        if(gardens.length == 0){
+            return res.status(404).json({ "message" : "No gardens found"})
+        }
+        res.status(200).json({"LIST OF GARDENS": gardens});
+    })
+    }
+
+const createGarden = (req,res,next) => {
+    const garden = new Garden(req.body);  
+    garden.save(function(err){
+        if (err) { return next(err); }
+        res.status(201).json(garden);
+    })
+    }
+
 const getUserGardens = (req,res,next) => {
     Garden.find({owned_by: req.params.userID}, function(err, gardens){
         if (err) { return next(err); }
