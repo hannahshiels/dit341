@@ -1,27 +1,16 @@
 <template>
   <div id="app">
-
-    <div v-if="authenticated">  <b-button @click="logout"> Logout </b-button> </div>
-
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/tips">Tips</router-link>
-      <router-link to="/login">Login</router-link>
-      <router-link to="/signup">Sign Up</router-link>
-      <router-link v-if="authenticated"  to="/settings">Settings</router-link>
-
-    </div>
+    <navigation-bar />
     <!-- Render the content of the current page view -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
-
 * {
-   box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 #app {
@@ -38,11 +27,12 @@
 </style>
 
 <script>
-
-import { Api } from '@/Api'
-import Router from '@/router'
+import NavigationBar from './components/NavigationBar.vue'
 
 export default {
+  components: {
+    NavigationBar
+  },
   name: 'App',
   data() {
     return {
@@ -54,20 +44,12 @@ export default {
     setID(id) {
       this.user_id = id
     },
+    getAuthenicated() {
+      return this.authenticated
+    },
     setAuthenticated(status) {
       this.authenticated = status
-    },
-    logout() {
-      Api.get('/logout')
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      this.setAuthenticated(false)
-      this.setID('')
-      Router.push('/')
+      console.log(status)
     }
   }
 }

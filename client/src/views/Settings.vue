@@ -19,7 +19,7 @@ import { Api } from '@/Api'
 
 export default {
   mounted() {
-    Api.get('/users/' + this.parentData)
+    Api.get('/users/' + this.user_id)
       .then(response => {
         console.log(response)
         this.user_data = response.data
@@ -31,7 +31,7 @@ export default {
 
   data() {
     return {
-      parentData: this.$parent.user_id,
+      user_id: this.$parent.user_id,
       user_data: {}
     }
   }

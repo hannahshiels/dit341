@@ -1,53 +1,65 @@
 <template>
-<div>
-<b-navbar toggleable="lg" type="dark" variant="warning">
+  <div>
+    <b-navbar toggleable="lg" type="dark" variant="warning">
       <b-navbar-nav class="ml-auto">
-          <b-link href="#foo" class="link-secondary" v-on:click="toLoginPage()">Create an account or login</b-link>
+        <div v-if="!isAuthenticated">
+          <router-link to="/signup" class="link-secondary">
+            Create an account
+          </router-link>
+          <span> or </span>
+          <router-link to="/login" class="link-secondary">
+            Login instead</router-link
+          >
+        </div>
+        <div v-else><a class="link" @click="logout"> Logout </a></div>
       </b-navbar-nav>
-  </b-navbar>
-
-  <b-navbar toggleable type="dark" variant="secondary">
-    <b-navbar-brand href="#" v-on:click="toMainPage">Get Potted</b-navbar-brand>
+    </b-navbar>
+    <b-navbar toggleable type="dark" variant="secondary">
+      <router-link to="/"
+        ><b-navbar-brand> Get Potted </b-navbar-brand>
+      </router-link>
 
       <b-navbar-nav class="ml-auto">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <a href="#" class="btn btn-secondary" v-on:click="toGardenPage()">Gardens</a>
-            <span class="border border-light"></span>
-            <a href="#" class="btn btn-secondary" v-on:click="toTipPage()">Tips</a>
-            <span class="border border-light"></span>
-            <a href="#" class="btn btn-secondary" v-on:click="toAdPage()">Ads</a>
+          <router-link to="/gardens" class="btn btn-secondary"
+            >Gardens</router-link
+          >
+          <span class="border border-light"></span>
+          <router-link to="/tips" class="btn btn-secondary">Tips</router-link>
+          <span class="border border-light"></span>
+          <router-link to="/ads" class="btn btn-secondary">Ads</router-link>
+            <span  v-if="isAuthenticated" class="border border-light"></span>
+            <router-link v-if="isAuthenticated" class="btn btn-secondary" to="/settings">
+              Settings
+            </router-link>
         </div>
       </b-navbar-nav>
-  </b-navbar>
-</div>
+    </b-navbar>
+  </div>
 </template>
-
 <script>
+import { Api } from '@/Api'
+
+import Router from '@/router'
 
 export default {
+  computed: {
+    isAuthenticated: function () {
+      return this.$parent.authenticated
+    }
+  },
   methods: {
-    toGardenPage() {
-      console.log('Moving to the garden page')
-      // Change '/test' to the garden route
-      // this.$router.push('/test')
-    },
-    toTipPage() {
-      console.log('Moving to the tip page')
-      // Change '/test' to the tip route
-      // this.$router.push('/test')
-    },
-    toAdPage() {
-      console.log('Moving to the ad pages')
-      this.$router.push('/ads')
-    },
-    toLoginPage() {
-      console.log('Moving to the account/login page')
-      // Change '/test' to the account/login route
-      // this.$router.push('/test')
-    },
-    toMainPage() {
-      console.log('Moving to the start page')
-      this.$router.push('/start')
+    logout() {
+      Api.get('/logout')
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      this.$parent.setAuthenticated(false)
+      this.$parent.setID('')
+      Router.push('/')
     }
   }
 }

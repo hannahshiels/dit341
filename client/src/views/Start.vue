@@ -1,9 +1,8 @@
 <template>
 <div>
-<navigation-bar/>
 <div class="row justify-content-center">
   <div class="col-lg-4">
-  <button type="button" class="btn btn-danger col align-self-center" v-on:click="toGardenPage()">Your gardens</button>
+  <button type="button" class="btn btn-danger col align-self-center" v-on:click="toGardenPage()">  Your gardens</button>
   </div>
 </div>
 <div class="row justify-content-center">
@@ -19,12 +18,8 @@
 </template>
 
 <script>
-import NavigationBar from '../components/NavigationBar.vue'
-
 export default {
-  components: {
-    NavigationBar
-  },
+
   name: 'start',
   methods: {
     toGardenPage() {
