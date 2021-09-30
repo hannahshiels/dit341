@@ -7,7 +7,7 @@
   </b-navbar>
 
   <b-navbar toggleable type="dark" variant="secondary">
-    <b-navbar-brand href="#">Get Potted</b-navbar-brand>
+    <b-navbar-brand href="#" v-on:click="toMainPage">Get Potted</b-navbar-brand>
 
       <b-navbar-nav class="ml-auto">
         <div class="btn-group" role="group" aria-label="Basic example">
@@ -44,6 +44,10 @@ export default {
       console.log('Moving to the account/login page')
       // Change '/test' to the account/login route
       // this.$router.push('/test')
+    },
+    toMainPage() {
+      console.log('Moving ot the main page')
+      this.$router.push('/main')
     }
   }
 }
