@@ -37,9 +37,8 @@ export default {
       // this.$router.push('/test')
     },
     toAdPage() {
-      console.log('Moving to the ad page')
-      // Change '/test' to the ad route
-      // this.$router.push('/test')
+      console.log('Moving to the ad pages')
+      this.$router.push('/ads')
     },
     toLoginPage() {
       console.log('Moving to the account/login page')
