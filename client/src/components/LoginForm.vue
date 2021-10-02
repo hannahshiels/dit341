@@ -25,7 +25,7 @@
       </b-form-group>
 
       <b-button size="lg" type="submit" variant="danger">Login</b-button>
-      <div class="mt-2 text-center text-danger" v-if="loginFailed"> <p>Login failed. Check your info.</p>  </div>
+      <div class="mt-4 text-center text-danger" v-if="loginFailed"> <p>Login failed. Check your info.</p>  </div>
     </b-form>
   </div>
 </template>
