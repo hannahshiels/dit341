@@ -44,7 +44,7 @@
       </b-form-group>
 
       <b-button size="lg" type="submit" variant="danger">Create Account</b-button>
-
+      <div v-if="createAccFailed" class="text-danger mt-4 text-center"> <p> Account creation failed. </p> </div>
     </b-form>
   </div>
 </template>
@@ -63,7 +63,7 @@ export default {
         password: '',
         passwordConfirm: ''
       },
-      show: true
+      createAccFailed: false
     }
   },
   computed: {
@@ -103,6 +103,7 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          this.createAccFailed = true
         })
     }
   }
