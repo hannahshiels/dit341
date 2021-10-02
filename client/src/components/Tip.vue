@@ -18,8 +18,8 @@
         <b-card-text align-h="start" class="tip-content">
           <p>{{ tip.content }}</p>
         </b-card-text>
-
-               <p class="mt-4"> - {{ tip.author.name }}</p>
+        <p v-if="tip.author != null" class="mt-4"> - {{ tip.author.name }} </p>
+        <p v-else class="mt-4"> - Account has been deleted </p>
       </b-card-body>
     </b-card>
   </div>

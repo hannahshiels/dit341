@@ -21,9 +21,6 @@
   color: #2c3e50;
 }
 
-#nav {
-  text-align: center;
-}
 </style>
 
 <script>

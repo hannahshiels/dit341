@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-auto"> <h2> Login </h2> </div>
-    <b-form @submit="onSubmit" v-if="show">
+    <b-form @submit="onSubmit">
       <b-form-group
         id="input-group-1"
         label="Enter email"
@@ -41,7 +41,6 @@ export default {
         email: '',
         password: ''
       },
-      show: true,
       loginFailed: false
     }
   },

@@ -3,7 +3,7 @@
 
     <div> <h2> Create an account </h2> </div>
 
-    <b-form @submit="onSubmit" v-if="show">
+    <b-form @submit="onSubmit">
 
       <b-form-group id="input-group-1" label="Enter email" label-for="input-1">
         <b-form-input
