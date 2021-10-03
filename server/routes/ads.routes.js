@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const adControllers = require('../controllers/ads.controllers');
 
+router.route('/api/ads')
+    .get(adControllers.getAllAds)
+    .delete(adControllers.deleteAllAds)
+
 router.route('/api/users/:userID/ads')
 
 .get(adControllers.getUserAds)
