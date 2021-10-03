@@ -30,7 +30,7 @@ export default {
     PostAd
   },
   mounted() {
-    Api.get('/users/6149f9f1e01786e798ea4619/ads')
+    Api.get('/ads')
       .then(response => {
         console.log(response)
         this.ads = response.data.ads
