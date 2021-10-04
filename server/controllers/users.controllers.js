@@ -20,7 +20,7 @@ const createUser = (req,res,next) => {
     user.contact_number = req.body.contact_number;
     user.email = req.body.email;
     user.save(function(err){
-        if (err) { return next(err); }
+        if (err) {return next(err); }
         res.status(201).json(user);
     })
     }
@@ -87,6 +87,7 @@ const deleteUser = (req,res,next)=> {
             return res.status(404).json({"message": "User not found"});
         }
         if(err) { return next(err);}
+        user.remove()
         res.status(200).json(user);
     })
     }

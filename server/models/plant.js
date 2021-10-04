@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Tip = require('./tip')
 
 const plantSchema = new Schema({
     plant_name: { type: String},
@@ -19,6 +20,12 @@ const plantSchema = new Schema({
         ref: 'Tip'
     }]
 });
+
+plantSchema.pre('remove', function(next) {
+    Tip.remove({plant: this._id}).exec();
+    next();
+});
+
 
 module.exports = mongoose.model('Plant', plantSchema, 'plants');
 

@@ -14,11 +14,6 @@ const getUserAds = (req, res, next) => {
 
 const createUserAd = (req, res, next) => {
     const ad = new Ad(req.body);
-    ad.save(function(err){
-        if (err){
-            return res.status(400).json({ "error" : err.message});
-        }
-    });
 
     User.findOneAndUpdate(
         { _id: req.params.userID },
@@ -27,6 +22,11 @@ const createUserAd = (req, res, next) => {
             if (user == null){
                 return res.status(404).json({ "message" : "User not found" })
             }
+            ad.save(function(err){
+                if (err){
+                    return res.status(400).json({ "error" : err.message});
+                }
+            });
             res.status(201).json(ad);
         }
     );
@@ -88,9 +88,10 @@ const deleteUserAd = (req, res, next) => {
         if (ad == null){
             return res.status(404).json({ "message" : "Ad not found"});
         }
+        ad.remove()
         res.status(200).json(ad);
     })
-
 }
+
 
 module.exports = { getUserAds, createUserAd,deleteUserAds,  getUserAd, fullUpdateUserAd, partialUpdateUserAd,  deleteUserAd  };

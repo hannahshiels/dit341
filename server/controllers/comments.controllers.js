@@ -28,11 +28,6 @@ const getAllCommentsOnAd = (req, res, next) => {
 
 const createComment = (req, res, next) => {
     const comment = new Comment(req.body);
-    comment.save(function(err){
-        if(err){
-           return res.status(400).json({"error": err.message});
-        }
-    });
 
     Ad.findOneAndUpdate(
         { _id : req.params.adID },
@@ -41,7 +36,11 @@ const createComment = (req, res, next) => {
             if(ad == null){
                 return res.status(404).json({"message": "Ad not found"})
             }
-            ad.save();
+            comment.save(function(err){
+                if(err){
+                   return res.status(400).json({"error": err.message});
+                }
+            });        
             res.status(201).json(comment);
         }
     )

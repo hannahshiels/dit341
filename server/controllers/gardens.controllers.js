@@ -25,22 +25,24 @@ const getUserGardens = (req,res,next) => {
         if(gardens.length == 0){
             return res.status(404).json({"message":"No gardens found"})
         }
-        res.status(200).json({"GARDENS OF THE USER": gardens});
+        res.status(200).json({"User gardens": gardens});
     })
     }
 
 const createUserGarden = (req,res,next) => {
     const garden = new Garden(req.body);  
-    garden.save(function(err){
-        if (err){
-            return res.status(400).json({ "error" : err.message});
-        }
-    });
     User.findOneAndUpdate(
         { _id: req.params.userID }, 
         { $push: { gardens: garden} }, function(err, user){
             if(err){ return next(err) }
-            user.save();
+            if(user == null){
+                return res.status(404).json({"message": "User not found"})
+            }
+            garden.save(function(err){
+                if (err){
+                    return res.status(400).json({ "error" : err.message});
+                }
+            });
             res.status(201).json(garden);
         }
     );
@@ -50,7 +52,7 @@ const deleteUserGardens =  (req,res,next)=> {
     Garden.deleteMany({owned_by: req.params.userID}, function(err,gardens){
         if(err){ return next(err);}
         res.status(200).json({
-            "message": "ALL GARDENS DELETED SUCCESSFULLY"
+            "message": "All gardens deleted successfully."
         })
     })
     }
@@ -58,7 +60,7 @@ const deleteUserGardens =  (req,res,next)=> {
 const getGarden = (req,res,next) => {
     Garden.findById(req.params.gardenID, function(err, garden){
         if(garden == null){
-            return res.status(404).json({"message": "GARDEN NOT FOUND"});
+            return res.status(404).json({"message": "Garden not found"});
         }
         if(err){ return next(err);}
         res.status(200).json(garden);
@@ -68,7 +70,7 @@ const getGarden = (req,res,next) => {
 const fullyUpdateGarden = (req,res,next) => {
     Garden.findById(req.params.gardenID, function(err, garden){
         if(garden == null){
-            return res.status(404).json({"message": "GARDEN NOT FOUND"});
+            return res.status(404).json({"message": "Garden not found"});
         }
         if(err){ return next(err);}
         garden.size = req.body.size;
@@ -101,6 +103,7 @@ const deleteGarden = (req,res,next)=> {
             return res.status(404).json({"message": "GARDEN NOT FOUND"});
         }
         if(err) { return next(err);}
+        garden.remove()
         res.status(200).json(garden);
     })
     }
