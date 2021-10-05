@@ -3,13 +3,17 @@
     <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no ads </p> </div>
     <div class="row mt-3">
     <div class="col-md-8 bg-secondary">
-    <p>All advertisements</p>
+    <h2>All advertisements</h2>
+    <h3 class="text-white">Showing ads {{this.startList}} to {{this.endList}}</h3>
     <div class="row justify-content-between">
     <div class="col-4">
       <button class="d-flex justify-content-start" v-on:click="showList()">Show all ads</button>
     </div>
     <div class="col-4">
-      <button class="d-flex justify-content-end" v-on:click="moveList()">Show next 5</button>
+      <button class="d-flex justify-content-end" v-on:click="moveList(-1)">Previous 5 ads</button>
+    </div>
+    <div class="col-4">
+      <button class="d-flex justify-content-end" v-on:click="moveList(1)">Next 5 ads</button>
     </div>
   </div>
        <b-card-group deck>
@@ -53,24 +57,34 @@ export default {
     return {
       ads: [],
       startList: 0,
-      endList: 5
+      endList: 5,
+      allAds: false
     }
   },
   methods: {
-    moveList() {
-      if (this.endList + 5 > this.ads.length) {
+    moveList(direction) {
+      if (this.endList + (5 * direction) > this.ads.length || this.startList + (5 * direction) < 0) {
         console.log('Reached limit')
       } else {
-        this.startList = this.startList + 5
-        this.endList = this.endList + 5
+        this.startList = this.startList + (5 * direction)
+        this.endList = this.endList + (5 * direction)
         Router.push('/ads')
       }
     },
     showList() {
-      console.log('Say hello')
-      this.startList = 0
-      this.endList = this.ads.length
-      Router.push('/ads')
+      if (this.allAds === false) {
+        console.log('Say hello')
+        this.startList = 0
+        this.endList = this.ads.length
+        Router.push('/ads')
+        this.allAds = true
+      } else {
+        console.log('Say goodbye')
+        this.startList = 0
+        this.endList = 5
+        Router.push('/ads')
+        this.allAds = false
+      }
     }
   }
 }
