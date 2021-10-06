@@ -46,11 +46,12 @@ const getUser = (req,res,next) => {
     }
 
 const fullyUpdateUser = (req,res,next) => {
-    User.findById(req.params.userID, function(err, user){
+    User.findById(req.params.userID, { runValidators: true, context: 'query' }, function(error, user){
+        if(error){ return next(err);}
         if(user == null){
             return res.status(404).json({"message": "User not found"});
         }
-        if(err){ return next(err);}
+
         user.name = req.body.name;
         user.dob = req.body.dob;
         user.role = req.body.role;
@@ -58,8 +59,15 @@ const fullyUpdateUser = (req,res,next) => {
         user.address = req.body.address;
         user.contact_number = req.body.contact_number;
         user.email = req.body.email;
-        user.save();
-        res.status(200).json(user);
+        user.save(function(err){
+            if(err.errors.email){
+                return res.status(400).json(user)
+            }
+            if(err){
+                return next(err)
+            }
+            res.status(200).json(user);
+        })
     })
     }
 

@@ -6,11 +6,11 @@ const Ad = require('./ad')
 
 
 const userSchema = new Schema({
-    email: { type: String, unique: true},
+    email: { type: String, unique: true, required: true},
     name: { type: String},
     dob: { type: String},
     role: { type: String},
-    password: { type: String},
+    password: { type: String, required: true},
     address: { type: String},
     contact_number: { type: String},
     gardens: [{
@@ -23,7 +23,7 @@ const userSchema = new Schema({
     }]
 });
 
-userSchema.plugin(uniqueValidator);
+userSchema.plugin(uniqueValidator, { type: 'mongoose-unique-validator' });
 
 userSchema.methods.validPassword = function(password) {
     return this.password === password
