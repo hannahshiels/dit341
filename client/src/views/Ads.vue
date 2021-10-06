@@ -4,7 +4,7 @@
     <div class="row mt-3">
     <div class="col-md-8 bg-secondary">
     <h2>All advertisements</h2>
-    <h3 class="text-white">Showing ads {{this.startList}} to {{this.endList}}</h3>
+    <h3 class="text-white">Showing ads ({{this.startList}} to {{this.endList}})</h3>
     <div class="row justify-content-between">
     <div class="col-4">
       <button class="d-flex justify-content-start" v-on:click="showList()">Show all ads</button>
@@ -33,7 +33,7 @@
 
 import Ad from '../components/Ad.vue'
 import PostAd from '../components/PostAd.vue'
-import Router from '@/router'
+// import Router from '@/router'
 import { Api } from '@/Api'
 
 export default {
@@ -63,12 +63,28 @@ export default {
   },
   methods: {
     moveList(direction) {
-      if (this.endList + (5 * direction) > this.ads.length || this.startList + (5 * direction) < 0) {
-        console.log('Reached limit')
+      if (this.allAds === true) {
+        this.showList()
       } else {
-        this.startList = this.startList + (5 * direction)
-        this.endList = this.endList + (5 * direction)
-        Router.push('/ads')
+        if (direction === 1) {
+          if (this.startList + 5 >= this.ads.length) {
+            console.log('Reached limit')
+          } else {
+            this.startList += 5
+            if (this.endList + 5 <= this.ads.length) {
+              this.endList += 5
+            } else {
+              this.endList = this.ads.length
+            }
+          }
+        } else {
+          if (this.startList === 0) {
+            console.log('Reached limit')
+          } else {
+            this.startList -= 5
+            this.endList = this.startList + 5
+          }
+        }
       }
     },
     showList() {
@@ -76,13 +92,11 @@ export default {
         console.log('Say hello')
         this.startList = 0
         this.endList = this.ads.length
-        Router.push('/ads')
         this.allAds = true
       } else {
         console.log('Say goodbye')
         this.startList = 0
         this.endList = 5
-        Router.push('/ads')
         this.allAds = false
       }
     }
