@@ -33,11 +33,13 @@ const getAllTipsOnPlant = (req,res,next) => {
 const createTipOnPlant = (req,res,next)=> {
     const tip = new Tip(req.body);
 
-
     Plant.findOneAndUpdate(
         { _id: req.params.plantID }, 
         { $push: { tips: tip} }, function(err, plant){
             if(err){ return next(err) }
+            if(plant == null){
+                return res.status(404).json({"message": "Plant not found"})
+            }
             tip.save(function(err){
                 if(err){
                    return res.status(400).json({"error": err.message});
