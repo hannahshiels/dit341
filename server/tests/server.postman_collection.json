@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"name\": \"James Bond\",\r\n   \"email\": \"email@email.com\",\r\n   \"password\": \"password\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contact_number\": \"007\"\r\n}",
+							"raw": "{\r\n   \"name\": \"James Bond\",\r\n   \"email\": \"bond@email.com\",\r\n   \"password\": \"password\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contact_number\": \"007\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -71,7 +71,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"email@email.com\",\r\n   \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"email\": \"bond@email.com\",\r\n   \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -174,7 +174,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"name\": \"Jack Bond\",\r\n   \"dob\": \"1901-01-01\",\r\n   \"role\": \"user\",\r\n   \"address\": \"10 Downing Street UK\",\r\n   \"contact_number\": \"008\"\r\n}",
+							"raw": "{\r\n    \"email\": \"changeEmail@email.com\",\r\n    \"password\": \"changedPassword\",\r\n    \"role\": \"user\",\r\n    \"dob\": \"1901-01-01\",\r\n    \"address\": \"10 Downing Street\",\r\n    \"contact_number\": \"008\",\r\n    \"name\": \"John Smith\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2194,6 +2194,19 @@
 				},
 				{
 					"name": "DELETE All tips",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -2499,6 +2512,19 @@
 				},
 				{
 					"name": "CREATE USER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -2526,6 +2552,19 @@
 				},
 				{
 					"name": "DELETE All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
