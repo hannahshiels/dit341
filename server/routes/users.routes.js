@@ -9,7 +9,7 @@ router.route('/api/users')
     .delete(userControllers.deleteUsers)
 
 router.route('/api/users/:userID')
-    .get(checkAuth, userControllers.getUser)
+    .get(userControllers.getUser)
     .put(userControllers.fullyUpdateUser)
     .patch(userControllers.partialUpdateUser)
     .delete(userControllers.deleteUser)

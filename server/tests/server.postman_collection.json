@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1d41144a-db28-4eec-afaa-85ddbf64c98f",
+		"_postman_id": "e04021ea-e276-4a89-a91e-9ed553324304",
 		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1266,6 +1266,52 @@
 					"response": []
 				},
 				{
+					"name": "GET All Ads",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/ads",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"ads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET Ad",
 					"event": [
 						{
@@ -2068,6 +2114,52 @@
 								"api",
 								"users",
 								"{{userID}}",
+								"ads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE All Ads",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/ads",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
 								"ads"
 							]
 						}

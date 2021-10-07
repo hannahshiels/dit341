@@ -1,6 +1,25 @@
 const Ad = require('../models/ad');
 const User = require('../models/user');
 
+const getAllAds = (req,res,next) => {
+    Ad.find(function(err, ads){
+        if (err) { return next(err); }
+        if(ads.length == 0){
+            return res.status(404).json({ "message" : "No ad found"})
+        }
+        res.status(200).json({ "ads": ads });
+    })
+}
+
+const deleteAllAds = (req,res,next)=> {
+    Ad.deleteMany(function(err, ads){
+    if(err){ return next(err);}
+    res.status(200).json({
+        "message": "Deletion of ads successful"
+    })
+})
+}
+
 const getUserAds = (req, res, next) => {
     Ad.find({uploaded_by: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
@@ -93,4 +112,4 @@ const deleteUserAd = (req, res, next) => {
 
 }
 
-module.exports = { getUserAds, createUserAd,deleteUserAds,  getUserAd, fullUpdateUserAd, partialUpdateUserAd,  deleteUserAd  };
+module.exports = { getAllAds, deleteAllAds, getUserAds, createUserAd,deleteUserAds,  getUserAd, fullUpdateUserAd, partialUpdateUserAd,  deleteUserAd  };
