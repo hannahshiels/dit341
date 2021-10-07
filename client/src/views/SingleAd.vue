@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
+      // userName: '',
       type: 'Generic',
       description: 'Generic',
       contactNumber: 'Generic',
@@ -27,6 +28,17 @@ export default {
     }
   },
   mounted() {
+    // Add when user is logged in
+    /*
+    Api.get('/users/6159e42b86f6ad3ed2cf3811')
+      .then(response => {
+        this.userName = response.data.name
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    */
+
     Api.get('/users/6159e42b86f6ad3ed2cf3811/ads/' + this.id)
       .then(response => {
         console.log(response)
