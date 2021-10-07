@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import SignUp from './views/SignUp.vue'
 import Tips from './views/Tips.vue'
@@ -17,8 +16,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'start',
+      component: Start
     },
     {
       path: '/tips',
@@ -44,11 +43,6 @@ export default new Router({
       path: '/ads',
       name: 'ads',
       component: Ads
-    },
-    {
-      path: '/start',
-      name: 'start',
-      component: Start
     },
     {
       path: '/settings',
