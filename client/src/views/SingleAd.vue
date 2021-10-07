@@ -1,12 +1,14 @@
 <template>
     <div>
-        <h3>Ad id:</h3>
-        <h3>{{ $route.params.id }}</h3>
-        <h3>Type: {{ this.type }}</h3>
-        <h3>Description: {{ this.description }}</h3>
-        <h3>Date posted: {{ this.datePosted }}</h3>
-        <h3>Uploaded by: {{ this.uploadedBy }}</h3>
-    </div>
+        <h3 class="d-flex justify-content-center">Ad id:</h3>
+        <h3 class="d-flex justify-content-center">{{ $route.params.id }}</h3>
+        <h3 class="d-flex justify-content-center">Type: {{ this.type }}</h3>
+        <h3 class="d-flex justify-content-center">Description: {{ this.description }}</h3>
+        <h3 class="d-flex justify-content-center">Date posted: {{ this.datePosted }}</h3>
+        <h3 class="d-flex justify-content-center">Uploaded by: {{ this.uploadedBy }}</h3>
+        <h3 class="d-flex justify-content-center">Contact number: {{ this.contactNumber }}</h3>
+        <h3 class="d-flex justify-content-center">Contact address: {{ this.contactAddress }}</h3>
+      </div>
 </template>
 
 <script>
@@ -18,8 +20,8 @@ export default {
       id: this.$route.params.id,
       type: 'Generic',
       description: 'Generic',
-      // contactNumber: '',
-      // contactAddress: '',
+      contactNumber: 'Generic',
+      contactAddress: 'Generic',
       datePosted: 'Generic',
       uploadedBy: 'Generic'
     }
@@ -32,6 +34,8 @@ export default {
         this.description = response.data.ad_description
         this.datePosted = response.data.ad_date_posted
         this.uploadedBy = response.data.uploaded_by
+        this.contactNumber = response.data.ad_contact[0].number
+        this.contactAddress = response.data.ad_contact[1].address
       })
       .catch(error => {
         console.log(error)
