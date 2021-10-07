@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      userName: '',
+      userName: 'Generic',
       type: 'Generic',
       description: 'Generic',
       contactNumber: 'Generic',
@@ -29,14 +29,6 @@ export default {
     }
   },
   mounted() {
-    Api.get('/users/6159e42b86f6ad3ed2cf3811')
-      .then(response => {
-        this.userName = response.data.name
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
     Api.get('/users/6159e42b86f6ad3ed2cf3811/ads/' + this.id)
       .then(response => {
         console.log(response)
@@ -46,10 +38,22 @@ export default {
         this.uploadedBy = response.data.uploaded_by
         this.contactNumber = response.data.ad_contact[0].number
         this.contactAddress = response.data.ad_contact[0].address
+        this.getUserInfo()
       })
       .catch(error => {
         console.log(error)
       })
+  },
+  methods: {
+    getUserInfo() {
+      Api.get('/users/' + this.uploadedBy)
+        .then(response => {
+          this.userName = response.data.name
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 }
 </script>

@@ -46,6 +46,7 @@ export default {
     Api.get('/ads')
       .then(response => {
         console.log(response)
+        console.log('Current user ID is ' + this.user_id)
         this.ads = response.data.ads
       })
       .catch(error => {
@@ -58,7 +59,8 @@ export default {
       ads: [],
       startList: 0,
       endList: 5,
-      allAds: false
+      allAds: false,
+      user_id: this.$parent.user_id
     }
   },
   methods: {

@@ -51,7 +51,7 @@
   </b-form-group>
   </div>
   <div class="row justify-content-md-center">
-  <b-button size="lg" type="submit" variant="danger">Post ad</b-button>
+  <b-button size="lg" type="submit" variant="danger">Post Ads</b-button>
   </div>
   </b-form>
 
@@ -70,7 +70,8 @@ export default {
         contactNumber: '',
         contactAddress: '',
         ad_date_posted: ''
-      }
+      },
+      log_user_id: this.$parent.user_id
     }
   },
   methods: {
@@ -83,27 +84,41 @@ export default {
           number: this.form.contactNumber,
           address: this.form.contactAddress
         },
-        ad_date_posted: this.form.datePosted
+        ad_date_posted: this.form.datePosted,
+        uploaded_by: this.log_user_id
       }
       this.createAd(ad)
     },
     createAd(ad) {
-      Api.post('/users/6159e42b86f6ad3ed2cf3811/ads', ad)
-        .then(response => {
-          const status = JSON.stringify(response.status)
-          if (status === '201') {
-            this.createdAdMessage()
-          }
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      if (this.log_user_id === '') {
+        console.log('Not logged in')
+        this.notLoggedInMessage()
+      } else {
+        Api.post('/users/' + this.log_user_id + '/ads', ad)
+          .then(response => {
+            const status = JSON.stringify(response.status)
+            if (status === '201') {
+              this.createdAdMessage()
+            }
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
     },
     createdAdMessage(append = false) {
       this.$bvToast.toast('Ad created', {
         title: 'Ad creation',
         variant: 'success',
+        solid: true,
+        autoHideDelay: 2000
+      })
+    },
+    notLoggedInMessage(append = false) {
+      this.$bvToast.toast('You need to be logged in to create ad', {
+        title: 'Not logged in',
+        variant: 'danger',
         solid: true,
         autoHideDelay: 2000
       })
