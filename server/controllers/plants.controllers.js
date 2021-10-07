@@ -1,6 +1,9 @@
 const Plant = require('../models/plant');
 const Garden = require('../models/garden');
 
+
+
+
 const getAllPlantsInGarden = (req,res,next) => {
     if(req.query.sort){
         if(req.query.sort === "asc"){
@@ -30,13 +33,7 @@ const getAllPlantsInGarden = (req,res,next) => {
     }
 
 const createPlantInGarden = (req,res,next) => {
-    const plant = new Plant(req.body);  
-    plant.save(function(err){
-        if(err){
-           return res.status(400).json({"error": err.message});
-        }
-    });
-
+    const plant = new Plant(req.body); 
    Garden.findOneAndUpdate(
         { _id: req.params.gardenID }, 
         { $push: { plants: plant} }, function(err, garden){
@@ -44,6 +41,12 @@ const createPlantInGarden = (req,res,next) => {
             if(garden == null){
                 return res.status(404).json({"message": "Garden not found"})
             }
+            plant.save(function(err){
+                if(err){
+                   return res.status(400).json({"error": err.message});
+                }
+            });
+        
             res.status(201).json(plant);
         }
     );
@@ -108,10 +111,11 @@ const partialUpdatePlant = (req,res,next) => {
         if(plant == null){
             return res.status(404).json({"message": "Plant not found"});
         }
-
-    
+        plant.remove()
         res.status(200).json(plant);
     } )
     }
+
+
 
 module.exports = {getAllPlantsInGarden, createPlantInGarden, deleteAllPlantsInGarden, getPlant, fullyUpdatePlant, partialUpdatePlant, deletePlant };

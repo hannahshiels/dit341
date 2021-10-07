@@ -1,5 +1,6 @@
 const Tip = require('../models/tip');
 const Plant = require('../models/plant');
+const User = require('../models/user')
 
 
 const getAllTips = (req,res,next) => {
@@ -31,17 +32,19 @@ const getAllTipsOnPlant = (req,res,next) => {
     }
 const createTipOnPlant = (req,res,next)=> {
     const tip = new Tip(req.body);
-    tip.save(function(err){
-        if(err){
-           return res.status(400).json({"error": err.message});
-        }
-    });
 
     Plant.findOneAndUpdate(
         { _id: req.params.plantID }, 
         { $push: { tips: tip} }, function(err, plant){
             if(err){ return next(err) }
-            plant.save();
+            if(plant == null){
+                return res.status(404).json({"message": "Plant not found"})
+            }
+            tip.save(function(err){
+                if(err){
+                   return res.status(400).json({"error": err.message});
+                }
+            });
             res.status(201).json(tip);
         }
     )
