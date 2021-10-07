@@ -58,8 +58,8 @@
 </template>
 
 <script>
+
 import { Api } from '@/Api'
-// import Router from '@/router'
 
 export default {
   data() {
@@ -67,8 +67,8 @@ export default {
       form: {
         ad_description: '',
         ad_type: '',
-        // ad_contact.number: '',
-        // ad_contact.address: '',
+        contactNumber: '',
+        contactAddress: '',
         ad_date_posted: ''
       }
     }
@@ -79,12 +79,13 @@ export default {
       const ad = {
         ad_description: this.form.description,
         ad_type: this.form.type,
-        // ad_contact.number:: this.form.contactNumber,
-        // ad_contact.address: this.form.contactAddress,
+        ad_contact: {
+          number: this.form.contactNumber,
+          address: this.form.contactAddress
+        },
         ad_date_posted: this.form.datePosted
       }
       this.createAd(ad)
-      // Router.push('/ads')
     },
     createAd(ad) {
       Api.post('/users/6159e42b86f6ad3ed2cf3811/ads', ad)
