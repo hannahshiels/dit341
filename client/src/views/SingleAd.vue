@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      userName: this.$parent.user_id,
+      userName: '',
       type: 'Generic',
       description: 'Generic',
       contactNumber: 'Generic',

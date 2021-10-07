@@ -25,7 +25,6 @@ export default {
   methods: {
     moveToAd() {
       const id = this.ad._id
-      console.log(id)
       Router.push('/ads/' + id)
     }
   }
