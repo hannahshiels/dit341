@@ -7,6 +7,7 @@ import Ad from './views/SingleAd.vue'
 import Ads from './views/Ads.vue'
 import Start from './views/Start.vue'
 import Settings from './views/Settings.vue'
+import Gardens from './views/Gardens.vue'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/settings',
       name: 'settings',
       component: Settings
+    },
+    {
+      path: '/gardens',
+      name: 'gardens',
+      component: Gardens
     }
   ]
 })
