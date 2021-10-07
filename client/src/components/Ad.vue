@@ -8,7 +8,7 @@
       </b-card-header>
       <b-card-body>
         <b-card-text align-h="start" class="ad-content">
-          <h3>{{ ad.ad_type }}</h3>
+          <button v-on:click="moveToAd()">{{ ad.ad_type }}</button>
         </b-card-text>
       </b-card-body>
     </b-card>
@@ -16,8 +16,18 @@
 </template>
 
 <script>
+
+import Router from '@/router'
+
 export default {
   name: 'ad',
-  props: ['ad']
+  props: ['ad'],
+  methods: {
+    moveToAd() {
+      const id = this.ad._id
+      Router.push('/ads/' + id)
+    }
+  }
 }
+
 </script>
