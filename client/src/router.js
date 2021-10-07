@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import SignUp from './views/SignUp.vue'
 import Tips from './views/Tips.vue'
+import Ad from './views/SingleAd.vue'
 import Ads from './views/Ads.vue'
 import Start from './views/Start.vue'
 import Settings from './views/Settings.vue'
@@ -33,6 +34,11 @@ export default new Router({
       path: '/signup',
       name: 'sign-up',
       component: SignUp
+    },
+    {
+      path: '/ads/:id',
+      name: 'ad',
+      component: Ad
     },
     {
       path: '/ads',
