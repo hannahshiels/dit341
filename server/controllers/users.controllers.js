@@ -20,7 +20,7 @@ const createUser = (req,res,next) => {
     user.contact_number = req.body.contact_number;
     user.email = req.body.email;
     user.save(function(err){
-        if (err) { return next(err); }
+        if (err) {return next(err); }
         res.status(201).json(user);
     })
     }
@@ -46,11 +46,12 @@ const getUser = (req,res,next) => {
     }
 
 const fullyUpdateUser = (req,res,next) => {
-    User.findById(req.params.userID, function(err, user){
+    User.findById(req.params.userID, function(error, user){
+        if(error){ return next(err);}
         if(user == null){
             return res.status(404).json({"message": "User not found"});
         }
-        if(err){ return next(err);}
+
         user.name = req.body.name;
         user.dob = req.body.dob;
         user.role = req.body.role;
@@ -58,8 +59,18 @@ const fullyUpdateUser = (req,res,next) => {
         user.address = req.body.address;
         user.contact_number = req.body.contact_number;
         user.email = req.body.email;
-        user.save();
-        res.status(200).json(user);
+        user.save(function(err){
+            if(err){
+                if(err.errors){
+                    return res.status(400).json(user)
+                }
+                return next(err)
+            }
+            
+
+
+            res.status(200).json(user);
+        })
     })
     }
 
@@ -87,6 +98,7 @@ const deleteUser = (req,res,next)=> {
             return res.status(404).json({"message": "User not found"});
         }
         if(err) { return next(err);}
+        user.remove()
         res.status(200).json(user);
     })
     }
