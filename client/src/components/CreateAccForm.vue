@@ -43,7 +43,7 @@
       </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-button size="lg" type="submit" variant="danger">Create Account</b-button>
+      <b-button size="lg" type="submit" >Create Account</b-button>
       <div v-if="createAccFailed" class="text-danger mt-4 text-center"> <p> Account creation failed. </p> </div>
     </b-form>
   </div>
@@ -119,9 +119,13 @@ h2 {
 .btn {
   display: flex;
   margin: 0 auto;
-    border: 4px solid var(--dark);
+  border: 4px solid var(--dark);
+  background: #D57A66;
 }
 
+.btn:hover {
+    background: #CF664F;
+}
 @media screen and (max-width:575px){
   h2{
     text-align: left;

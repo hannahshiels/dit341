@@ -2,24 +2,24 @@
   <div class="mb-3">
     <b-card border-variant="dark" class="tip shadow mt-4">
       <b-card-header class="garden-plant-info-container  d-flex justify-content-center align-items-center border-dark">
-        <div class="garden-plant-info  bg-grey  d-flex flex-fill">
-          <div class="plant-name-container  border-right flex-fill">
-            <p>{{ tip.plant.plant_name.charAt(0).toUpperCase() + tip.plant.plant_name.slice(1) }}</p>
+        <div class="garden-plant-info bg-brown text-white bb d-flex flex-fill">
+          <div class="plant-name-container text-black-50 br bold flex-fill">
+            <p>  {{ tip.plant.plant_name.charAt(0).toUpperCase() + tip.plant.plant_name.slice(1) }}</p>
           </div>
-          <div class="view-garden-container bg-dark text-white flex-fill"
-            ><p>View Garden</p></div
+          <div class="view-garden-container text-white flex-fill">
+             <p> <router-link class="secondary-link text-black-50" :to="'/gardens/' + tip.plant.garden">  View Garden </router-link> </p> </div
           >
         </div>
       </b-card-header>
-      <b-card-header class="text-danger" header-bg-variant="white">
+      <b-card-header class="text-black-50" header-bg-variant="white">
           <h3>{{ tip.title }}</h3>
       </b-card-header>
       <b-card-body>
-        <b-card-text align-h="start" class="tip-content">
+        <b-card-text align-h="start" class="tip-content text-black-50">
           <p>{{ tip.content }}</p>
         </b-card-text>
-        <p v-if="tip.author != null" class="mt-4"> - {{ tip.author.name }} </p>
-        <p v-else class="mt-4"> - Account has been deleted </p>
+        <p class="text-black-50 mt-4" v-if="tip.author == null"> User deleted </p>
+        <p class="text-black-50 mt-4"> - {{ tip.author.name }} </p>
       </b-card-body>
     </b-card>
   </div>
@@ -34,8 +34,18 @@ export default {
 
 <style scoped>
 
+.bg-brown{
+  background: #D57A66;
+}
+
+.br{
+  border-right: 1px solid #343a40;
+}
+
 h3 {
-  font-size: 1.2rem
+  font-size: 1.2rem;
+  color: #b1e693;
+  font-weight: bold;
 }
 
 .garden-plant-info-container{
