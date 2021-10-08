@@ -1,6 +1,6 @@
 <template>
  <div>
-    <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no ads </p> </div>
+    <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no plants </p> </div>
     <div class="row mt-3">
     <div class="col-md-8 bg-secondary">
     <h2>PLANTS IN THE GARDENS</h2>
