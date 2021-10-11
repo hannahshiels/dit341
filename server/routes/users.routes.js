@@ -10,8 +10,8 @@ router.route('/api/users')
 
 router.route('/api/users/:userID')
     .get(userControllers.getUser)
-    .put(userControllers.fullyUpdateUser)
-    .patch(userControllers.partialUpdateUser)
-    .delete(userControllers.deleteUser)
+    .put(checkAuth,userControllers.fullyUpdateUser)
+    .patch(checkAuth,userControllers.partialUpdateUser)
+    .delete(checkAuth,userControllers.deleteUser)
 
 module.exports = router;

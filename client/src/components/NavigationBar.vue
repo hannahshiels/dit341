@@ -1,48 +1,57 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="warning">
+    <b-navbar toggleable="lg" type="dark"  class="bg" id="nav">
       <b-navbar-nav class="ml-auto">
-        <div v-if="!isAuthenticated">
-          <router-link to="/signup" class="link-secondary">
+        <div v-if="!isAuthenticated" class="text-center">
+          <router-link to="/signup" class="link-secondary text-dark">
             Create an account
           </router-link>
           <span> or </span>
-          <router-link to="/login" class="link-secondary">
+          <router-link to="/login" class="link-secondary text-dark">
             Login instead</router-link
           >
         </div>
-        <div v-else><a class="link" @click="logout"> Logout </a></div>
+        <div v-else><a class="link text-dark" @click="logout"> Logout </a></div>
       </b-navbar-nav>
     </b-navbar>
-    <b-navbar toggleable type="dark" variant="secondary">
-      <router-link to="/start"
+    <b-navbar toggleable="md" type="dark" variant="dark" class="flex-col">
+      <router-link to="/"
         ><b-navbar-brand> Get Potted </b-navbar-brand>
       </router-link>
-
-      <b-navbar-nav class="ml-auto">
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <router-link to="/gardens" class="btn btn-secondary"
-            >Gardens</router-link
-          >
-          <span class="border border-light"></span>
-          <router-link to="/tips" class="btn btn-secondary">Tips</router-link>
-          <span class="border border-light"></span>
-          <router-link to="/ads" class="btn btn-secondary">Ads</router-link>
-            <span  v-if="isAuthenticated" class="border border-light"></span>
-            <router-link v-if="isAuthenticated" class="btn btn-secondary" to="/settings">
+        <b-navbar-toggle target="navbar-toggle-collapse">
+      <template #default="{ expanded }">
+        <b-icon-chevron-up v-if="expanded" ></b-icon-chevron-up>
+        <b-icon-chevron-down v-else ></b-icon-chevron-down>
+      </template>
+    </b-navbar-toggle>
+    <b-collapse id="navbar-toggle-collapse" is-nav>
+      <b-navbar-nav class="ml-auto mr">
+        <div class="btn-group" role="group">
+          <router-link to="/gardens" class="btn btn-secondary btn-dark"
+            >Gardens</router-link>
+          <router-link to="/tips" class="btn btn-secondary btn-dark">Tips</router-link>
+          <router-link to="/ads" class="btn btn-secondary btn-dark">Ads</router-link>
+            <span  v-if="isAuthenticated"></span>
+            <router-link v-if="isAuthenticated" class="btn btn-secondary btn-dark" to="/settings">
               Settings
             </router-link>
         </div>
       </b-navbar-nav>
+      </b-collapse>
     </b-navbar>
   </div>
 </template>
 <script>
 import { Api } from '@/Api'
+import { BIconChevronDown, BIconChevronUp } from 'bootstrap-vue'
 
 import Router from '@/router'
 
 export default {
+  components: {
+    BIconChevronDown,
+    BIconChevronUp
+  },
   computed: {
     isAuthenticated: function () {
       return this.$parent.authenticated
@@ -64,3 +73,21 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.bg {
+  background: #FFD65C;
+}
+
+@media screen and (max-width:575px){
+
+  .mr{
+    margin-right: auto;
+  }
+
+  .navbar-brand {
+    margin-right: 0;
+  }
+}
+
+</style>

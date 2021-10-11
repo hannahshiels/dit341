@@ -12,7 +12,7 @@
 
 <style scoped>
 .bg {
-  background: #B1E693;
+  background: #b1e693;
 }
 
 .form-container {
