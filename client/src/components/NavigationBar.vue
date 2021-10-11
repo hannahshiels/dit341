@@ -18,31 +18,40 @@
       <router-link to="/"
         ><b-navbar-brand> Get Potted </b-navbar-brand>
       </router-link>
-
-      <b-navbar-nav class="ml-auto">
-        <div class="btn-group flex-col" role="group" aria-label="Basic example">
+        <b-navbar-toggle target="navbar-toggle-collapse">
+      <template #default="{ expanded }">
+        <b-icon-chevron-up v-if="expanded" ></b-icon-chevron-up>
+        <b-icon-chevron-down v-else ></b-icon-chevron-down>
+      </template>
+    </b-navbar-toggle>
+    <b-collapse id="navbar-toggle-collapse" is-nav>
+      <b-navbar-nav class="ml-auto mr">
+        <div class="btn-group" role="group">
           <router-link to="/gardens" class="btn btn-secondary btn-dark"
-            >Gardens</router-link
-          >
-          <span class="border border-light"></span>
+            >Gardens</router-link>
           <router-link to="/tips" class="btn btn-secondary btn-dark">Tips</router-link>
-          <span class="border border-light"></span>
           <router-link to="/ads" class="btn btn-secondary btn-dark">Ads</router-link>
-            <span  v-if="isAuthenticated" class="border border-light"></span>
+            <span  v-if="isAuthenticated"></span>
             <router-link v-if="isAuthenticated" class="btn btn-secondary btn-dark" to="/settings">
               Settings
             </router-link>
         </div>
       </b-navbar-nav>
+      </b-collapse>
     </b-navbar>
   </div>
 </template>
 <script>
 import { Api } from '@/Api'
+import { BIconChevronDown, BIconChevronUp } from 'bootstrap-vue'
 
 import Router from '@/router'
 
 export default {
+  components: {
+    BIconChevronDown,
+    BIconChevronUp
+  },
   computed: {
     isAuthenticated: function () {
       return this.$parent.authenticated
@@ -72,18 +81,8 @@ export default {
 
 @media screen and (max-width:575px){
 
-  .ml-auto{
+  .mr{
     margin-right: auto;
-  }
-
-  .flex-col {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .flex-col > * {
-    width: 100%;
-    text-align: center;
   }
 
   .navbar-brand {

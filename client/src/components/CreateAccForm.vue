@@ -43,6 +43,10 @@
       </b-form-invalid-feedback>
       </b-form-group>
 
+      <b-form-group id="input-group-5">
+         <b-form-checkbox v-model="form.admin" id="admin" value="admin">Admin</b-form-checkbox>
+      </b-form-group>
+
       <b-button size="lg" type="submit" >Create Account</b-button>
       <div v-if="createAccFailed" class="text-danger mt-4 text-center"> <p> Account creation failed. </p> </div>
     </b-form>
@@ -61,7 +65,8 @@ export default {
         email: '',
         name: '',
         password: '',
-        passwordConfirm: ''
+        passwordConfirm: '',
+        admin: ''
       },
       createAccFailed: false
     }
@@ -78,25 +83,17 @@ export default {
         const user = {
           email: this.form.email,
           name: this.form.name,
-          password: this.form.password
+          password: this.form.password,
+          role: this.form.admin
         }
         this.createAccount(user)
       }
-    },
-    createdAccountMessage(append = false) {
-      this.$bvToast.toast('Redirecting to login...', {
-        title: 'Account created',
-        variant: 'success',
-        solid: true,
-        autoHideDelay: 2000
-      })
     },
     createAccount(user) {
       Api.post('/users', user)
         .then(response => {
           const status = JSON.stringify(response.status)
           if (status === '201') {
-            this.createdAccountMessage()
             Router.push('/login')
           }
           console.log(response)
