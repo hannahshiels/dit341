@@ -15,7 +15,7 @@
       </b-navbar-nav>
     </b-navbar>
     <b-navbar toggleable type="dark" variant="secondary">
-      <router-link to="/start"
+      <router-link to="/"
         ><b-navbar-brand> Get Potted </b-navbar-brand>
       </router-link>
 
