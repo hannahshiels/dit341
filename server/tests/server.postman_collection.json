@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"name\": \"James Bond\",\r\n   \"email\": \"bond@email.com\",\r\n   \"password\": \"password\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contact_number\": \"007\"\r\n}",
+							"raw": "{\r\n   \"name\": \"James Bond\",\r\n   \"email\": \"email@email.com\",\r\n   \"password\": \"password\",\r\n   \"dob\": \"1900-01-01\",\r\n   \"role\": \"admin\",\r\n   \"address\": \"10 Drowwning Street UK\",\r\n   \"contact_number\": \"007\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -71,7 +71,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"bond@email.com\",\r\n   \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"email\": \"email@email.com\",\r\n   \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -174,7 +174,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"changeEmail@email.com\",\r\n    \"password\": \"changedPassword\",\r\n    \"role\": \"user\",\r\n    \"dob\": \"1901-01-01\",\r\n    \"address\": \"10 Downing Street\",\r\n    \"contact_number\": \"008\",\r\n    \"name\": \"John Smith\"\r\n}",
+							"raw": "{\r\n   \"name\": \"Jack Bond\",\r\n   \"dob\": \"1901-01-01\",\r\n   \"role\": \"user\",\r\n   \"address\": \"10 Downing Street UK\",\r\n   \"contact_number\": \"008\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -264,7 +264,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soil_level\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
+							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soil_level\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"img_link\": \"https://picsum.photos/200/300\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -373,7 +373,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"no_plants\": \"5\"\r\n}",
+							"raw": "{\r\n    \"no_plants\": \"6\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -381,16 +381,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{userID}}/gardens/{{gardenID}}",
+							"raw": "{{host}}/api/users/614a3a475b5105f7a5540b8a/gardens/61655ffa31b77b1364dae968",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{userID}}",
+								"614a3a475b5105f7a5540b8a",
 								"gardens",
-								"{{gardenID}}"
+								"61655ffa31b77b1364dae968"
 							]
 						}
 					},
@@ -416,7 +416,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"soil_level\": \"tilt\"\r\n}",
+							"raw": "{\r\n    \"img_link\": \"https://picsum.photos/200/350\",\r\n    \"soil_level\": \"tilt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -462,7 +462,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soil_level\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
+							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soil_level\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"img_link\": \"https://picsum.photos/200/300\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -575,7 +575,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"soil_level\": \"tilt\"\r\n}",
+							"raw": "{\r\n    \"img_link\": \"https://picsum.photos/200/300\",\r\n    \"soil_level\": \"tilt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2286,19 +2286,6 @@
 				},
 				{
 					"name": "DELETE All tips",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -2604,19 +2591,6 @@
 				},
 				{
 					"name": "CREATE USER",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful POST request\", function () {\r",
-									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -2644,19 +2618,6 @@
 				},
 				{
 					"name": "DELETE All Users",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "DELETE",
 						"header": [],

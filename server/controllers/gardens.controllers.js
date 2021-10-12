@@ -77,6 +77,7 @@ const fullyUpdateGarden = (req,res,next) => {
         garden.soil_level = req.body.soil_level;
         garden.direction = req.body.direction;
         garden.no_plants = req.body.no_plants; //update it to count on plant id
+        garden.img_link = req.body.img_link;
         garden.save();
         res.status(200).json(garden);
     })
@@ -92,6 +93,7 @@ const partialUpdateGarden = (req,res,next) => {
         garden.soil_level = (req.body.soil_level || garden.soil_level);
         garden.direction = (req.body.direction || garden.direction);
         garden.no_plants = (req.body.no_plants || garden.no_plants); //update it to count on plant id
+        garden.img_link = (req.body.img_link || garden.img_link);
         garden.save();
         res.status(200).json(garden);
     })
