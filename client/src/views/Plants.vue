@@ -1,30 +1,57 @@
 <template>
- <div>
-    <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no plants </p> </div>
-    <div class="row mt-3">
-    <div class="col-md-8 bg-secondary">
-    <h2>PLANTS IN THE GARDENS</h2>
-    <div class="row justify-content-between">
-    <div class="col-4">
-      <button class="d-flex justify-content-start" v-on:click="showList()">Plant 1</button>
+  <div>
+    <div class="text-center text-white" v-if="ads.length == 0">
+      <p>Sorry! There are no plants.</p>
     </div>
-    <div class="col-4">
-      <button class="d-flex justify-content-end" v-on:click="moveList(-1)">Plant 2</button>
-    </div>
-    <div class="col-4">
-      <button class="d-flex justify-content-end" v-on:click="moveList(1)">Plant 3</button>
-    </div>
-  </div>
-       <b-card-group deck>
-          <div v-for="ad in ads.slice(this.startList,this.endList)" v-bind:key="ad._id">
-            <ad v-bind:ad="ad" class="mb-1 mt-1 ml-1 mr-1"/>
+    <div class="row mt-1 ml-4 mr-3">
+      <div class="bg-muted">
+        <h2 class="text-center">PLANTS</h2>
+        <h6 class="text-center">Click on a plant to be taken to a page full of information about that plant.</h6>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col">
+              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 1"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 2"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 3"></a>
+            </div>
           </div>
-     </b-card-group>
-     </div>
-   <div class="col-md-4">
-     <post-ad/>
-   </div>
-   </div>
+          <div class="row justify-content-between, mt-3">
+            <div class="col">
+              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 4"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 5"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 6"></a>
+            </div>
+          </div>
+          <div class="row justify-content-between, mt-3">
+            <div class="col">
+              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 7"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 8"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 9"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <b-card-group deck>
+        <div v-for="ad in ads.slice(this.startList,this.endList)" v-bind:key="ad._id">
+          <ad v-bind:ad="ad" class="mb-1 mt-1 ml-1 mr-1"/>
+        </div>
+      </b-card-group>
+    </div>
+    <div class="col-md-4">
+      <post-ad/>
+    </div>
   </div>
 </template>
 
