@@ -41,6 +41,11 @@ export default {
       console.log('Moving to the plant pages')
       this.$router.push('/plants')
     }
+  },
+  data() {
+    return {
+      user_id: this.$parent.user_id
+    }
   }
 }
 </script>

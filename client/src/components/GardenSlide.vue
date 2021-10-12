@@ -1,31 +1,49 @@
 <template>
-  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <!-- Carousel indicators -->
-    <ol class="carousel-indicators">
-        <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
-        <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
-        <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
-    </ol>
-
-    <!-- Wrapper for carousel items -->
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://picsum.photos/200" class="d-block w-100" alt="Slide 1">
-        </div>
-        <div class="carousel-item">
-            <img src="https://picsum.photos/200" class="d-block w-100" alt="Slide 2">
-        </div>
-        <div class="carousel-item">
-            <img src="https://picsum.photos/200" class="d-block w-100" alt="Slide 3">
-        </div>
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img :src= "this.first_img" class="d-block w-100" alt="">
     </div>
-
-    <!-- Carousel controls -->
-    <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </a>
+    <div v-for="garden in gardens.slice(1, this.gardens.length)" v-bind:key="garden._id" class="carousel-item">
+      <img :src="garden.img_link" class="d-block w-100" alt="">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
 </template>
+
+<script>
+
+import { Api } from '@/Api'
+
+export default {
+  name: 'gardens',
+  data() {
+    return {
+      user_id: this.$parent.user_id,
+      first_img: ''
+    }
+  },
+  mounted() {
+    Api.get('/users/' + this.user_id + '/gardens')
+      .then(response => {
+        console.log(response)
+        console.log('Current user ID is ' + this.user_id)
+        this.gardens = response.data.User_gardens
+        console.log(this.gardens[0].img_link)
+        this.first_img = this.gardens[0].img_link
+      })
+      .catch(error => {
+        this.ads = []
+        console.log(error)
+      })
+  }
+}
+</script>
