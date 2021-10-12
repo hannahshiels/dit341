@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-center text-white" v-if="ads.length == 0">
+    <div class="text-center text-white" v-if="gardens.length == 0">
       <p>Sorry! There are no gardens.</p>
     </div>
     <div class="row mt-1 ml-4 mr-3">
@@ -44,63 +44,63 @@
         </div>
       </div>
       <b-card-group deck>
-        <div v-for="ad in ads.slice(this.startList,this.endList)" v-bind:key="ad._id">
-          <ad v-bind:ad="ad" class="mb-1 mt-1 ml-1 mr-1"/>
+        <div v-for="garden in gardens.slice(this.startList,this.endList)" v-bind:key="garden._id">
+          <garden v-bind:garden="garden" class="mb-1 mt-1 ml-1 mr-1"/>
         </div>
       </b-card-group>
     </div>
     <div class="col-md-4">
-      <post-ad/>
+      <post-garden/>
     </div>
   </div>
 </template>
 
 <script>
 
-import Ad from '../components/Ad.vue'
+import Garden from '../components/Garden.vue'
 // import Router from '@/router'
 import { Api } from '@/Api'
 
 export default {
-  name: 'ads',
+  name: 'gardens',
   components: {
-    ad: Ad
+    garden: Garden
   },
   mounted() {
-    Api.get('/ads')
+    Api.get('/gardens')
       .then(response => {
         console.log(response)
         console.log('Current user ID is ' + this.user_id)
-        this.ads = response.data.ads
+        this.gardens = response.data.gardens
       })
       .catch(error => {
-        this.ads = []
+        this.gardens = []
         console.log(error)
       })
   },
   data() {
     return {
-      ads: [],
+      gardens: [],
       startList: 0,
       endList: 5,
-      allAds: false,
+      allGardens: false,
       user_id: this.$parent.user_id
     }
   },
   methods: {
     moveList(direction) {
-      if (this.allAds === true) {
+      if (this.allGardens === true) {
         this.showList()
       } else {
         if (direction === 1) {
-          if (this.startList + 5 >= this.ads.length) {
+          if (this.startList + 5 >= this.gardens.length) {
             console.log('Reached limit')
           } else {
             this.startList += 5
-            if (this.endList + 5 <= this.ads.length) {
+            if (this.endList + 5 <= this.gardens.length) {
               this.endList += 5
             } else {
-              this.endList = this.ads.length
+              this.endList = this.gardens.length
             }
           }
         } else {
@@ -114,125 +114,18 @@ export default {
       }
     },
     showList() {
-      if (this.allAds === false) {
+      if (this.allGardens === false) {
         console.log('Say hello')
         this.startList = 0
-        this.endList = this.ads.length
-        this.allAds = true
+        this.endList = this.gardens.length
+        this.allGardens = true
       } else {
         console.log('Say goodbye')
         this.startList = 0
         this.endList = 5
-        this.allAds = false
+        this.allGardens = false
       }
     }
   }
 }
 </script>
-
-<!--
-<template>
- <div>
-    <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no gardens </p> </div>
-    <div class="row mt-3">
-    <div class="col-md-8 bg-secondary">
-    <h2>GARDENS</h2>
-    <div class="row justify-content-between">
-    <div class="col-4">
-      <button class="d-flex justify-content-start" v-on:click="showList()">Garden 1</button>
-    </div>
-    <div class="col-4">
-      <button class="d-flex justify-content-end" v-on:click="moveList(-1)">Garden 2</button>
-    </div>
-    <div class="col-4">
-      <button class="d-flex justify-content-end" v-on:click="moveList(1)">Garden 3</button>
-    </div>
-  </div>
-       <b-card-group deck>
-          <div v-for="ad in ads.slice(this.startList,this.endList)" v-bind:key="ad._id">
-            <ad v-bind:ad="ad" class="mb-1 mt-1 ml-1 mr-1"/>
-          </div>
-     </b-card-group>
-     </div>
-   <div class="col-md-4">
-     <post-ad/>
-   </div>
-   </div>
-  </div>
-</template>
-
-<script>
-
-import Ad from '../components/Ad.vue'
-// import Router from '@/router'
-import { Api } from '@/Api'
-
-export default {
-  name: 'ads',
-  components: {
-    ad: Ad
-  },
-  mounted() {
-    Api.get('/ads')
-      .then(response => {
-        console.log(response)
-        console.log('Current user ID is ' + this.user_id)
-        this.ads = response.data.ads
-      })
-      .catch(error => {
-        this.ads = []
-        console.log(error)
-      })
-  },
-  data() {
-    return {
-      ads: [],
-      startList: 0,
-      endList: 5,
-      allAds: false,
-      user_id: this.$parent.user_id
-    }
-  },
-  methods: {
-    moveList(direction) {
-      if (this.allAds === true) {
-        this.showList()
-      } else {
-        if (direction === 1) {
-          if (this.startList + 5 >= this.ads.length) {
-            console.log('Reached limit')
-          } else {
-            this.startList += 5
-            if (this.endList + 5 <= this.ads.length) {
-              this.endList += 5
-            } else {
-              this.endList = this.ads.length
-            }
-          }
-        } else {
-          if (this.startList === 0) {
-            console.log('Reached limit')
-          } else {
-            this.startList -= 5
-            this.endList = this.startList + 5
-          }
-        }
-      }
-    },
-    showList() {
-      if (this.allAds === false) {
-        console.log('Say hello')
-        this.startList = 0
-        this.endList = this.ads.length
-        this.allAds = true
-      } else {
-        console.log('Say goodbye')
-        this.startList = 0
-        this.endList = 5
-        this.allAds = false
-      }
-    }
-  }
-}
-</script>
--->
