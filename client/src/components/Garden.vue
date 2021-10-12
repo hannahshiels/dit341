@@ -3,12 +3,12 @@
     <b-card border-variant="dark">
       <b-card-header class="d-flex justify-content-center align-items-center border-dark">
         <div class="bg-grey d-flex flex-fill">
-          <div class="bg-dark text-white flex-fill"><p>{{ ad.ad_date_posted }}</p></div>
+          <div class="bg-dark text-white flex-fill"><p>{{ garden.size }}</p></div>
         </div>
       </b-card-header>
       <b-card-body>
-        <b-card-text align-h="start" class="ad-content">
-          <button v-on:click="moveToAd()">{{ ad.ad_type }}</button>
+        <b-card-text align-h="start" class="garden-content">
+          <button v-on:click="moveToAd()">{{ garden.size }}</button>
         </b-card-text>
       </b-card-body>
     </b-card>
@@ -20,12 +20,12 @@
 import Router from '@/router'
 
 export default {
-  name: 'ad',
-  props: ['ad'],
+  name: 'garden',
+  props: ['garden'],
   methods: {
-    moveToAd() {
-      const id = this.ad._id
-      Router.push('/ads/' + id)
+    moveToGarden() {
+      const id = this.garden._id
+      Router.push('/gardens/' + id)
     }
   }
 }
