@@ -31,7 +31,7 @@ export default {
   methods: {
     toGardenPage() {
       console.log('Moving to the garden page')
-      // this.$router.push('/test')
+      this.$router.push('/gardens')
     },
     toTipPage() {
       console.log('Moving to the tip page')
@@ -39,7 +39,7 @@ export default {
     },
     toPlantPage() {
       console.log('Moving to the plant pages')
-      // this.$router.push('/ads')
+      this.$router.push('/plants')
     }
   }
 }
