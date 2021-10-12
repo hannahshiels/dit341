@@ -1,7 +1,7 @@
 <template>
 <div>
-  <div class="mx-auto">
-  <garden-slide/>
+  <div class="d-flex justify-content-center">
+  <basic-carousel/>
   </div>
 <div class="row justify-content-center">
   <div class="col-lg-4 mb-3 mt-1 ml-1 mr-1">
@@ -21,12 +21,14 @@
 </template>
 
 <script>
-import GardenSlide from '../components/GardenSlide.vue'
+// import GardenSlide from '../components/GardenSlide.vue'
+import BasicCarousel from '../components/BasicCarousel.vue'
 
 export default {
   name: 'start',
   components: {
-    GardenSlide
+    // GardenSlide
+    BasicCarousel
   },
   methods: {
     toGardenPage() {
