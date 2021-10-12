@@ -25,7 +25,7 @@ const getUserGardens = (req,res,next) => {
         if(gardens.length == 0){
             return res.status(404).json({"message":"No gardens found"})
         }
-        res.status(200).json({"User gardens": gardens});
+        res.status(200).json({"User_gardens": gardens});
     })
     }
 
