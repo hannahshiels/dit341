@@ -24,7 +24,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button size="lg" type="submit" variant="danger">Login</b-button>
+      <b-button size="lg" type="submit" >Login</b-button>
       <div class="mt-4 text-center text-danger" v-if="loginFailed"> <p>Login failed. Check your info.</p>  </div>
     </b-form>
   </div>
@@ -78,6 +78,11 @@ export default {
   display: flex;
   margin: 0 auto;
   border: 4px solid var(--dark);
+  background: #D57A66;
+}
+
+.btn:hover {
+    background: #CF664F;
 }
 h2  {
   text-align: center;

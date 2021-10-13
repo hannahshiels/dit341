@@ -1,5 +1,5 @@
 <template>
-<div class="tips bg-success">
+<div class="tips">
     <div class="text-center text-white" v-if="tips.length == 0" >  <p> Sorry, there are no tips ☹️ </p> </div>
   <b-card-group deck class="center">
     <div v-for="tip in tips" v-bind:key="tip._id">
@@ -42,6 +42,7 @@ export default {
 <style scoped>
 .tips {
   min-height: 100vh;
+  background: #b1e693;
   display: flex;
   justify-content: center;
   align-items: center;

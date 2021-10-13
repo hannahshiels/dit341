@@ -1,5 +1,5 @@
 <template>
-  <div class="bg text-black-50 forms">
+  <div class="bg text-black-50  forms">
     <b-container >
       <b-row align-h="center">
           <b-col xl="6" md="8" class="form-container">           <create-acc-form />
@@ -11,7 +11,7 @@
 
 <style scoped>
 .bg {
-  background: #B1E693;
+  background: #b1e693;
 }
 
 .form-container {
