@@ -1,7 +1,7 @@
 <template>
 <div>
-  <div class="mx-auto">
-  <garden-slide/>
+  <div class="d-flex justify-content-center">
+  <basic-carousel/>
   </div>
 <div class="row justify-content-center">
   <div class="col-lg-4 mb-3 mt-1 ml-1 mr-1">
@@ -21,17 +21,17 @@
 </template>
 
 <script>
-import GardenSlide from '../components/GardenSlide.vue'
+import BasicCarousel from '../components/BasicCarousel.vue'
 
 export default {
   name: 'start',
   components: {
-    GardenSlide
+    BasicCarousel
   },
   methods: {
     toGardenPage() {
       console.log('Moving to the garden page')
-      // this.$router.push('/test')
+      this.$router.push('/gardens')
     },
     toTipPage() {
       console.log('Moving to the tip page')
@@ -39,7 +39,12 @@ export default {
     },
     toPlantPage() {
       console.log('Moving to the plant pages')
-      // this.$router.push('/ads')
+      this.$router.push('/plants')
+    }
+  },
+  data() {
+    return {
+      user_id: this.$parent.user_id
     }
   }
 }

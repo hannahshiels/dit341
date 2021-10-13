@@ -7,6 +7,7 @@ const gardenSchema = new Schema({
     soil_level: { type: String},
     direction: { type: String},
     no_plants: { type: String},
+    img_link: { type: String },
     owned_by: {
         type: Schema.Types.ObjectId,
         ref: "User"
