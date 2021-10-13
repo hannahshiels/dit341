@@ -14,9 +14,6 @@
         <h3 class="d-flex justify-content-center">Contact address: {{ this.contactAddress }}</h3>
         </div>
         <h3 class="d-flex justify-content-center">Date posted: {{ this.datePosted }}</h3>
-        <div class="bg-white border border-primary">
-        <h6 class="d-flex justify-content-center">Ad id: {{ $route.params.id }}</h6>
-        </div>
         <div class="col-md-10 align-self-center bg-dark">
         <h4 class="d-flex justify-content-center text-white">Comments:</h4>
         <h3 v-for="(comment, index) in complete_comments" v-bind:key="comment"
