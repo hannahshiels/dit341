@@ -41,7 +41,7 @@
   </b-form-group>
   </div>
   <div class="row justify-content-md-center">
-  <b-form-group class="col-md-6" id="input-group-5" label="Date Posted" label-for="datePosted">
+  <b-form-group class="col-md-6" id="input-group-5" label="Date Posted" label-for="input-5">
     <b-form-input
       id="datePosted"
       type="text"
@@ -51,7 +51,7 @@
   </b-form-group>
   </div>
   <div class="row justify-content-md-center">
-  <b-button size="lg" type="submit" variant="danger">Post Ads</b-button>
+  <b-button size="lg" type="submit" variant="danger">Post Ad</b-button>
   </div>
   </b-form>
 
@@ -116,7 +116,7 @@ export default {
       })
     },
     notLoggedInMessage(append = false) {
-      this.$bvToast.toast('You need to be logged in to create ad', {
+      this.$bvToast.toast('You need to be logged in to create an ad', {
         title: 'Not logged in',
         variant: 'danger',
         solid: true,

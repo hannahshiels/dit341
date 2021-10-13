@@ -45,7 +45,6 @@ export default {
   mounted() {
     Api.get('/ads')
       .then(response => {
-        console.log(response)
         console.log('Current user ID is ' + this.user_id)
         this.ads = response.data.ads
       })

@@ -21,13 +21,11 @@
 </template>
 
 <script>
-// import GardenSlide from '../components/GardenSlide.vue'
 import BasicCarousel from '../components/BasicCarousel.vue'
 
 export default {
   name: 'start',
   components: {
-    // GardenSlide
     BasicCarousel
   },
   methods: {
