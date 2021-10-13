@@ -2,24 +2,34 @@
     <div>
       <div class="row mt-3">
         <div class="col-md-8 bg-secondary">
-        <h3 class="d-flex justify-content-center">Ad id:</h3>
-        <h3 class="d-flex justify-content-center">{{ $route.params.id }}</h3>
+        <div class="bg-white border border-primary">
         <h3 class="d-flex justify-content-center">Type: {{ this.type }}</h3>
+        </div>
         <h3 class="d-flex justify-content-center">Description: {{ this.description }}</h3>
-        <h3 class="d-flex justify-content-center">Date posted: {{ this.datePosted }}</h3>
-        <h3 class="d-flex justify-content-center">Uploaded by: {{ this.uploadedBy }}</h3>
-        <h3 class="d-flex justify-content-center">User name: {{ this.userName}}</h3>
+        <div class="bg-white border border-primary">
+        <h3 class="d-flex justify-content-center">Uploaded by: <br> {{ this.userName }}</h3>
+        </div>
         <h3 class="d-flex justify-content-center">Contact number: {{ this.contactNumber }}</h3>
+        <div class="bg-white border border-primary">
         <h3 class="d-flex justify-content-center">Contact address: {{ this.contactAddress }}</h3>
-        <h3 class="d-flex justify-content-center">Comments:</h3>
+        </div>
+        <h3 class="d-flex justify-content-center">Date posted: {{ this.datePosted }}</h3>
+        <div class="bg-white border border-primary">
+        <h6 class="d-flex justify-content-center">Ad id: {{ $route.params.id }}</h6>
+        </div>
+        <div class="col align-self-center">
+        <h4 class="d-flex justify-content-center">Comments:</h4>
+        <div>
         <h3 v-for="(comment, index) in complete_comments" v-bind:key="comment"
-        class="d-flex justify-content-center"><br>{{ index + 1 }}: <br>
+        class="d-flex justify-content-center text-light"><br>{{ index + 1 }}: <br>
         Content: {{ comment.comment_content }} <br>
         Date posted: {{ comment.comment_date }} <br>
         Author: {{ comment.comment_author }}
         </h3>
         </div>
-        <div class="col-md-4 bg-secondary">
+        </div>
+        </div>
+        <div class="col-md-4 bg-dark">
           <post-comment/>
         </div>
       </div>
