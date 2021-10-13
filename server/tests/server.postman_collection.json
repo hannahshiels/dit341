@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e04021ea-e276-4a89-a91e-9ed553324304",
+		"_postman_id": "a2f0a7a4-ead4-4eea-9717-300894b8ebb1",
 		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1353,6 +1353,53 @@
 								"api",
 								"users",
 								"{{userID}}",
+								"ads",
+								"{{adID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Specific Ad",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/ads/{{adID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
 								"ads",
 								"{{adID}}"
 							]
