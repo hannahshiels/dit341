@@ -17,16 +17,14 @@
         <div class="bg-white border border-primary">
         <h6 class="d-flex justify-content-center">Ad id: {{ $route.params.id }}</h6>
         </div>
-        <div class="col align-self-center">
-        <h4 class="d-flex justify-content-center">Comments:</h4>
-        <div>
+        <div class="col-md-10 align-self-center bg-dark">
+        <h4 class="d-flex justify-content-center text-white">Comments:</h4>
         <h3 v-for="(comment, index) in complete_comments" v-bind:key="comment"
-        class="d-flex justify-content-center text-light"><br>{{ index + 1 }}: <br>
+        class="d-flex text-light"><br>{{ index + 1 }}: <br>
         Content: {{ comment.comment_content }} <br>
         Date posted: {{ comment.comment_date }} <br>
         Author: {{ comment.comment_author }}
         </h3>
-        </div>
         </div>
         </div>
         <div class="col-md-4 bg-dark">
