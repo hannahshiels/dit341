@@ -11,6 +11,10 @@
         <h3 class="d-flex justify-content-center">User name: {{ this.userName}}</h3>
         <h3 class="d-flex justify-content-center">Contact number: {{ this.contactNumber }}</h3>
         <h3 class="d-flex justify-content-center">Contact address: {{ this.contactAddress }}</h3>
+        <h3 class="d-flex justify-content-center">Comments:</h3>
+        <h3 v-for="comment in comments" v-bind:key="comment"
+        class="d-flex justify-content-center">{{ comment }}
+        </h3>
         </div>
         <div class="col-md-4 bg-secondary">
           <post-comment/>
@@ -34,6 +38,7 @@ export default {
       contactNumber: 'Generic',
       contactAddress: 'Generic',
       datePosted: 'Generic',
+      comments: [],
       uploadedBy: 'Generic'
     }
   },
@@ -57,6 +62,7 @@ export default {
           this.uploadedBy = response.data.uploaded_by
           this.contactNumber = response.data.ad_contact[0].number
           this.contactAddress = response.data.ad_contact[0].address
+          this.comments = response.data.comments
           this.getUserInfo()
         })
         .catch(error => {
