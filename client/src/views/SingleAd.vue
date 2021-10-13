@@ -12,8 +12,11 @@
         <h3 class="d-flex justify-content-center">Contact number: {{ this.contactNumber }}</h3>
         <h3 class="d-flex justify-content-center">Contact address: {{ this.contactAddress }}</h3>
         <h3 class="d-flex justify-content-center">Comments:</h3>
-        <h3 v-for="comment in comments" v-bind:key="comment"
-        class="d-flex justify-content-center">{{ comment }}
+        <h3 v-for="(comment, index) in complete_comments" v-bind:key="comment"
+        class="d-flex justify-content-center"><br>{{ index + 1 }}: <br>
+        Content: {{ comment.comment_content }} <br>
+        Date posted: {{ comment.comment_date }} <br>
+        Author: {{ comment.comment_author }}
         </h3>
         </div>
         <div class="col-md-4 bg-secondary">
@@ -39,6 +42,7 @@ export default {
       contactAddress: 'Generic',
       datePosted: 'Generic',
       comments: [],
+      complete_comments: [],
       uploadedBy: 'Generic'
     }
   },
@@ -64,6 +68,7 @@ export default {
           this.contactAddress = response.data.ad_contact[0].address
           this.comments = response.data.comments
           this.getUserInfo()
+          this.fillCommentList()
         })
         .catch(error => {
           console.log(error)
@@ -73,6 +78,37 @@ export default {
       Api.get('/users/' + this.uploadedBy)
         .then(response => {
           this.userName = response.data.name
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    fillCommentList() {
+      for (let i = 0; i < this.comments.length; i++) {
+        console.log(this.complete_comments[i])
+        this.addFullComment(this.comments[i], i)
+      }
+    },
+    addFullComment(commentID, i) {
+      Api.get('/users/' + this.uploadedBy + '/ads/' + this.id + '/comments/' + commentID)
+        .then(response => {
+          const currentComment = {
+            comment_content: response.data.comment_content,
+            comment_date: response.data.date_posted,
+            comment_author: response.data.posted_by
+          }
+          this.complete_comments.push(currentComment)
+          this.getUserName(currentComment.comment_author, i)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    getUserName(userID, index) {
+      Api.get('/users/' + userID)
+        .then(response => {
+          const userName = response.data.name
+          this.complete_comments[index].comment_author = userName
         })
         .catch(error => {
           console.log(error)
