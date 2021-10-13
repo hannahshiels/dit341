@@ -20,6 +20,16 @@ const deleteAllAds = (req,res,next)=> {
 })
 }
 
+const getSpecificAd = (req, res, next) => {
+    Ad.findById(req.params.adID, function(err, ad) {
+        if (ad == null){
+            return res.status(404).json({ "message" : "Ad not found" });
+        }
+        if (err) { return next(err);}
+        res.status(200).json(ad);
+    })
+}
+
 const getUserAds = (req, res, next) => {
     Ad.find({uploaded_by: req.params.userID}, function(err, ads){
         if (err) { return next(err); }
@@ -112,4 +122,4 @@ const deleteUserAd = (req, res, next) => {
     })
 }
 
-module.exports = { getAllAds, deleteAllAds, getUserAds, createUserAd,deleteUserAds,  getUserAd, fullUpdateUserAd, partialUpdateUserAd,  deleteUserAd  };
+module.exports = { getAllAds, deleteAllAds, getSpecificAd, getUserAds, createUserAd,deleteUserAds,  getUserAd, fullUpdateUserAd, partialUpdateUserAd,  deleteUserAd  };

@@ -3,8 +3,11 @@ const router = express.Router();
 const adControllers = require('../controllers/ads.controllers');
 
 router.route('/api/ads')
-    .get(adControllers.getAllAds)
-    .delete(adControllers.deleteAllAds)
+.get(adControllers.getAllAds)
+.delete(adControllers.deleteAllAds)
+
+router.route('/api/ads/:adID')
+.get(adControllers.getSpecificAd)
 
 router.route('/api/users/:userID/ads')
 
