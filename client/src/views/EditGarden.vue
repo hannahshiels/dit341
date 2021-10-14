@@ -2,8 +2,8 @@
   <div class="bg text-black-50 forms">
     <b-container>
       <b-row align-h="center">
-        <b-col class="form-container" xl="6" md="8" sm="12">
-          <create-garden-form />
+        <b-col class="form-container login-form-container" xl="6" md="8" sm="12">
+          <edit-garden-form />
         </b-col>
       </b-row>
     </b-container>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import CreateGardenForm from '../components/CreateGardenForm.vue'
+import EditGardenForm from '../components/EditGardenForm.vue'
 import Router from '@/router'
 
 export default {
@@ -22,7 +22,7 @@ export default {
     }
   },
   components: {
-    CreateGardenForm
+    EditGardenForm
   },
   mounted() {
     this.restrictAccess()

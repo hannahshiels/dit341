@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div><h2>Create a garden</h2></div>
+    <div><h2>Update your garden</h2></div>
 
     <b-form @submit="onSubmit">
       <b-form-group
@@ -12,7 +12,6 @@
           id="input-1"
           v-model="form.size"
           type="number"
-          required
         ></b-form-input>
       </b-form-group>
 
@@ -24,7 +23,6 @@
         <b-form-input
           id="input-2"
           v-model="form.soil_level"
-          required
         ></b-form-input>
       </b-form-group>
 
@@ -36,19 +34,18 @@
         <b-form-input
           id="input-3"
           v-model="form.direction"
-          required
         ></b-form-input>
       </b-form-group>
 
       <b-form-group
         id="input-group-4"
-        label="Enter image (optional) "
+        label="Enter image "
         label-for="input-4"
       >
         <b-form-input id="input-4" v-model="form.img_link"></b-form-input>
       </b-form-group>
 
-      <b-button size="lg" type="submit">Create Garden</b-button>
+      <b-button size="lg" type="submit">Update Garden</b-button>
     </b-form>
   </div>
 </template>
@@ -98,17 +95,16 @@ export default {
         size: this.form.size,
         soil_level: this.form.soil_level,
         direction: this.form.direction,
-        img_link: this.form.img_link,
-        owned_by: this.user_id
+        img_link: this.form.img_link
       }
-      this.createGarden(garden)
+      this.updateGarden(garden)
     },
-    createGarden(garden) {
-      Api.post('/gardens', garden)
+    updateGarden(garden) {
+      Api.patch('/gardens/' + this.$route.params.id, garden)
         .then(response => {
           const status = JSON.stringify(response.status)
           if (status === '201') {
-            Router.push('/gardens')
+            Router.push('/gardens/' + this.$route.params.id)
           }
           console.log(response)
         })
