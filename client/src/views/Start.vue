@@ -3,18 +3,20 @@
   <div class="d-flex justify-content-center">
   <basic-carousel/>
   </div>
+  <div class ="container">
 <div class="row justify-content-center">
-  <div class="col-lg-4 mb-3 mt-1 ml-1 mr-1">
+  <div class="col-lg-4 mb-2 mt-3 ml-1 mr-1">
   <button type="button" class="btn btn-danger col align-self-center p-2" v-on:click="toGardenPage()">Your gardens</button>
   </div>
 </div>
 <div class="row justify-content-center">
-  <div class="col-lg-4 mb-1 mt-1 ml-1 mr-1">
+  <div class="col-lg-3 mb-1 mt-1 ml-1 mr-1">
   <button type="button" class="btn btn-danger col align-self-start p-2" v-on:click="toPlantPage()">Your plants</button>
   </div>
-  <div class="col-lg-4 mb-1 mt-1 ml-1 mr-1">
+  <div class="col-lg-3 mb-1 mt-1 ml-1 mr-1">
   <button type="button" class="btn btn-danger col align-self-end p-2" v-on:click="toTipPage()">Your tips</button>
   </div>
+</div>
 </div>
 
 </div>
