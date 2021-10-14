@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "667cb2a9-ea9a-4a82-9654-7713b88e2521",
+		"_postman_id": "49c25d31-17a7-444a-a6f7-84dc8e7f1ec1",
 		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -174,7 +174,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"name\": \"Jack Bond\",\r\n   \"dob\": \"1901-01-01\",\r\n   \"role\": \"user\",\r\n   \"address\": \"10 Downing Street UK\",\r\n   \"email\": \"email2@email.com\",\r\n   \"password\": \"secretpassword\",\r\n   \"contact_number\": \"008\"\r\n}",
+							"raw": "{\r\n    \"email\": \"changeEmail@email.com\",\r\n    \"password\": \"changedPassword\",\r\n    \"role\": \"user\",\r\n    \"dob\": \"1901-01-01\",\r\n    \"address\": \"10 Downing Street\",\r\n    \"contact_number\": \"008\",\r\n    \"name\": \"John Smith\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -655,7 +655,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"example image\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
+							"raw": "{\r\n   \"plant_name\": \"banana\",\r\n    \"plant_description\": [\r\n        {\"img\": \"example image\"},\r\n        {\"description\": \"delicate, feathery foliage\"}\r\n    ],\r\n    \"fertilizer_schedule\": [ \"Monday\", \"Tuesday\" ],\r\n    \"water_schedule\": [ \"Monday\", \"Tuesday\" ],\r\n   \"owned_by\": \"{{userID}}\",\r\n   \"garden\": \"{{gardenID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2574,6 +2574,37 @@
 					"response": []
 				},
 				{
+					"name": "Logout user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "DELETE User",
 					"event": [
 						{
@@ -2600,37 +2631,6 @@
 								"api",
 								"users",
 								"{{userID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Logout user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/logout",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"logout"
 							]
 						}
 					},

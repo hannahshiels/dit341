@@ -1,7 +1,7 @@
 <template>
   <div class="mb-3">
-    <b-card border-variant="dark" class="tip shadow mt-4">
-      <b-card-header class="garden-plant-info-container  d-flex justify-content-center align-items-center border-dark">
+    <b-card  border-variant="dark" class="tip shadow mt-4 ">
+      <b-card-header v-if="!this.$route.params.gardenID" class="garden-plant-info-container  d-flex justify-content-center align-items-center border-dark">
         <div class="garden-plant-info bg-brown text-white bb d-flex flex-fill">
           <div class="plant-name-container text-black-50 br bold flex-fill">
             <p>  {{ tip.plant.plant_name.charAt(0).toUpperCase() + tip.plant.plant_name.slice(1) }}</p>
