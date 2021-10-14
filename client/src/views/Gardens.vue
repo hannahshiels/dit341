@@ -3,9 +3,11 @@
     <div class="text-center text-white" v-if="gardens.length == 0">
       <p>Sorry! There are no gardens.</p>
     </div>
+                    <div v-if="user_id != '' "> <div class="create-div"> <button class="btn btn-dark m-4"> <router-link class="text-white" to="/create-a-garden"> Create a garden </router-link> </button> </div> </div>
+
           <b-row class="center">
         <b-col lg="3" md="8" sm="12" v-for="garden in gardens" v-bind:key="garden._id">
-          <garden v-bind:garden="garden" class="mb-1 mt-1 ml-1 mr-1"/>
+          <garden v-bind:garden="garden" />
         </b-col>
       </b-row>
   </div>
