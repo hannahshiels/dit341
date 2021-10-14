@@ -1,7 +1,7 @@
 <template>
  <div id="myID">
     <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no ads </p> </div>
-    <div class="container whole">
+    <div class="container">
     <div class="row mt-3">
     <div class="col-md-8 bg-secondary">
     <h2>All advertisements</h2>
@@ -10,10 +10,10 @@
       <button class="col-3 d-flex justify-content-start" v-on:click="showList()">Show all ads</button>
       <button class="col-3 d-flex justify-content-end" v-on:click="moveList(-1)">Previous 5 ads</button>
       <button class="col-3 d-flex justify-content-end" v-on:click="moveList(1)">Next 5 ads</button>
-  </div>
-       <b-card-group deck>
-          <div v-for="ad in ads.slice(this.startList,this.endList)" v-bind:key="ad._id">
-            <ad v-bind:ad="ad" class="mb-1 mt-1 ml-1 mr-1"/>
+    </div>
+       <b-card-group deck class="center">
+          <div class="d-flex" v-for="ad in ads.slice(this.startList,this.endList)" v-bind:key="ad._id">
+            <ad v-bind:ad="ad" class="col mb-1 mt-1 ml-1 mr-1"/>
           </div>
      </b-card-group>
   </div>
@@ -107,6 +107,15 @@ export default {
 
 #myID {
   background:rgba(63, 87, 165, 0.671);
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.col {
+  max-width: 30vh;
 }
 
 </style>
