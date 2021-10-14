@@ -10,6 +10,7 @@ import Settings from './views/Settings.vue'
 import Gardens from './views/Gardens.vue'
 import Plants from './views/Plants.vue'
 import Garden from './views/SingleGarden.vue'
+import Plant from './views/SinglePlant.vue'
 
 Vue.use(Router)
 
@@ -66,6 +67,11 @@ export default new Router({
       path: '/plants',
       name: 'plants',
       component: Plants
+    },
+    {
+      path: '/plants/:id',
+      name: 'plant',
+      component: Plant
     }
   ]
 })
