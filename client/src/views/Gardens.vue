@@ -10,35 +10,35 @@
         <div class="container">
           <div class="row justify-content-between">
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 1"></a>
+              <a href="/gardens/1" target=_blank><img src="../assets/garden1.jpg" width="300" height="300" alt="Garden 1"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 2"></a>
+              <a href="#"><img src="../assets/garden2.jpg" width="300" height="300" alt="Garden 2"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 3"></a>
-            </div>
-          </div>
-          <div class="row justify-content-between, mt-3">
-            <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 4"></a>
-            </div>
-            <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 5"></a>
-            </div>
-            <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 6"></a>
+              <a href="#"><img src="../assets/garden3.jpg" width="300" height="300" alt="Garden 3"></a>
             </div>
           </div>
           <div class="row justify-content-between, mt-3">
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 7"></a>
+              <a href="#"><img src="../assets/garden3.jpg" width="300" height="300" alt="Garden 4"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 8"></a>
+              <a href="#"><img src="../assets/garden1.jpg" width="300" height="300" alt="Garden 5"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 9"></a>
+              <a href="#"><img src="../assets/garden2.jpg" width="300" height="300" alt="Garden 6"></a>
+            </div>
+          </div>
+          <div class="row justify-content-between, mt-3">
+            <div class="col">
+              <a href="#"><img src="../assets/garden2.jpg" width="300" height="300" alt="Garden 7"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="../assets/garden3.jpg" width="300" height="300" alt="Garden 8"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="../assets/garden1.jpg" width="300" height="300" alt="Garden 9"></a>
             </div>
           </div>
         </div>
@@ -72,6 +72,7 @@ export default {
         console.log(response)
         console.log('Current user ID is ' + this.user_id)
         this.gardens = response.data.gardens
+        console.log(this.gardens)
       })
       .catch(error => {
         this.gardens = []

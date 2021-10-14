@@ -7,7 +7,7 @@ const getAllGardens = (req,res,next) => {
         if(gardens.length == 0){
             return res.status(404).json({ "message" : "No gardens found"})
         }
-        res.status(200).json({"LIST OF GARDENS": gardens});
+        res.status(200).json({"gardens": gardens});
     })
     }
 

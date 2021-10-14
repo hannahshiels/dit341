@@ -9,6 +9,7 @@ import Start from './views/Start.vue'
 import Settings from './views/Settings.vue'
 import Gardens from './views/Gardens.vue'
 import Plants from './views/Plants.vue'
+import Garden from './views/SingleGarden.vue'
 
 Vue.use(Router)
 
@@ -55,6 +56,11 @@ export default new Router({
       path: '/gardens',
       name: 'gardens',
       component: Gardens
+    },
+    {
+      path: '/gardens/:id',
+      name: 'garden',
+      component: Garden
     },
     {
       path: '/plants',
