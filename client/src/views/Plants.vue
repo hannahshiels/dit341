@@ -10,35 +10,35 @@
         <div class="container">
           <div class="row justify-content-between">
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 1"></a>
+              <a href="#"><img src="../assets/plant1.jpg" width="300" height="300" alt="Plant 1"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 2"></a>
+              <a href="#"><img src="../assets/plant2.jpg" width="300" height="300" alt="Plant 2"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 3"></a>
-            </div>
-          </div>
-          <div class="row justify-content-between, mt-3">
-            <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 4"></a>
-            </div>
-            <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 5"></a>
-            </div>
-            <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 6"></a>
+              <a href="#"><img src="../assets/plant3.jpg" width="300" height="300" alt="Plant 3"></a>
             </div>
           </div>
           <div class="row justify-content-between, mt-3">
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 7"></a>
+              <a href="#"><img src="../assets/plant3.jpg" width="300" height="300" alt="Plant 4"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 8"></a>
+              <a href="#"><img src="../assets/plant1.jpg" width="300" height="300" alt="Plant 5"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Plant 9"></a>
+              <a href="#"><img src="../assets/plant2.jpg" width="300" height="300" alt="Plant 6"></a>
+            </div>
+          </div>
+          <div class="row justify-content-between, mt-3">
+            <div class="col">
+              <a href="#"><img src="../assets/plant2.jpg" width="300" height="300" alt="Plant 7"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="../assets/plant3.jpg" width="300" height="300" alt="Plant 8"></a>
+            </div>
+            <div class="col">
+              <a href="#"><img src="../assets/plant1.jpg" width="300" height="300" alt="Plant 9"></a>
             </div>
           </div>
         </div>

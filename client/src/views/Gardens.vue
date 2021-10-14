@@ -10,44 +10,44 @@
         <div class="container">
           <div class="row justify-content-between">
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 1"></a>
+              <a href="/gardens/1" target=_blank><img src="../assets/garden1.jpg" width="300" height="300" alt="Garden 1"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 2"></a>
+              <a href="/gardens/2" target=_blank><img src="../assets/garden2.jpg" width="300" height="300" alt="Garden 2"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 3"></a>
-            </div>
-          </div>
-          <div class="row justify-content-between, mt-3">
-            <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 4"></a>
-            </div>
-            <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 5"></a>
-            </div>
-            <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 6"></a>
+              <a href="/gardens/3" target=_blank><img src="../assets/garden3.jpg" width="300" height="300" alt="Garden 3"></a>
             </div>
           </div>
           <div class="row justify-content-between, mt-3">
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 7"></a>
+              <a href="/gardens/4" target=_blank><img src="../assets/garden3.jpg" width="300" height="300" alt="Garden 4"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 8"></a>
+              <a href="/gardens/5" target=_blank><img src="../assets/garden1.jpg" width="300" height="300" alt="Garden 5"></a>
             </div>
             <div class="col">
-              <a href="#"><img src="https://picsum.photos/300/300" alt="Garden 9"></a>
+              <a href="/gardens/6" target=_blank><img src="../assets/garden2.jpg" width="300" height="300" alt="Garden 6"></a>
+            </div>
+          </div>
+          <div class="row justify-content-between, mt-3">
+            <div class="col">
+              <a href="/gardens/7" target=_blank><img src="../assets/garden2.jpg" width="300" height="300" alt="Garden 7"></a>
+            </div>
+            <div class="col">
+              <a href="/gardens/8" target=_blank><img src="../assets/garden3.jpg" width="300" height="300" alt="Garden 8"></a>
+            </div>
+            <div class="col">
+              <a href="/gardens/9" target=_blank><img src="../assets/garden1.jpg" width="300" height="300" alt="Garden 9"></a>
             </div>
           </div>
         </div>
       </div>
-      <b-card-group deck>
+      <!--<b-card-group deck>
         <div v-for="garden in gardens.slice(this.startList,this.endList)" v-bind:key="garden._id">
           <garden v-bind:garden="garden" class="mb-1 mt-1 ml-1 mr-1"/>
         </div>
-      </b-card-group>
+      </b-card-group>-->
     </div>
     <div class="col-md-4">
       <post-garden/>
@@ -64,6 +64,7 @@ import { Api } from '@/Api'
 export default {
   name: 'gardens',
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     garden: Garden
   },
   mounted() {
@@ -72,6 +73,7 @@ export default {
         console.log(response)
         console.log('Current user ID is ' + this.user_id)
         this.gardens = response.data.gardens
+        console.log(this.gardens)
       })
       .catch(error => {
         this.gardens = []
