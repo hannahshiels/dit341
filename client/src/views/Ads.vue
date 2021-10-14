@@ -115,7 +115,7 @@ export default {
 }
 
 .col {
-  max-width: 30vh;
+  max-width: 60vh;
 }
 
 </style>
