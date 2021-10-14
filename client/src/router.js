@@ -64,12 +64,12 @@ export default new Router({
       component: Garden
     },
     {
-      path: '/plants',
+      path: '/gardens/:gardenID/plants',
       name: 'plants',
       component: Plants
     },
     {
-      path: '/plants/:id',
+      path: '/gardens/:gardenID/plants/:plantID',
       name: 'plant',
       component: Plant
     }
