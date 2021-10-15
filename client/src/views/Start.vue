@@ -6,15 +6,15 @@
   <div class ="container">
 <div class="row justify-content-center">
   <div class="col-lg-4 mb-2 mt-3 ml-1 mr-1">
-  <button type="button" class="btn btn-danger col align-self-center p-2" v-on:click="toGardenPage()">Your gardens</button>
+  <button type="button" class="btn btn-danger col align-self-center p-2 m-1" v-on:click="toGardenPage()">Gardens</button>
   </div>
 </div>
 <div class="row justify-content-center">
   <div class="col-lg-3 mb-1 mt-1 ml-1 mr-1">
-  <button type="button" class="btn btn-danger col align-self-start p-2" v-on:click="toPlantPage()">Your plants</button>
+  <button type="button" class="btn btn-danger col align-self-start p-2 m-1" v-on:click="toAdPage()">Ads</button>
   </div>
   <div class="col-lg-3 mb-1 mt-1 ml-1 mr-1">
-  <button type="button" class="btn btn-danger col align-self-end p-2" v-on:click="toTipPage()">Your tips</button>
+  <button type="button" class="btn btn-danger col align-self-end p-2 m-1" v-on:click="toTipPage()">Tips</button>
   </div>
 </div>
 </div>
@@ -32,16 +32,13 @@ export default {
   },
   methods: {
     toGardenPage() {
-      console.log('Moving to the garden page')
       this.$router.push('/gardens')
     },
     toTipPage() {
-      console.log('Moving to the tip page')
       this.$router.push('/tips')
     },
-    toPlantPage() {
-      console.log('Moving to the plant pages')
-      this.$router.push('/plants')
+    toAdPage() {
+      this.$router.push('/ads')
     }
   },
   data() {

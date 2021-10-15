@@ -1,7 +1,6 @@
 <template>
-  <b-form class="bg-secondary" @submit="onSubmit">
-    <div class="row justify-content-md-center">
-  <b-form-group class="col-md-6" id="input-group-1" label="Description" label-for="input-1">
+  <b-form class="bg-secondary p-2" @submit="onSubmit">
+  <b-form-group  id="input-group-1" label="Description" label-for="input-1">
     <b-form-input
       id="description"
       type="text"
@@ -9,9 +8,7 @@
       required
     ></b-form-input>
   </b-form-group>
-  </div>
-  <div class="row justify-content-md-center">
-  <b-form-group class="col-md-6" id="input-group-2" label="Type" label-for="input-2">
+  <b-form-group id="input-group-2" label="Type" label-for="input-2">
     <b-form-input
       id="type"
       type="text"
@@ -19,9 +16,7 @@
       required
     ></b-form-input>
   </b-form-group>
-  </div>
-  <div class="row justify-content-md-center">
-  <b-form-group class="col-md-6" id="input-group-3" label="Contact Number" label-for="input-3">
+  <b-form-group  id="input-group-3" label="Contact Number" label-for="input-3">
     <b-form-input
       id="contactNumber"
       type="text"
@@ -29,9 +24,7 @@
       required
     ></b-form-input>
   </b-form-group>
-  </div>
-  <div class="row justify-content-md-center">
-  <b-form-group class="col-md-6" id="input-group-4" label="Contact Address" label-for="input-4">
+  <b-form-group  id="input-group-4" label="Contact Address" label-for="input-4">
     <b-form-input
       id="contactAddress"
       type="text"
@@ -39,9 +32,7 @@
       required
     ></b-form-input>
   </b-form-group>
-  </div>
-  <div class="row justify-content-md-center">
-  <b-form-group class="col-md-6" id="input-group-5" label="Date Posted" label-for="input-5">
+  <b-form-group  id="input-group-5" label="Date Posted" label-for="input-5">
     <b-form-input
       id="datePosted"
       type="text"
@@ -49,10 +40,7 @@
       required
     ></b-form-input>
   </b-form-group>
-  </div>
-  <div class="row justify-content-md-center">
-  <b-button size="lg" type="submit" variant="danger">Post Ad</b-button>
-  </div>
+  <b-button class="d-flex ml-auto mr-auto" size="lg" type="submit" variant="danger">Post Ad</b-button>
   </b-form>
 
 </template>
@@ -69,7 +57,7 @@ export default {
         ad_type: '',
         contactNumber: '',
         contactAddress: '',
-        ad_date_posted: ''
+        datePosted: ''
       },
       log_user_id: this.$parent.user_id
     }

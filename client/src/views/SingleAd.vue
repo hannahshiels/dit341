@@ -3,17 +3,17 @@
       <div class="row mt-3">
         <div class="col-md-8 bg-secondary">
         <div class="bg-white border border-primary">
-        <h3 class="d-flex justify-content-center">Type: {{ this.type }}</h3>
+        <h3 class="d-flex justify-content-center">Type: {{ type }}</h3>
         </div>
-        <h3 class="d-flex justify-content-center">Description: {{ this.description }}</h3>
+        <h3 class="d-flex justify-content-center">Description: {{ description }}</h3>
         <div class="bg-white border border-primary">
-        <h3 class="d-flex justify-content-center">Uploaded by: <br> {{ this.userName }}</h3>
+        <h3 class="d-flex justify-content-center">Uploaded by: <br> {{ userName }}</h3>
         </div>
-        <h3 class="d-flex justify-content-center">Contact number: {{ this.contactNumber }}</h3>
+        <h3 class="d-flex justify-content-center">Contact number: {{ contactNumber }}</h3>
         <div class="bg-white border border-primary">
-        <h3 class="d-flex justify-content-center">Contact address: {{ this.contactAddress }}</h3>
+        <h3 class="d-flex justify-content-center">Contact address: {{ contactAddress }}</h3>
         </div>
-        <h3 class="d-flex justify-content-center">Date posted: {{ this.datePosted }}</h3>
+        <h3 class="d-flex justify-content-center">Date posted: {{ datePosted }}</h3>
         <div class="col-md-10 align-self-center bg-dark">
         <h4 class="d-flex justify-content-center text-white">Comments:</h4>
         <h3 v-for="(comment, index) in complete_comments" v-bind:key="comment"
@@ -40,15 +40,15 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      userName: 'Generic',
-      type: 'Generic',
-      description: 'Generic',
-      contactNumber: 'Generic',
-      contactAddress: 'Generic',
-      datePosted: 'Generic',
+      userName: '',
+      type: '',
+      description: '',
+      contactNumber: '',
+      contactAddress: '',
+      datePosted: '',
       comments: [],
       complete_comments: [],
-      uploadedBy: 'Generic'
+      uploadedBy: ''
     }
   },
   mounted() {
@@ -65,13 +65,13 @@ export default {
     getAdInfo() {
       Api.get('/users/' + this.uploadedBy + '/ads/' + this.id)
         .then(response => {
-          this.type = response.data.ad_type
-          this.description = response.data.ad_description
-          this.datePosted = response.data.ad_date_posted
-          this.uploadedBy = response.data.uploaded_by
-          this.contactNumber = response.data.ad_contact[0].number
-          this.contactAddress = response.data.ad_contact[0].address
-          this.comments = response.data.comments
+          this.type = response.data.ad.ad_type
+          this.description = response.ad.data.ad_description
+          this.datePosted = response.data.ad.ad_date_posted
+          this.uploadedBy = response.data.ad.uploaded_by
+          this.contactNumber = response.data.ad.ad_contact[0].number
+          this.contactAddress = response.data.ad.ad_contact[0].address
+          this.comments = response.data.ad.comments
           this.getUserInfo()
           this.fillCommentList()
         })

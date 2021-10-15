@@ -1,5 +1,5 @@
 <template>
-  <b-form class="bg-secondary" @submit="onSubmit">
+  <b-form class="bg-secondary p-2" @submit="onSubmit">
     <div class="row justify-content-md-center">
   <b-form-group class="col-md-6" id="input-group-1" label="Content" label-for="input-1">
     <b-form-input

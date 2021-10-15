@@ -19,7 +19,7 @@
       <b-carousel-slide v-for="garden in gardens" v-bind:key="garden._id"
         :caption="'Garden number: ' + (slide+1)"
         :img-src="garden.img_link"
-        class="img-fluid"
+        class="d-block img-fluid w-100"
         alt="Responsive image"
       ></b-carousel-slide>
 
