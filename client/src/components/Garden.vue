@@ -1,5 +1,5 @@
 <template>
-  <div class="garden mb-3">
+  <div class="garden m-2 mb-3">
     <b-card class="mt-4 shadow"  align-h="center" border-variant="dark">
       <b-card-header class="card-head d-flex justify-content-center align-items-center border-dark">
       </b-card-header>

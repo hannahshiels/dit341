@@ -26,7 +26,7 @@ const getSpecificAd = (req, res, next) => {
             return res.status(404).json({ "message" : "Ad not found" });
         }
         if (err) { return next(err);}
-        res.status(200).json(ad);
+        res.status(200).json({"ad": ad});
     })
 }
 

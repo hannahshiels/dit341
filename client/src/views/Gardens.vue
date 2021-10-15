@@ -22,8 +22,10 @@
 
 <style scoped>
 .center {
+  display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .gardens {
@@ -35,6 +37,9 @@
 
   .card-deck{
     padding: 1rem;
+  }
+  .gardens {
+    align-items: flex-start;
   }
 }
 
