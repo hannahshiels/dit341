@@ -27,8 +27,8 @@ const deleteAllTips = (req,res,next)=> {
 const getAllTipsOnPlant = (req,res,next) => {
     Tip.find({plant: req.params.plantID}, function(err, tips){
         if (err) { return next(err); }
-        res.status(200).json({"tips on a plant in a garden": tips});
-    })
+        res.status(200).json({"tips": tips});
+    }).populate('plant author')
     }
 const createTipOnPlant = (req,res,next)=> {
     const tip = new Tip(req.body);

@@ -12,7 +12,7 @@ const getAllPlantsInGarden = (req,res,next) => {
                 if(plants.length == 0){
                     return res.status(404).json({"message":"No plants with that name found"})
                 }
-                return res.status(200).json({"plants in a garden": plants});
+                return res.status(200).json({"plants": plants});
             }).sort({plant_name: 1}).populate('tips');
         }
         if(req.query.sort === "desc"){
@@ -21,13 +21,13 @@ const getAllPlantsInGarden = (req,res,next) => {
                 if(plants.length == 0){
                     return res.status(404).json({"message":"No plants with that name found"})
                 }
-                return res.status(200).json({"plants in a garden": plants});
+                return res.status(200).json({"plants": plants});
             }).sort({plant_name: -1}).populate('tips');
         }
     } else {
         Plant.find({garden: req.params.gardenID}, function(err, plants){
             if (err) { return next(err); }
-            res.status(200).json({"plants in a garden": plants});
+            res.status(200).json({"plants": plants});
         }).populate('tips');
     }
     }
@@ -67,7 +67,7 @@ const getPlant = (req,res,next) => {
             return res.status(404).json({"message": "Plant not found"});
         }
         if(err){ return next(err);}
-        res.status(200).json(plant);
+        res.status(200).json({"plant": plant});
     }).populate('tips');
     }
 
@@ -115,7 +115,6 @@ const partialUpdatePlant = (req,res,next) => {
         res.status(200).json(plant);
     } )
     }
-
 
 
 module.exports = {getAllPlantsInGarden, createPlantInGarden, deleteAllPlantsInGarden, getPlant, fullyUpdatePlant, partialUpdatePlant, deletePlant };

@@ -8,7 +8,7 @@ const getAllGardens = (req,res,next) => {
             return res.status(404).json({ "message" : "No gardens found"})
         }
         res.status(200).json({"gardens": gardens});
-    })
+    }).populate('owned_by')
     }
 
 const createGarden = (req,res,next) => {
@@ -63,8 +63,8 @@ const getGarden = (req,res,next) => {
             return res.status(404).json({"message": "Garden not found"});
         }
         if(err){ return next(err);}
-        res.status(200).json(garden);
-    })
+        res.status(200).json({'garden': garden});
+    }).populate('owned_by plants')
     }
 
 const fullyUpdateGarden = (req,res,next) => {
