@@ -3,17 +3,17 @@
       <div class="row mt-3">
         <div class="col-md-8 bg-secondary">
         <div class="bg-white border border-primary">
-        <h3 class="d-flex justify-content-center">Type: {{ type }}</h3>
+        <h3 class="d-flex justify-content-center">Type: {{ ad.ad_type }}</h3>
         </div>
-        <h3 class="d-flex justify-content-center">Description: {{ description }}</h3>
+        <h3 class="d-flex justify-content-center">Description: {{ ad.ad_description }}</h3>
         <div class="bg-white border border-primary">
-        <h3 class="d-flex justify-content-center">Uploaded by: <br> {{ userName }}</h3>
+        <h3 class="d-flex justify-content-center">Uploaded by: <br> {{ ad.uploaded_by.name }}</h3>
         </div>
-        <h3 class="d-flex justify-content-center">Contact number: {{ contactNumber }}</h3>
+        <h3 class="d-flex justify-content-center">Contact number: {{ ad.ad_contact[0].number }}</h3>
         <div class="bg-white border border-primary">
-        <h3 class="d-flex justify-content-center">Contact address: {{ contactAddress }}</h3>
+        <h3 class="d-flex justify-content-center">Contact address: {{ ad.ad_contact[1].address }}</h3>
         </div>
-        <h3 class="d-flex justify-content-center">Date posted: {{ datePosted }}</h3>
+        <h3 class="d-flex justify-content-center">Date posted: {{ ad.ad_date_posted }}</h3>
         <div class="col-md-10 align-self-center bg-dark">
         <h4 class="d-flex justify-content-center text-white">Comments:</h4>
         <h3 v-for="(comment, index) in complete_comments" v-bind:key="comment"
@@ -41,20 +41,16 @@ export default {
     return {
       id: this.$route.params.id,
       userName: '',
-      type: '',
-      description: '',
-      contactNumber: '',
-      contactAddress: '',
-      datePosted: '',
-      comments: [],
+      ad: {},
       complete_comments: [],
       uploadedBy: ''
     }
   },
   mounted() {
-    Api.get('/ads/' + this.id)
+    Api.get('/ads/' + this.$route.params.id)
       .then(response => {
-        this.uploadedBy = response.data.uploaded_by
+        this.uploadedBy = response.data.ad.uploaded_by
+        this.ad = response.data.ad
         this.getAdInfo()
       })
       .catch(error => {
@@ -65,33 +61,17 @@ export default {
     getAdInfo() {
       Api.get('/users/' + this.uploadedBy + '/ads/' + this.id)
         .then(response => {
-          this.type = response.data.ad.ad_type
-          this.description = response.ad.data.ad_description
-          this.datePosted = response.data.ad.ad_date_posted
-          this.uploadedBy = response.data.ad.uploaded_by
-          this.contactNumber = response.data.ad.ad_contact[0].number
-          this.contactAddress = response.data.ad.ad_contact[0].address
-          this.comments = response.data.ad.comments
-          this.getUserInfo()
+          this.ad = response.data.ad
           this.fillCommentList()
         })
         .catch(error => {
           console.log(error)
         })
     },
-    getUserInfo() {
-      Api.get('/users/' + this.uploadedBy)
-        .then(response => {
-          this.userName = response.data.name
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    },
     fillCommentList() {
-      for (let i = 0; i < this.comments.length; i++) {
+      for (let i = 0; i < this.ad.comments.length; i++) {
         console.log(this.complete_comments[i])
-        this.addFullComment(this.comments[i], i)
+        this.addFullComment(this.ad.comments[i], i)
       }
     },
     addFullComment(commentID, i) {

@@ -27,7 +27,7 @@ const getSpecificAd = (req, res, next) => {
         }
         if (err) { return next(err);}
         res.status(200).json({"ad": ad});
-    })
+    }).populate('uploaded_by')
 }
 
 const getUserAds = (req, res, next) => {

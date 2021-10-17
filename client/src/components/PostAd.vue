@@ -1,5 +1,5 @@
 <template>
-  <b-form class="bg-secondary p-2" @submit="onSubmit">
+  <b-form class=" p-2" @submit="onSubmit">
   <b-form-group  id="input-group-1" label="Description" label-for="input-1">
     <b-form-input
       id="description"
@@ -19,7 +19,7 @@
   <b-form-group  id="input-group-3" label="Contact Number" label-for="input-3">
     <b-form-input
       id="contactNumber"
-      type="text"
+      type="number"
       v-model="form.contactNumber"
       required
     ></b-form-input>
@@ -29,14 +29,6 @@
       id="contactAddress"
       type="text"
       v-model="form.contactAddress"
-      required
-    ></b-form-input>
-  </b-form-group>
-  <b-form-group  id="input-group-5" label="Date Posted" label-for="input-5">
-    <b-form-input
-      id="datePosted"
-      type="text"
-      v-model="form.datePosted"
       required
     ></b-form-input>
   </b-form-group>
@@ -57,7 +49,7 @@ export default {
         ad_type: '',
         contactNumber: '',
         contactAddress: '',
-        datePosted: ''
+        datePosted: new Date().toISOString().slice(0, 10)
       },
       log_user_id: this.$parent.user_id
     }
@@ -79,7 +71,6 @@ export default {
     },
     createAd(ad) {
       if (this.log_user_id === '') {
-        console.log('Not logged in')
         this.notLoggedInMessage()
       } else {
         Api.post('/users/' + this.log_user_id + '/ads', ad)

@@ -1,11 +1,11 @@
 <template>
-  <div class="gardens">
+  <div class="gardens center">
     <div class="text-center text-white" v-if="gardens.length == 0">
-      <p>Sorry! There are no gardens.</p>
+      <p>Sorry, there are no gardens ☹️.</p>
     </div>
     <div v-if="user_id != ''">
       <div class="create-div">
-        <button class="btn btn-dark m-4">
+        <button class="btn btn-lg btn-dark m-4 ">
           <router-link class="text-white" to="/create-a-garden">
             Create a garden
           </router-link>
@@ -65,6 +65,9 @@ export default {
       .catch(error => {
         this.gardens = []
         console.log(error)
+        if (error.message === 'Network Error') {
+          this.$parent.networkErrorMessage()
+        }
       })
   },
   data() {

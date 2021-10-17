@@ -28,6 +28,9 @@ export default {
       .catch(error => {
         this.tips = []
         console.log(error)
+        if (error.message === 'Network Error') {
+          this.$parent.networkErrorMessage()
+        }
       })
   },
   data() {

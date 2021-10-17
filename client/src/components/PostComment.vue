@@ -1,28 +1,13 @@
 <template>
   <b-form class="bg-secondary p-2" @submit="onSubmit">
-    <div class="row justify-content-md-center">
-  <b-form-group class="col-md-6" id="input-group-1" label="Content" label-for="input-1">
-    <b-form-input
+  <b-form-group id="input-group-1" label="Content" label-for="input-1">
+    <b-form-textarea
       id="content"
-      type="text"
       v-model="form.commentContent"
       required
-    ></b-form-input>
+    ></b-form-textarea>
   </b-form-group>
-  </div>
-  <div class="row justify-content-md-center">
-  <b-form-group class="col-md-6" id="input-group-2" label="Date Posted" label-for="input-2">
-    <b-form-input
-      id="datePosted"
-      type="text"
-      v-model="form.datePosted"
-      required
-    ></b-form-input>
-  </b-form-group>
-  </div>
-  <div class="row justify-content-md-center">
-  <b-button size="lg" type="submit" variant="danger">Post Comment</b-button>
-  </div>
+  <b-button class="d-flex ml-auto mr-auto" size="lg" type="submit" variant="danger">Post Comment</b-button>
   </b-form>
 </template>
 
@@ -35,7 +20,7 @@ export default {
     return {
       form: {
         comment_content: '',
-        date_posted: ''
+        date_posted: new Date().toISOString().slice(0, 10)
       },
       log_user_id: this.$parent.$parent.user_id,
       ad_id: this.$parent.id
