@@ -33,7 +33,7 @@ export default {
       console.log(this.log_user_id)
       const comment = {
         comment_content: this.form.commentContent,
-        date_posted: this.form.datePosted,
+        date_posted: this.form.date_posted,
         posted_by: this.log_user_id,
         ad: this.ad_id
       }

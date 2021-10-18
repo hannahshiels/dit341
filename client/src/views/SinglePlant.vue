@@ -1,7 +1,7 @@
 <template>
   <div id="bg">
     <div class="p-5">
-    <b-card class="ml-auto mr-auto d-flex" no-body style="max-width: 20rem;">
+    <b-card class="ml-auto mr-auto d-flex shadow" no-body style="max-width: 20rem;">
       <b-card-body>
         <b-card-title>{{ plant.plant_name }}</b-card-title>
         <b-card-text>

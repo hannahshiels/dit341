@@ -7,7 +7,7 @@
         </div>
         <h3 class="d-flex justify-content-center">Description: {{ ad.ad_description }}</h3>
         <div class="bg-white border border-primary">
-        <h3 class="d-flex justify-content-center">Uploaded by: <br> {{ ad.uploaded_by.name }}</h3>
+        <h3 class="d-flex justify-content-center">Uploaded by: {{ ad.uploaded_by.name }}</h3>
         </div>
         <h3 class="d-flex justify-content-center">Contact number: {{ ad.ad_contact[0].number }}</h3>
         <div class="bg-white border border-primary">
@@ -16,11 +16,11 @@
         <h3 class="d-flex justify-content-center">Date posted: {{ ad.ad_date_posted }}</h3>
         <div class="col-md-10 align-self-center bg-dark">
         <h4 class="d-flex justify-content-center text-white">Comments:</h4>
-        <h3 v-for="(comment, index) in complete_comments" v-bind:key="comment"
-        class="d-flex text-light"><br>{{ index + 1 }}: <br>
-        Content: {{ comment.comment_content }} <br>
+        <h3 v-for="(comment) in complete_comments" v-bind:key="comment"
+        class="d-flex text-light text-center ml-auto mr-auto">
         Date posted: {{ comment.comment_date }} <br>
-        Author: {{ comment.comment_author }}
+        Author: {{ comment.comment_author }} <br>
+        {{ comment.comment_content }}
         </h3>
         </div>
         </div>
@@ -41,7 +41,7 @@ export default {
     return {
       id: this.$route.params.id,
       userName: '',
-      ad: {},
+      ad: null,
       complete_comments: [],
       uploadedBy: ''
     }
@@ -49,7 +49,7 @@ export default {
   mounted() {
     Api.get('/ads/' + this.$route.params.id)
       .then(response => {
-        this.uploadedBy = response.data.ad.uploaded_by
+        this.uploadedBy = response.data.ad.uploaded_by._id
         this.ad = response.data.ad
         this.getAdInfo()
       })
@@ -61,7 +61,8 @@ export default {
     getAdInfo() {
       Api.get('/users/' + this.uploadedBy + '/ads/' + this.id)
         .then(response => {
-          this.ad = response.data.ad
+          console.log()
+          console.log(response)
           this.fillCommentList()
         })
         .catch(error => {
@@ -71,7 +72,7 @@ export default {
     fillCommentList() {
       for (let i = 0; i < this.ad.comments.length; i++) {
         console.log(this.complete_comments[i])
-        this.addFullComment(this.ad.comments[i], i)
+        this.addFullComment(this.ad.comments[i]._id, i)
       }
     },
     addFullComment(commentID, i) {

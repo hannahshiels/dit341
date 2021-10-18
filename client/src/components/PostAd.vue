@@ -60,10 +60,10 @@ export default {
       const ad = {
         ad_description: this.form.description,
         ad_type: this.form.type,
-        ad_contact: {
-          number: this.form.contactNumber,
-          address: this.form.contactAddress
-        },
+        ad_contact: [
+          { number: this.form.contactNumber },
+          { address: this.form.contactAddress }
+        ],
         ad_date_posted: this.form.datePosted,
         uploaded_by: this.log_user_id
       }

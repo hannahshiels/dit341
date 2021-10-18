@@ -14,7 +14,7 @@
     </div>
 <b-card-group deck class="center">
     <div v-for="garden in gardens" v-bind:key="garden._id">
-            <garden v-bind:garden="garden"/>
+            <garden class="garden" v-bind:garden="garden"/>
             </div>
       </b-card-group>
   </div>
@@ -31,6 +31,14 @@
 .gardens {
   min-height: 100vh;
   background: #b1e693;
+}
+
+.garden {
+  min-width: 250px;
+}
+
+.card-deck{
+  margin:0;
 }
 
 @media screen and (max-width:575px) {
