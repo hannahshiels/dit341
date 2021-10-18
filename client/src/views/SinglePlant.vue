@@ -22,7 +22,7 @@
         v-for="plant in plant.fertilizer_schedule" > {{ plant }} </b-badge>
       </div>
     </b-card>
-    <b-card-group deck class="center">
+    <b-card-group deck class="flex-row center">
       <div v-for="tip in tips" v-bind:key="tip._id">
         <tip v-bind:tip="tip" />
       </div>
@@ -54,6 +54,12 @@
 .flex-row {
   display:flex;
   flex-direction: row;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 </style>
 

@@ -1,35 +1,51 @@
 <template>
-    <div>
-      <div class="row mt-3">
-        <div class="col-md-8 bg-secondary">
-        <div class="bg-white border border-primary">
-        <h3 class="d-flex justify-content-center">Type: {{ ad.ad_type }}</h3>
+    <div class="bg-info text-black-50 single-ad">
+      <div class="row d-flex justify-content-center pt-4">
+        <div class="col-md-8 bg-alpha p-0 m-2">
+        <div class="bg-alpha  ">
+        <h3 class="d-flex justify-content-center ">Type: {{ ad.ad_type }}</h3>
         </div>
         <h3 class="d-flex justify-content-center">Description: {{ ad.ad_description }}</h3>
-        <div class="bg-white border border-primary">
+        <div class="bg-alpha ">
         <h3 class="d-flex justify-content-center">Uploaded by: {{ ad.uploaded_by.name }}</h3>
         </div>
         <h3 class="d-flex justify-content-center">Contact number: {{ ad.ad_contact[0].number }}</h3>
-        <div class="bg-white border border-primary">
+        <div class="bg-alpha">
         <h3 class="d-flex justify-content-center">Contact address: {{ ad.ad_contact[1].address }}</h3>
         </div>
         <h3 class="d-flex justify-content-center">Date posted: {{ ad.ad_date_posted }}</h3>
-        <div class="col-md-10 align-self-center bg-dark">
+        <div class="bg-alpha p-2">
         <h4 class="d-flex justify-content-center text-white">Comments:</h4>
         <h3 v-for="(comment) in complete_comments" v-bind:key="comment"
-        class="d-flex text-light text-center ml-auto mr-auto">
+        class="d-flex justify-content-center p-2 text-light text-center ml-auto mr-auto border-bottom border-gray">
         Date posted: {{ comment.comment_date }} <br>
         Author: {{ comment.comment_author }} <br>
         {{ comment.comment_content }}
         </h3>
         </div>
         </div>
-        <div class="col-md-4 bg-dark">
+        <div class="col-md-3 m-2 bg-alpha">
           <post-comment/>
         </div>
       </div>
       </div>
 </template>
+
+<style scoped>
+
+.single-ad {
+  min-height: 100vh;
+}
+
+.bg-alpha {
+  background: rgba(255,255,255,0.3) ;
+}
+
+.row {
+  margin: 0;
+}
+
+</style>
 
 <script>
 import { Api } from '@/Api'
