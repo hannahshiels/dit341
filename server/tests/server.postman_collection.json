@@ -264,7 +264,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soil_level\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"img_link\": \"https://picsum.photos/200/300\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
+							"raw": "{\r\n   \"size\": \"50\",\r\n   \"soil_level\": \"normal\",\r\n   \"direction\": \"east-south\",\r\n   \"img_link\": \"https://picsum.photos/1024/480\",\r\n   \"owned_by\": \"{{userID}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1176,6 +1176,7 @@
 									"var jsonData = JSON.parse(responseBody);",
 									"pm.collectionVariables.set(\"adID\", jsonData._id);",
 									"",
+									"",
 									"pm.test(\"Post ad successful\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
 									"});"
@@ -1195,7 +1196,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ad_description\" : \"Test1\",\n    \"ad_type\" : \"Test1\",\n    \"ad_contact\" : [\n        {\"number\" : 1},\n        {\"address\" : \"Test1\"}\n    ],\n    \"ad_date_posted\" : \"Test1\",\n    \"uploaded_by\" : \"{{userID}}\"\n}",
+							"raw": "{\n    \"ad_description\" : \"Test1\",\n    \"ad_type\" : \"Test1\",\n    \"ad_contact\" : [\n        {\"number\" : 1},\n        {\"address\" : \"Test1\"}\n    ],\n    \"ad_date_posted\" : \"{{date}}\",\n    \"uploaded_by\" : \"{{userID}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1523,6 +1524,28 @@
 					},
 					"response": []
 				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var date = new Date().toISOString().slice(0, 10)",
+							"pm.collectionVariables.set(\"date\", date);",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -1567,7 +1590,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"comment_content\" : \"Test1\",\n    \"date_posted\" : \"Test1\",\n    \"posted_by\" : \"{{userID}}\",\n    \"ad\" : \"{{adID}}\"\n}",
+							"raw": "{\n    \"comment_content\" : \"Test1\",\n    \"date_posted\" : \"{{date}}\",\n    \"posted_by\" : \"{{userID}}\",\n    \"ad\" : \"{{adID}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1857,6 +1880,28 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var date = new Date().toISOString().slice(0, 10)",
+							"pm.collectionVariables.set(\"date\", date);",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -2765,6 +2810,10 @@
 		},
 		{
 			"key": "commentID",
+			"value": ""
+		},
+		{
+			"key": "date",
 			"value": ""
 		}
 	]

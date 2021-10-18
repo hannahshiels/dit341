@@ -26,7 +26,7 @@
       </b-form-group>
 
       <b-form-group id="input-group-4" label="Contact number">
-        <b-form-input id="input-4" v-model="form.contact_number"></b-form-input>
+        <b-form-input id="input-4" type="number" v-model="form.contact_number"></b-form-input>
       </b-form-group>
 
       <b-form-group id="input-group-5" label="Address">

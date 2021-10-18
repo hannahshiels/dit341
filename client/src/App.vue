@@ -20,7 +20,6 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
 </style>
 
 <script>
@@ -47,6 +46,14 @@ export default {
     setAuthenticated(status) {
       this.authenticated = status
       console.log(status)
+    },
+    networkErrorMessage(append = false) {
+      this.$bvToast.toast('Server is not responding. Please try again later', {
+        title: 'Server Error',
+        variant: 'danger',
+        solid: true,
+        autoHideDelay: 2000
+      })
     }
   }
 }

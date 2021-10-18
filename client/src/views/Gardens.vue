@@ -1,11 +1,11 @@
 <template>
-  <div class="gardens">
+  <div class="gardens center">
     <div class="text-center text-white" v-if="gardens.length == 0">
-      <p>Sorry! There are no gardens.</p>
+      <p>Sorry, there are no gardens ☹️.</p>
     </div>
     <div v-if="user_id != ''">
       <div class="create-div">
-        <button class="btn btn-dark m-4">
+        <button class="btn btn-lg btn-dark m-4 ">
           <router-link class="text-white" to="/create-a-garden">
             Create a garden
           </router-link>
@@ -14,7 +14,7 @@
     </div>
 <b-card-group deck class="center">
     <div v-for="garden in gardens" v-bind:key="garden._id">
-            <garden v-bind:garden="garden"/>
+            <garden class="garden" v-bind:garden="garden"/>
             </div>
       </b-card-group>
   </div>
@@ -31,6 +31,14 @@
 .gardens {
   min-height: 100vh;
   background: #b1e693;
+}
+
+.garden {
+  min-width: 250px;
+}
+
+.card-deck{
+  margin:0;
 }
 
 @media screen and (max-width:575px) {
@@ -65,6 +73,9 @@ export default {
       .catch(error => {
         this.gardens = []
         console.log(error)
+        if (error.message === 'Network Error') {
+          this.$parent.networkErrorMessage()
+        }
       })
   },
   data() {

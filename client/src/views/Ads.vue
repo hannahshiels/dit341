@@ -1,8 +1,8 @@
 <template>
  <div id="myID" class="bg-info">
     <div class="container">
-    <b-row class=" pt-3">
-    <b-col lg="8" md="10" sm="12" class=" bg-secondary">
+    <b-row class="pt-3">
+    <b-col lg="8" md="10" sm="12" class="bg">
     <h2>Advertisements</h2>
     <h3 class="text-white">Showing ads ({{this.startList}} - {{this.endList}})</h3>
     <div class="row p-2 justify-content-between">
@@ -10,14 +10,15 @@
       <button class="btn btn-dark text-center" v-on:click="moveList(-1)">Previous 5 ads</button>
       <button class="btn btn-dark text-center" v-on:click="moveList(1)">Next 5 ads</button>
     </div>
-       <b-card-group deck class="center">
-          <div class="d-flex" v-for="ad in ads.slice(this.startList,this.endList)" v-bind:key="ad._id">
-            <ad v-bind:ad="ad" class="col mb-1 mt-1 ml-1 mr-1"/>
-          </div>
-     </b-card-group>
+       <b-row class="p-2" align-h="center">
+         <div class="text-center text-white" v-if="ads.length == 0" >  <p> Sorry, there are no ads ☹️ </p> </div>
+          <b-col lg=6 md="8" sm=12 v-for="ad in ads.slice(this.startList,this.endList)" v-bind:key="ad._id">
+            <ad v-bind:ad="ad" class="col m-2"/>
+          </b-col>
+     </b-row>
   </b-col>
    <b-col lg="4" md="10"  sm="12" class="">
-     <div class="container">
+     <div class="container bg">
      <post-ad class="ad-form" />
    </div>
    </b-col>
@@ -42,12 +43,14 @@ export default {
   mounted() {
     Api.get('/ads')
       .then(response => {
-        console.log('Current user ID is ' + this.user_id)
         this.ads = response.data.ads
       })
       .catch(error => {
         this.ads = []
         console.log(error)
+        if (error.message === 'Network Error') {
+          this.$parent.networkErrorMessage()
+        }
       })
   },
   data() {
@@ -87,12 +90,10 @@ export default {
     },
     showList() {
       if (this.allAds === false) {
-        console.log('Say hello')
         this.startList = 0
         this.endList = this.ads.length
         this.allAds = true
       } else {
-        console.log('Say goodbye')
         this.startList = 0
         this.endList = 5
         this.allAds = false
@@ -104,13 +105,16 @@ export default {
 
 <style>
 
+.bg {
+  background: rgba(255,255,255,0.3) ;
+}
+
 #myID {
   min-height: 100vh;
 }
 
-.center {
-  justify-content: center;
-  align-items: center;
+.ad {
+  width: 50%;
 }
 
 @media screen and (max-width: 992px) {
