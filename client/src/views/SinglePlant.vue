@@ -1,25 +1,25 @@
 <template>
   <div id="bg">
     <div class="p-5">
-    <b-card class="ml-auto mr-auto d-flex shadow" no-body style="max-width: 20rem;">
+    <b-card class="ml-auto mr-auto d-flex shadow text-center text-black-50 border-none" no-body style="max-width: 20rem;">
       <b-card-body>
-        <b-card-title>{{ plant.plant_name }}</b-card-title>
-        <b-card-text>
+        <b-card-title class="title">{{ plant.plant_name }}</b-card-title>
+        <b-card-text class="pt-2 pb-2">
           {{ plant.plant_description[1].description }}
         </b-card-text>
       </b-card-body>
-      <b-card-header> Watering schedule </b-card-header>
-      <div class="flex-row p-2"
+      <b-card-header class="bg-info text-white border-none"> Watering schedule </b-card-header>
+      <div class="flex-row justify-content-center p-4"
       >
         <b-badge class="m-1"
         v-bind:key="plant.water_schedule"
-        v-for="plant in plant.water_schedule" variant="primary"> {{ plant }} </b-badge>
+        v-for="plant in plant.water_schedule" variant="info"> {{ plant }} </b-badge>
       </div>
-      <b-card-header> Fertilizer schedule </b-card-header>
-      <div class="flex-row p-2"
+      <b-card-header class="green border-none"> Fertilizer schedule </b-card-header>
+      <div class="flex-row justify-content-center p-4"
       >
-        <b-badge class="m-1" v-bind:key="plant.fertilizer_schedule"
-        v-for="plant in plant.fertilizer_schedule" variant="success"> {{ plant }} </b-badge>
+        <b-badge class="m-1 green text-black-50" v-bind:key="plant.fertilizer_schedule"
+        v-for="plant in plant.fertilizer_schedule" > {{ plant }} </b-badge>
       </div>
     </b-card>
     <b-card-group deck class="center">
@@ -32,9 +32,23 @@
 </template>
 
 <style scoped>
+
+.green {
+  background: #b1e693;
+}
+
 #bg {
   min-height: 100vh;
   background: #d57a66;
+}
+
+.border-none {
+  border: none;
+}
+
+.title {
+  border-bottom: 1px solid;
+  padding: 1rem 0;
 }
 
 .flex-row {

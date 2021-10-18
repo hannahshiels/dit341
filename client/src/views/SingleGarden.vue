@@ -3,7 +3,7 @@
   <b-jumbotron class="mb-0 bg-green text-black-50 ">
     <router-link class="" v-if="user_id == garden.owned_by._id" :to="'/gardens/' + this.$route.params.id + '/edit' ">Edit your garden </router-link>
     <h1> {{ garden.owned_by.name }}'s  garden </h1>
-    <div class="p-4">  <p> size: {{ garden.size }} km²</p> <p> soil level: {{ garden.soil_level }}</p> <p> direction: {{ garden.direction }} </p>  <p> number of plants: {{ garden.plants.length }} </p>  </div>
+    <div class="p-4">  <p> size: {{ garden.size }} m²</p> <p> soil level: {{ garden.soil_level }}</p> <p> direction: {{ garden.direction }} </p>  <p> number of plants: {{ garden.plants.length }} </p>  </div>
   </b-jumbotron>
         <div v-if="user_id == garden.owned_by._id" class="edit-div bg-brown">
         <button class="btn btn-dark m-4">
