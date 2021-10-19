@@ -113,10 +113,6 @@ export default {
   min-height: 100vh;
 }
 
-.ad {
-  width: 50%;
-}
-
 @media screen and (max-width: 992px) {
   .ad-form{
     margin-top:1rem;

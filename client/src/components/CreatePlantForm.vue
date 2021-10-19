@@ -35,7 +35,10 @@
       </b-form-group>
 
       <b-form-group label="Water schedule:">
-        <b-form-checkbox-group id="checkbox-group-1" v-model="form.water_schedule">
+        <b-form-checkbox-group
+          id="checkbox-group-1"
+          v-model="form.water_schedule"
+        >
           <b-form-checkbox value="Monday">Monday</b-form-checkbox>
           <b-form-checkbox value="Tuesday">Tuesday</b-form-checkbox>
           <b-form-checkbox value="Wednesday">Wednesday</b-form-checkbox>
@@ -61,6 +64,9 @@
       </b-form-group>
 
       <b-button size="lg" type="submit">Create Plant</b-button>
+      <div v-if="err" class="text-danger mt-4 text-center">
+        <p>Plant creation failed.</p>
+      </div>
     </b-form>
   </div>
 </template>
@@ -79,7 +85,8 @@ export default {
         water_schedule: [],
         fertilizer_schedule: []
       },
-      user_id: this.$parent.$parent.user_id
+      user_id: this.$parent.$parent.user_id,
+      err: false
     }
   },
   methods: {
@@ -87,7 +94,10 @@ export default {
       event.preventDefault()
       const plant = {
         plant_name: this.form.plant_name,
-        plant_description: [{ img: this.form.img }, { description: this.form.description }],
+        plant_description: [
+          { img: this.form.img },
+          { description: this.form.description }
+        ],
         water_schedule: this.form.water_schedule,
         fertilizer_schedule: this.form.fertilizer_schedule,
         owned_by: this.user_id,
@@ -106,6 +116,10 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          this.err = true
+          if (error.message === 'Network Error') {
+            this.$parent.$parent.networkErrorMessage()
+          }
         })
     }
   }

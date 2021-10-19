@@ -85,8 +85,11 @@ export default {
         console.log(response)
         this.plant = response.data.plant
       })
-      .catch(err => {
-        console.log(err)
+      .catch(error => {
+        console.log(error)
+        if (error.message === 'Network Error') {
+          this.$parent.networkErrorMessage()
+        }
       })
 
     Api.get(
@@ -102,6 +105,9 @@ export default {
       })
       .catch(error => {
         console.log(error)
+        if (error.message === 'Network Error') {
+          this.$parent.networkErrorMessage()
+        }
       })
   },
   components: {

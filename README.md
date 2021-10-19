@@ -61,21 +61,21 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-We are making this system to help gardeners in Sweden who want to maintain their plants well, track progress, prepare schedules and thus keep their plants and gardens in the best shape possible. Users can instantly advertise what they are offering or looking for and can also comment on any advertisements in the system. We’ll allow the users to share their own wise wisdom regarding their plants. Descriptions and pictures of all plants in the garden will be kept in the system, which can be added by the users.
+We are making this system to help gardeners in Sweden who want to maintain their plants well, track progress, prepare schedules and thus keep their plants and gardens in the best shape possible. Users can instantly advertise what they are offering or looking for and can also comment on any advertisements in the system. Descriptions, names, and schedules of all plants in the garden will be kept in the system, which can be added by the users.
 
 ### Pages
 
 * Home: This page will show all key features of our system i.e. the garden, the advertisement, the login and the gallery page. The user is able to navigate to the individual feature’s pages. The page will also show whether the user is logged in or not and if logged in, a button for logging out.
 
-*  Account/Login: This page will allow users to create a user account or login to the system. It will also show options like “forget username” and “forget password”. To create an account, the system will ask for a username, password and an email. The rest of the fields  (such as date of birth, contact number etc.) will be optional and can be filled in any time later on.
+*  Create Account/Login: This page will allow users to create a user account or login to the system. To create an account, the system will ask for a name, password and an email. The rest of the fields  (such as contact address, contact number etc.) will be optional and can be filled in any time later on.
 
 * Advertisements: This page will have listings of local services or tools offered. The user will be able to post an advertisement offering something or asking for something. Registered users may post their own advertisements here. Registered users can also comment on any advertisements that are posted. Non-registered users can only view advertisements.
 
 * Gardens: All users can view other posted gardens showing details about the size, soil, and number of plants. Only registered users can create or edit their own garden. The user can navigate to each individual garden to view more details.
 
-* Plants: Within a user’s garden, all plants are shown. Each plant is shown with an image, name and description, along with schedules for water/ fertilizer. Users can write a tip for the plant and have an option to view all tips pertaining to that specific plant.
+* Plants: Within a user’s garden, all plants are shown. Each plant is shown with a name and description, along with schedules for water/ fertilizer. 
 
-* Tips: Users can search and view all tips in the system on this page.
+* Tips: Users can view all tips in the system on this page.
 
 ### Entity-Relationship (ER) Diagram
 

@@ -1,12 +1,8 @@
 <template>
   <div>
-    <div class="mb-auto"> <h2> Login </h2> </div>
+    <div class="mb-auto"><h2>Login</h2></div>
     <b-form @submit="onSubmit">
-      <b-form-group
-        id="input-group-1"
-        label="Enter email"
-        label-for="input-1"
-      >
+      <b-form-group id="input-group-1" label="Enter email" label-for="input-1">
         <b-form-input
           id="input-1"
           v-model="form.email"
@@ -15,7 +11,11 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Enter password" label-for="input-2">
+      <b-form-group
+        id="input-group-2"
+        label="Enter password"
+        label-for="input-2"
+      >
         <b-form-input
           id="input-2"
           type="password"
@@ -24,8 +24,10 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button size="lg" type="submit" >Login</b-button>
-      <div class="mt-4 text-center text-danger" v-if="loginFailed"> <p>Login failed. Check your info.</p>  </div>
+      <b-button size="lg" type="submit">Login</b-button>
+      <div class="mt-4 text-center text-danger" v-if="loginFailed">
+        <p>Login failed. Check your info.</p>
+      </div>
     </b-form>
   </div>
 </template>
@@ -67,6 +69,9 @@ export default {
         .catch(error => {
           console.log(error)
           this.loginFailed = true
+          if (error.message === 'Network Error') {
+            this.$parent.$parent.networkErrorMessage()
+          }
         })
     }
   }
@@ -78,24 +83,23 @@ export default {
   display: flex;
   margin: 0 auto;
   border: 4px solid var(--dark);
-  background: #D57A66;
+  background: #d57a66;
 }
 
 .btn:hover {
-    background: #CF664F;
+  background: #cf664f;
 }
-h2  {
+h2 {
   text-align: center;
 }
 
- .mb-auto{
-   margin-bottom: auto;
- }
-
- @media screen and (max-width:575px){
-  h2{
-    text-align: left;
-    }
+.mb-auto {
+  margin-bottom: auto;
 }
 
+@media screen and (max-width: 575px) {
+  h2 {
+    text-align: left;
+  }
+}
 </style>

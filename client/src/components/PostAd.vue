@@ -1,44 +1,52 @@
 <template>
   <b-form class=" p-2" @submit="onSubmit">
-  <b-form-group  id="input-group-1" label="Description" label-for="input-1">
-    <b-form-input
-      id="description"
-      type="text"
-      v-model="form.description"
-      required
-    ></b-form-input>
-  </b-form-group>
-  <b-form-group id="input-group-2" label="Type" label-for="input-2">
-    <b-form-input
-      id="type"
-      type="text"
-      v-model="form.type"
-      required
-    ></b-form-input>
-  </b-form-group>
-  <b-form-group  id="input-group-3" label="Contact Number" label-for="input-3">
-    <b-form-input
-      id="contactNumber"
-      type="number"
-      v-model="form.contactNumber"
-      required
-    ></b-form-input>
-  </b-form-group>
-  <b-form-group  id="input-group-4" label="Contact Address" label-for="input-4">
-    <b-form-input
-      id="contactAddress"
-      type="text"
-      v-model="form.contactAddress"
-      required
-    ></b-form-input>
-  </b-form-group>
-  <b-button class="d-flex ml-auto mr-auto" size="lg" type="submit" variant="danger">Post Ad</b-button>
+    <b-form-group id="input-group-1" label="Description" label-for="input-1">
+      <b-form-input
+        id="description"
+        type="text"
+        v-model="form.description"
+        required
+      ></b-form-input>
+    </b-form-group>
+    <b-form-group id="input-group-2" label="Type" label-for="input-2">
+      <b-form-input
+        id="type"
+        type="text"
+        v-model="form.type"
+        required
+      ></b-form-input>
+    </b-form-group>
+    <b-form-group id="input-group-3" label="Contact Number" label-for="input-3">
+      <b-form-input
+        id="contactNumber"
+        type="number"
+        v-model="form.contactNumber"
+        required
+      ></b-form-input>
+    </b-form-group>
+    <b-form-group
+      id="input-group-4"
+      label="Contact Address"
+      label-for="input-4"
+    >
+      <b-form-input
+        id="contactAddress"
+        type="text"
+        v-model="form.contactAddress"
+        required
+      ></b-form-input>
+    </b-form-group>
+    <b-button
+      class="d-flex ml-auto mr-auto"
+      size="lg"
+      type="submit"
+      variant="danger"
+      >Post Ad</b-button
+    >
   </b-form>
-
 </template>
 
 <script>
-
 import { Api } from '@/Api'
 
 export default {
@@ -83,6 +91,9 @@ export default {
           })
           .catch(error => {
             console.log(error)
+            if (error.message === 'Network Error') {
+              this.$parent.$parent.networkErrorMessage()
+            }
           })
       }
     },

@@ -1,26 +1,29 @@
 <template>
   <b-form class=" p-2" @submit="onSubmit">
-  <b-form-group id="input-group-1" label="Content" label-for="input-1">
-    <b-form-textarea
-      id="content"
-      v-model="form.commentContent"
-      required
-    ></b-form-textarea>
-  </b-form-group>
-  <b-button class="d-flex ml-auto mr-auto" size="lg" type="submit" variant="danger">Post Comment</b-button>
+    <b-form-group id="input-group-1" label="Content" label-for="input-1">
+      <b-form-textarea
+        id="content"
+        v-model="form.commentContent"
+        required
+      ></b-form-textarea>
+    </b-form-group>
+    <b-button
+      class="d-flex ml-auto mr-auto"
+      size="lg"
+      type="submit"
+      variant="danger"
+      >Post Comment</b-button
+    >
   </b-form>
 </template>
 
 <style scoped>
-
 .bg-alpha {
-  background: rgba(255,255,255,0.3) ;
+  background: rgba(255, 255, 255, 0.3);
 }
-
 </style>
 
 <script>
-
 import { Api } from '@/Api'
 
 export default {
@@ -52,7 +55,10 @@ export default {
         console.log('Not logged in')
         this.notLoggedInMessage()
       } else {
-        Api.post('/users/' + this.log_user_id + '/ads/' + this.ad_id + '/comments', comment)
+        Api.post(
+          '/users/' + this.log_user_id + '/ads/' + this.ad_id + '/comments',
+          comment
+        )
           .then(response => {
             const status = JSON.stringify(response.status)
             if (status === '201') {
@@ -62,6 +68,9 @@ export default {
           })
           .catch(error => {
             console.log(error)
+            if (error.message === 'Network Error') {
+              this.$parent.$parent.networkErrorMessage()
+            }
           })
       }
     },
