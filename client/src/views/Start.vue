@@ -5,7 +5,7 @@
   </div>
   <div class ="container">
     <div class="text-center text-black">
-      <p>This application helps home gardeners to maintain their gardens and plants well, track progress, prepare schedules and thus keep them in the best shape possible. You can write blog posts about your garden and plants to share knowledge, wisdom and experience. You can also make adverstisements.</p>
+      <p>This system helps home gardeners to maintain their gardens and plants well, track progress, prepare schedules and thus keep them in the best shape possible. You can write blog posts about your garden and plants to share knowledge, wisdom and experience. You can also make advertisements.</p>
 </div>
 <div class="row justify-content-center">
   <div class="col-lg-4 mb-2 mt-3 ml-1 mr-1">
