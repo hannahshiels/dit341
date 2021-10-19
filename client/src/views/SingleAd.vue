@@ -141,6 +141,7 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          this.complete_comments[index].comment_author = 'Deleted user'
           if (error.message === 'Network Error') {
             this.$parent.networkErrorMessage()
           }
