@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="mt-4 text-center">
+    <h1 class="mt-6 text-center">
       {{this.garden_title}}
     </h1>
     <b-carousel
