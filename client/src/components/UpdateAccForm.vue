@@ -1,9 +1,12 @@
 <template>
   <div>
     <h2 class="text-white font-weight-bold mt-4">Settings</h2>
-    <p class="text-white-50 pb-4"> You can update your account information, or alternatively delete your account. </p>
+    <p class="text-white-50 pb-4">
+      You can update your account information, or alternatively delete your
+      account.
+    </p>
     <b-form class="text-white" @submit="onSubmit">
-      <b-form-group id="input-group-1"  label="Email" label-for="input-1">
+      <b-form-group id="input-group-1" label="Email" label-for="input-1">
         <b-form-input
           id="input-1"
           v-model="form.email"
@@ -26,7 +29,11 @@
       </b-form-group>
 
       <b-form-group id="input-group-4" label="Contact number">
-        <b-form-input id="input-4" type="number" v-model="form.contact_number"></b-form-input>
+        <b-form-input
+          id="input-4"
+          type="number"
+          v-model="form.contact_number"
+        ></b-form-input>
       </b-form-group>
 
       <b-form-group id="input-group-5" label="Address">
@@ -34,7 +41,6 @@
       </b-form-group>
       <b-button type="submit" class="ml-auto btn-lg btn-dark">Update</b-button>
     </b-form>
-
   </div>
 </template>
 
@@ -42,7 +48,7 @@
 .btn {
   display: flex;
   border: 4px solid var(--dark);
-  background: #D57A66;
+  background: #d57a66;
 }
 </style>
 
@@ -78,10 +84,31 @@ export default {
       Api.put('users/' + this.user_id, this.form)
         .then(response => {
           console.log(response)
+          this.successfulMsg()
         })
         .catch(error => {
           console.log(error)
+          this.failMsg()
+          if (error.message === 'Network Error') {
+            this.$parent.networkErrorMessage()
+          }
         })
+    },
+    successfulMsg(append = false) {
+      this.$bvToast.toast('Account updated.', {
+        title: 'Account successfully updated',
+        variant: 'success',
+        solid: true,
+        autoHideDelay: 2000
+      })
+    },
+    failMsg(append = false) {
+      this.$bvToast.toast('Account could not be updated.', {
+        title: 'Account update failed',
+        variant: 'danger',
+        solid: true,
+        autoHideDelay: 2000
+      })
     },
     getUserData() {
       Api.get('users/' + this.user_id)
@@ -91,6 +118,9 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          if (error.message === 'Network Error') {
+            this.$parent.networkErrorMessage()
+          }
         })
     }
   }

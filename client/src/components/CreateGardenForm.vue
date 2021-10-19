@@ -49,6 +49,9 @@
       </b-form-group>
 
       <b-button size="lg" type="submit">Create Garden</b-button>
+      <div v-if="err" class="text-danger mt-4 text-center">
+        <p>Garden creation failed.</p>
+      </div>
     </b-form>
   </div>
 </template>
@@ -83,6 +86,7 @@ export default {
   data() {
     return {
       user_id: this.$parent.$parent.user_id,
+      err: false,
       form: {
         size: '',
         soil_level: '',
@@ -114,6 +118,10 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          this.err = true
+          if (error.message === 'Network Error') {
+            this.$parent.$parent.networkErrorMessage()
+          }
         })
     }
   }

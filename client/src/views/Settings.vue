@@ -78,6 +78,9 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          if (error.message === 'Network Error') {
+            this.$parent.networkErrorMessage()
+          }
         })
     },
     deleteAccount() {
@@ -87,6 +90,9 @@ export default {
         })
         .catch(error => {
           console.log(error)
+          if (error.message === 'Network Error') {
+            this.$parent.networkErrorMessage()
+          }
         })
     }
   }

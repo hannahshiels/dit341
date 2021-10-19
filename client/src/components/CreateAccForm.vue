@@ -1,10 +1,8 @@
 <template>
   <div>
-
-    <div> <h2> Create an account </h2> </div>
+    <div><h2>Create an account</h2></div>
 
     <b-form @submit="onSubmit">
-
       <b-form-group id="input-group-1" label="Enter email" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -14,15 +12,15 @@
         ></b-form-input>
       </b-form-group>
 
-        <b-form-group id="input-group-2" label="Enter name" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.name"
-          required
-        ></b-form-input>
+      <b-form-group id="input-group-2" label="Enter name" label-for="input-2">
+        <b-form-input id="input-2" v-model="form.name" required></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-3" label="Enter password" label-for="input-3">
+      <b-form-group
+        id="input-group-3"
+        label="Enter password"
+        label-for="input-3"
+      >
         <b-form-input
           id="input-3"
           type="password"
@@ -31,24 +29,32 @@
         ></b-form-input>
       </b-form-group>
 
-    <b-form-group id="input-group-4" label="Confirm password" label-for="input-4">
+      <b-form-group
+        id="input-group-4"
+        label="Confirm password"
+        label-for="input-4"
+      >
         <b-form-input
           id="input-4"
           type="password"
           v-model="form.passwordConfirm"
           required
         ></b-form-input>
-         <b-form-invalid-feedback :state="validation">
-        Passwords must match.
-      </b-form-invalid-feedback>
+        <b-form-invalid-feedback :state="validation">
+          Passwords must match.
+        </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group id="input-group-5">
-         <b-form-checkbox v-model="form.admin" id="admin" value="admin">Admin</b-form-checkbox>
+        <b-form-checkbox v-model="form.admin" id="admin" value="admin"
+          >Admin</b-form-checkbox
+        >
       </b-form-group>
 
-      <b-button size="lg" type="submit" >Create Account</b-button>
-      <div v-if="createAccFailed" class="text-danger mt-4 text-center"> <p> Account creation failed. </p> </div>
+      <b-button size="lg" type="submit">Create Account</b-button>
+      <div v-if="createAccFailed" class="text-danger mt-4 text-center">
+        <p>Account creation failed.</p>
+      </div>
     </b-form>
   </div>
 </template>
@@ -58,7 +64,6 @@ import { Api } from '@/Api'
 import Router from '@/router'
 
 export default {
-
   data() {
     return {
       form: {
@@ -101,6 +106,9 @@ export default {
         .catch(error => {
           console.log(error)
           this.createAccFailed = true
+          if (error.message === 'Network Error') {
+            this.$parent.$parent.networkErrorMessage()
+          }
         })
     }
   }
@@ -108,7 +116,6 @@ export default {
 </script>
 
 <style scoped>
-
 h2 {
   text-align: center;
 }
@@ -117,16 +124,15 @@ h2 {
   display: flex;
   margin: 0 auto;
   border: 4px solid var(--dark);
-  background: #D57A66;
+  background: #d57a66;
 }
 
 .btn:hover {
-    background: #CF664F;
+  background: #cf664f;
 }
-@media screen and (max-width:575px){
-  h2{
+@media screen and (max-width: 575px) {
+  h2 {
     text-align: left;
-    }
+  }
 }
-
 </style>
